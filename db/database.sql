@@ -130,18 +130,6 @@ BEGIN
 END$$
 
 DELIMITER $$
-CREATE TRIGGER after_update_detail_penyuplaian 
-    AFTER UPDATE 
-    ON detail_penyuplaian 
-    FOR EACH ROW 
-BEGIN 
-    UPDATE barang SET 
-        stok=(stok+(OLD.jumlah-NEW.jumlah)) 
-    WHERE 
-        id=OLD.id_barang;
-END$$
-
-DELIMITER $$
 CREATE TRIGGER after_delete_detail_penyuplaian 
     AFTER DELETE 
     ON detail_penyuplaian 
