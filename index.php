@@ -59,9 +59,8 @@ $_SESSION['old'] = [];
                             case "barang":
                                 include_once "halaman/tampil/barang.php";
                                 break;
-                                  // Detail
-                            case "detail_barang":
-                                include_once "halaman/detail/barang.php";
+                            case "barang_per_jenis_barang":
+                                include_once "halaman/tampil/barang_per_jenis_barang.php";
                                 break;
                                 // Tambah
                             case "tambah_admin":

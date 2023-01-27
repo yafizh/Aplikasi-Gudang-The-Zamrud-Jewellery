@@ -38,7 +38,7 @@
                                         <td class="align-middle text-center"><?= $row['nama']; ?></td>
                                         <td class="align-middle text-center"><?= $row['jumlah_barang']; ?></td>
                                         <td class="text-center td-fit">
-                                            <a href="?h=detail_barang&id_jenis_barang=<?= $row['id']; ?>" class="btn btn-sm btn-info"><i class="far fa-eye"></i></a>
+                                            <a href="?h=barang_per_jenis_barang&id_jenis_barang=<?= $row['id']; ?>" class="btn btn-sm btn-info"><i class="far fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
