@@ -81,11 +81,11 @@
         </a>
         <div id="laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="login.html">1</a>
-                <a class="collapse-item" href="register.html">2</a>
-                <a class="collapse-item" href="register.html">3</a>
-                <a class="collapse-item" href="register.html">4</a>
-                <a class="collapse-item" href="register.html">5</a>
+                <a class="collapse-item" href="#">1</a>
+                <a class="collapse-item" href="#">2</a>
+                <a class="collapse-item" href="#">3</a>
+                <a class="collapse-item" href="#">4</a>
+                <a class="collapse-item" href="#">5</a>
             </div>
         </div>
     </li>
