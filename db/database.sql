@@ -116,3 +116,40 @@ CREATE TABLE `db_gudang`.`barang_terjual` (
     FOREIGN KEY (id_pameran) REFERENCES pameran (id) ON DELETE CASCADE,
     FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
 );
+
+DELIMITER $$
+CREATE TRIGGER after_insert_detail_penyuplaian 
+    AFTER INSERT 
+    ON detail_penyuplaian 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok+NEW.jumlah) 
+    WHERE 
+        id=NEW.id_barang;
+END$$
+
+DELIMITER $$
+CREATE TRIGGER after_update_detail_penyuplaian 
+    AFTER UPDATE 
+    ON detail_penyuplaian 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok+(OLD.jumlah-NEW.jumlah)) 
+    WHERE 
+        id=OLD.id_barang;
+END$$
+
+DELIMITER $$
+CREATE TRIGGER after_delete_detail_penyuplaian 
+    AFTER DELETE 
+    ON detail_penyuplaian 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok-OLD.jumlah) 
+    WHERE 
+        id=OLD.id_barang;
+END$$
+DELIMITER ;

@@ -40,3 +40,37 @@ INSERT INTO `db_gudang`.`jenis_barang` (
 (13, 'Minyak', 'NFMYK'),
 (14, 'Souvenir', 'NVSOV'),
 (15, 'Tasbih', 'NFTSB');
+
+INSERT INTO `db_gudang`.`barang` (
+    id,
+    id_jenis_barang,
+    kode,
+    nama,
+    harga_toko,
+    harga_label,
+    stok,
+    satuan
+) VALUES 
+(1, 1, 1, 'Bantal Polos', 45000, 90000, 0, 'PCS'), 
+(2, 1, 2, 'Bantal Motif/Boneka', 50000, 100000, 0, 'PCS'), 
+(3, 1, 3, 'Bantal Leher Printing', 60000, 120000, 0, 'PCS'), 
+(4, 1, 4, 'Bantal/Boneka', 125000, 250000, 0, 'PCS'), 
+(5, 2, 1, 'Kecubung', 26000, 75000, 0, 'PCS'), 
+(6, 2, 2, 'Milky Agate', 50000, 100000, 0, 'PCS'), 
+(7, 2, 3, 'White Agate', 50000, 100000, 0, 'PCS'), 
+(8, 2, 4, 'Green Agate', 50000, 100000, 0, 'PCS'), 
+(9, 2, 5, 'N.Amethyst 25,26 CT', 2525000, 5050000, 0, 'PCS'), 
+(10, 2, 6, 'N.Amethyst 27,88 CT', 2800000, 5600000, 0, 'PCS'), 
+(11, 2, 7, 'N.Amethyst 24,79 CT', 2475000, 4950000, 0, 'PCS'), 
+(12, 2, 8, 'N.Amethyst 21,59 CT', 2150000, 4300000, 0, 'PCS'), 
+(13, 2, 9, 'Natural Yellow Sapphire', 4600000, 9200000, 0, 'PCS'), 
+(14, 2, 10, 'Natural Rubby 18.74 CT', 5150000, 10300000, 0, 'PCS');
+
+INSERT INTO `db_gudang`.`pemasok` (
+    id,
+    nama,
+    nomor_telepon,
+    email,
+    alamat 
+) VALUES 
+(1, 'A', '0', 'email@example.com', 'jalan');

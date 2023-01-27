@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     ";
     if ($mysqli->query($q)) {
         $_SESSION['success'] = 'Edit data berhasil!';
-        echo "<script>location.href = '?h=detail_barang&id_jenis_barang=" . $_GET['id_jenis_barang'] . "';</script>";
+        echo "<script>location.href = '?h=barang_per_jenis_barang&id_jenis_barang=" . $_GET['id_jenis_barang'] . "';</script>";
     } else
         die($mysqli->error);
 }
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="h3 mb-0 text-gray-800">Edit Barang</h1>
-        <a href="?h=detail_barang&id_jenis_barang=<?= $_GET['id_jenis_barang']; ?>" class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;Kembali</a>
+        <a href="?h=barang_per_jenis_barang&id_jenis_barang=<?= $_GET['id_jenis_barang']; ?>" class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;Kembali</a>
     </div>
 
     <hr>
