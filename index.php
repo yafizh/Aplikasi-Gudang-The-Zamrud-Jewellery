@@ -1,3 +1,9 @@
+<?php session_start(); ?>
+<?php require_once('db/koneksi.php'); ?>
+<?php
+$_SESSION['error'] = [];
+$_SESSION['old'] = [];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +27,12 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <style>
+        .td-fit {
+            width: 1%;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -39,6 +51,14 @@
                             // Tambah
                         case "tambah_admin":
                             include_once "halaman/tambah/admin.php";
+                            break;
+                            // Hapus
+                        case "edit_admin":
+                            include_once "halaman/edit/admin.php";
+                            break;
+                            // Hapus
+                        case "hapus_admin":
+                            include_once "halaman/hapus/admin.php";
                             break;
                         default:
                             include_once "beranda.php";
