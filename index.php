@@ -62,6 +62,9 @@ $_SESSION['old'] = [];
                             case "barang_per_jenis_barang":
                                 include_once "halaman/tampil/barang_per_jenis_barang.php";
                                 break;
+                            case "pemasok":
+                                include_once "halaman/tampil/pemasok.php";
+                                break;
                                 // Tambah
                             case "tambah_admin":
                                 include_once "halaman/tambah/admin.php";
@@ -74,6 +77,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "tambah_barang":
                                 include_once "halaman/tambah/barang.php";
+                                break;
+                            case "tambah_pemasok":
+                                include_once "halaman/tambah/pemasok.php";
                                 break;
                                 // Hapus
                             case "edit_admin":
@@ -88,6 +94,9 @@ $_SESSION['old'] = [];
                             case "edit_barang":
                                 include_once "halaman/edit/barang.php";
                                 break;
+                            case "edit_pemasok":
+                                include_once "halaman/edit/pemasok.php";
+                                break;
                                 // Hapus
                             case "hapus_admin":
                                 include_once "halaman/hapus/admin.php";
@@ -100,6 +109,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "hapus_barang":
                                 include_once "halaman/hapus/barang.php";
+                                break;
+                            case "hapus_pemasok":
+                                include_once "halaman/hapus/pemasok.php";
                                 break;
                             default:
                                 include_once "beranda.php";

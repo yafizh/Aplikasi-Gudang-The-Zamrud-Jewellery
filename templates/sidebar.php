@@ -52,15 +52,15 @@
             </div>
         </div>
     </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pemasok" aria-expanded="true" aria-controls="pemasok">
+    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'tambah_pemasok', 'tambah_penyuplaian', 'edit_pemasok', 'edit_penyuplaian']) ? 'active' : '' ?>">
+        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'tambah_pemasok', 'tambah_penyuplaian', 'edit_pemasok', 'edit_penyuplaian']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#pemasok" aria-expanded="true" aria-controls="pemasok">
             <i class="fas fa-fw fa-folder"></i>
             <span>Pemasok</span>
         </a>
-        <div id="pemasok" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="pemasok" class="collapse <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'tambah_pemasok', 'tambah_penyuplaian', 'edit_pemasok', 'edit_penyuplaian']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="login.html">Daftar Pemasok</a>
-                <a class="collapse-item" href="register.html">Penyuplaian</a>
+                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'tambah_pemasok', 'edit_pemasok']) ? 'active' : '' ?>" href="?h=pemasok">Daftar Pemasok</a>
+                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['penyuplaian', 'tambah_penyuplaian', 'edit_penyuplaian']) ? 'active' : '' ?>" href="?h=penyuplaian">Penyuplaian</a>
             </div>
         </div>
     </li>
