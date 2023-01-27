@@ -78,11 +78,19 @@ CREATE TABLE `db_gudang`.`detail_penyuplaian` (
 CREATE TABLE `db_gudang`.`return_barang` (
     id INT NOT NULL AUTO_INCREMENT,
     id_penyuplaian INT NOT NULL,
-    id_barang INT NOT NULL,
     tanggal DATE,
-    jumlah INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_penyuplaian) REFERENCES penyuplaian (id) ON DELETE CASCADE,
+    FOREIGN KEY (id_penyuplaian) REFERENCES penyuplaian (id) ON DELETE CASCADE 
+);
+
+CREATE TABLE `db_gudang`.`detail_return_barang` (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_return_barang INT NOT NULL,
+    id_barang INT NOT NULL,
+    jumlah INT,
+    alasan TEXT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_return_barang) REFERENCES return_barang (id) ON DELETE CASCADE,
     FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
 );
 
@@ -138,6 +146,31 @@ CREATE TRIGGER after_delete_detail_penyuplaian
 BEGIN 
     UPDATE barang SET 
         stok=(stok-OLD.jumlah) 
+    WHERE 
+        id=OLD.id_barang;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER after_insert_detail_return_barang 
+    AFTER INSERT 
+    ON detail_return_barang 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok-NEW.jumlah) 
+    WHERE 
+        id=NEW.id_barang;
+END$$
+
+DELIMITER $$
+CREATE TRIGGER after_delete_detail_return_barang 
+    AFTER DELETE 
+    ON detail_return_barang 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok+OLD.jumlah) 
     WHERE 
         id=OLD.id_barang;
 END$$

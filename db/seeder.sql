@@ -75,3 +75,21 @@ INSERT INTO `db_gudang`.`pemasok` (
     tanggal_terdaftar  
 ) VALUES 
 (1, 'A', '0', 'email@example.com', 'jalan', CURRENT_DATE());
+
+INSERT INTO `db_gudang`.`penyuplaian` (
+    id,
+    id_pemasok,
+    id_petugas,
+    tanggal 
+) VALUES 
+(1, 1, 1, CURRENT_DATE());
+
+INSERT INTO `db_gudang`.`detail_penyuplaian` (
+    id,
+    id_penyuplaian,
+    id_barang,
+    jumlah 
+) VALUES 
+(1, 1, 1, 5),
+(2, 1, 2, 5),
+(3, 1, 3, 5);
