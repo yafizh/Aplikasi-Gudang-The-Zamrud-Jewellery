@@ -40,15 +40,15 @@
     <div class="sidebar-heading mt-3">
         Utama
     </div>
-    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'active' : '' ?>">
-        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#barang" aria-expanded="true" aria-controls="barang">
+    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'detail_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'active' : '' ?>">
+        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'detail_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#barang" aria-expanded="true" aria-controls="barang">
             <i class="fas fa-fw fa-folder"></i>
             <span>Barang</span>
         </a>
-        <div id="barang" class="collapse <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="barang" class="collapse <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'detail_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'tambah_jenis_barang', 'edit_jenis_barang']) ? 'active' : '' ?>" href="?h=jenis_barang">Jenis Barang</a>
-                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['barang', 'tambah_barang', 'edit_barang']) ? 'active' : '' ?>" href="?h=barang">Daftar Barang</a>
+                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['barang', 'detail_barang', 'tambah_barang', 'edit_barang']) ? 'active' : '' ?>" href="?h=barang">Daftar Barang</a>
             </div>
         </div>
     </li>

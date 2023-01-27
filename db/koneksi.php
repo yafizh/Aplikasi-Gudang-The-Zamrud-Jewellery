@@ -1,9 +1,19 @@
 <?php
 
-$mysqli = new mysqli("localhost","root","","db_gudang");
+$mysqli = new mysqli("localhost", "root", "", "db_gudang");
 
 // Check connection
-if ($mysqli -> connect_errno) {
-  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+if ($mysqli->connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli->connect_error;
   exit();
+}
+
+function generateKodeBarang($number)
+{
+  if ($number < 10)
+    return ("00" . $number);
+  elseif ($number < 100)
+    return ("0" . $number);
+  elseif ($number < 1000)
+    return $number;
 }

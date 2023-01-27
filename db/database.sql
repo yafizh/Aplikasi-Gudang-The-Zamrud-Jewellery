@@ -35,11 +35,11 @@ CREATE TABLE `db_gudang`.`jenis_barang` (
 CREATE TABLE `db_gudang`.`barang` (
     id INT NOT NULL AUTO_INCREMENT,
     id_jenis_barang INT NOT NULL,
+    kode INT,
     nama VARCHAR(255),
     harga_toko INT,
     harga_label INT,
-    stok_tersedia INT,
-    stok_tidak_tersedia INT,
+    stok INT,
     satuan VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (id_jenis_barang) REFERENCES jenis_barang (id) ON DELETE CASCADE
