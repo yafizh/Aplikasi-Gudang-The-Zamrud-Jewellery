@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
 
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="h3 mb-0 text-gray-800">Tambah Admin</h1>
-        <a href="?h=admin" class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i> Kembali</a>
+        <a href="?h=admin" class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;Kembali</a>
     </div>
 
     <hr>
@@ -47,11 +47,11 @@ if (isset($_POST['submit'])) {
                     <form action="" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" autocomplete="off" value="<?= $_SESSION['old']['username'] ?? ''; ?>">
+                            <input type="text" class="form-control" id="username" name="username" required autocomplete="off" value="<?= $_SESSION['old']['username'] ?? ''; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-end">

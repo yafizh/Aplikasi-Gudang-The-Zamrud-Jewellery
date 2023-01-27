@@ -48,17 +48,29 @@ $_SESSION['old'] = [];
                         case "admin":
                             include_once "halaman/tampil/admin.php";
                             break;
+                        case "petugas":
+                            include_once "halaman/tampil/petugas.php";
+                            break;
                             // Tambah
                         case "tambah_admin":
                             include_once "halaman/tambah/admin.php";
+                            break;
+                        case "tambah_petugas":
+                            include_once "halaman/tambah/petugas.php";
                             break;
                             // Hapus
                         case "edit_admin":
                             include_once "halaman/edit/admin.php";
                             break;
+                        case "edit_petugas":
+                            include_once "halaman/edit/petugas.php";
+                            break;
                             // Hapus
                         case "hapus_admin":
                             include_once "halaman/hapus/admin.php";
+                            break;
+                        case "hapus_petugas":
+                            include_once "halaman/hapus/petugas.php";
                             break;
                         default:
                             include_once "beranda.php";

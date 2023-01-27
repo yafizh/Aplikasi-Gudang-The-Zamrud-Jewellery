@@ -1,8 +1,8 @@
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="h3 mb-0 text-gray-800">Data Admin</h1>
-        <a href="?h=tambah_admin" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+        <h1 class="h3 mb-0 text-gray-800">Data Petugas</h1>
+        <a href="?h=tambah_petugas" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
     </div>
 
     <hr>
@@ -25,22 +25,26 @@
                             <thead>
                                 <tr>
                                     <th class="td-fit text-center">No</th>
-                                    <th class="text-center">Username</th>
+                                    <th class="text-center">NIK</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Jabatan</th>
                                     <th class="td-fit text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <?php
-                            $result = $mysqli->query("SELECT * FROM pengguna");
+                            $result = $mysqli->query("SELECT * FROM petugas");
                             $no = 1;
                             ?>
                             <tbody>
                                 <?php while ($row = $result->fetch_assoc()) : ?>
                                     <tr>
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
-                                        <td class="align-middle text-center"><?= $row['username']; ?></td>
+                                        <td class="align-middle text-center"><?= $row['nik']; ?></td>
+                                        <td class="align-middle"><?= $row['nama']; ?></td>
+                                        <td class="align-middle text-center"><?= $row['jabatan']; ?></td>
                                         <td class="text-center td-fit">
-                                            <a href="?h=edit_admin&id=<?= $row['id']; ?>" class="btn btn-sm btn-warning"><i class="far fa-edit"></i></a>
-                                            <a href="?h=hapus_admin&id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="far fa-trash-alt"></i></a>
+                                            <a href="?h=edit_petugas&id=<?= $row['id']; ?>" class="btn btn-sm btn-warning"><i class="far fa-edit"></i></a>
+                                            <a href="?h=hapus_petugas&id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>

@@ -20,6 +20,7 @@ CREATE TABLE `db_gudang`.`petugas` (
     tempat_lahir VARCHAR(255),
     tanggal_lahir DATE,
     jenis_kelamin VARCHAR(255),
+    tanggal_terdaftar DATE,
     PRIMARY KEY (id),
     FOREIGN KEY (id_pengguna) REFERENCES pengguna (id) ON DELETE CASCADE
 );
