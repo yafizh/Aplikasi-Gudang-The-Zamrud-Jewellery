@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
         try {
             $mysqli->begin_transaction();
 
-            $q = "INSERT INTO pengguna (username, password) VALUES ('$nik', '$password')";
+            $q = "INSERT INTO pengguna (username, password, status) VALUES ('$nik', '$password', 'PETUGAS')";
             $mysqli->query($q);
 
             $q = "

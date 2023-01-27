@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
 
     $validasi = $mysqli->query("SELECT username FROM pengguna WHERE username='$username'");
     if (!$validasi->num_rows) {
-        $q = "INSERT INTO pengguna (username, password) VALUES ('$username', '$password')";
+        $q = "INSERT INTO pengguna (username, password, status) VALUES ('$username', '$password', 'ADMIN')";
 
         if ($mysqli->query($q)) {
             $_SESSION['success'] = 'Tambah data berhasil!';
