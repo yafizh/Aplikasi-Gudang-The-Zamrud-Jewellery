@@ -86,10 +86,8 @@ $barang_disuplai = $mysqli->query($q);
                                                 <input type="text" class="form-control" disabled value="<?= $row['nama']; ?>">
                                             </div>
                                             <div class="col-3">
-                                                <div class="input-style-1">
                                                     <label>Jumlah</label>
-                                                    <input type="number" class="form-control" disabled name="jumlah[]" autocomplete="off" value="<?= $row['jumlah']; ?>" />
-                                                </div>
+                                                    <input type="number" class="form-control text-center" disabled name="jumlah[]" autocomplete="off" value="<?= $row['jumlah']; ?>" />
                                             </div>
                                             <div class="col-2 d-flex align-items-end gap-2">
                                                 <label class="satuan"><?= $row['satuan']; ?></label>

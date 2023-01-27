@@ -1,8 +1,7 @@
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="h3 mb-0 text-gray-800">Data Penyupalaian</h1>
-        <a href="?h=tambah_penyuplaian" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+        <h1 class="h3 mb-0 text-gray-800">Data Return Barang</h1>
     </div>
 
     <hr>
@@ -16,30 +15,31 @@
                             <thead>
                                 <tr>
                                     <th class="td-fit text-center">No</th>
-                                    <th class="text-center">Tanggal</th>
+                                    <th class="text-center">Tanggal Return</th>
+                                    <th class="text-center">Tanggal Penyuplaian</th>
                                     <th class="text-center">Pemasok</th>
-                                    <th class="text-center">Petugas Yang Menerima</th>
                                     <th class="td-fit text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <?php
                             $q = "
                                 SELECT 
-                                    penyuplaian.*,
+                                    return_barang.*,
                                     pemasok.nama nama_pemasok,
-                                    petugas.nama nama_petugas
+                                    penyuplaian.tanggal penyuplaian_tanggal
                                 FROM 
+                                    return_barang 
+                                INNER JOIN 
                                     penyuplaian 
+                                ON 
+                                    penyuplaian.id=return_barang.id_penyuplaian 
                                 INNER JOIN 
                                     pemasok 
                                 ON 
                                     pemasok.id=penyuplaian.id_pemasok 
-                                INNER JOIN 
-                                    petugas 
-                                ON 
-                                    petugas.id=penyuplaian.id_petugas 
+                             
                                 ORDER BY 
-                                    penyuplaian.tanggal DESC 
+                                    return_barang.tanggal DESC, id DESC 
                             ";
                             $result = $mysqli->query($q);
                             $no = 1;
@@ -49,13 +49,12 @@
                                     <tr>
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
                                         <td class="align-middle text-center"><?= indoensiaDateWithDay($row['tanggal']); ?></td>
+                                        <td class="align-middle text-center"><?= indoensiaDateWithDay($row['penyuplaian_tanggal']); ?></td>
                                         <td class="align-middle"><?= $row['nama_pemasok']; ?></td>
-                                        <td class="align-middle"><?= $row['nama_petugas']; ?></td>
                                         <td class="text-center td-fit">
-                                            <a title="Return Barang" href="?h=tambah_return_barang&id_penyuplaian=<?= $row['id']; ?>" class="btn btn-sm btn-secondary"><i class="fas fa-people-carry"></i></a>
-                                            <a title="Detail Penyuplaian" href="?h=detail_penyuplaian&id=<?= $row['id']; ?>" class="btn btn-sm btn-info"><i class="far fa-eye"></i></a>
-                                            <a href="?h=edit_penyuplaian&id=<?= $row['id']; ?>" class="btn btn-sm btn-warning"><i class="far fa-edit"></i></a>
-                                            <a href="?h=hapus_penyuplaian&id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="far fa-trash-alt"></i></a>
+                                            <a href="?h=detail_return_barang&id=<?= $row['id']; ?>" class="btn btn-sm btn-info"><i class="far fa-eye"></i></a>
+                                            <a href="?h=edit_return_barang&id=<?= $row['id']; ?>" class="btn btn-sm btn-warning"><i class="far fa-edit"></i></a>
+                                            <a href="?h=hapus_return_barang&id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>

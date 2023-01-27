@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 
     try {
         $mysqli->begin_transaction();
-        
+
         $q = "
             INSERT INTO penyuplaian (
                 id_pemasok,
@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
                                         <div class="col-3">
                                             <div class="input-style-1">
                                                 <label>Jumlah</label>
-                                                <input type="number" class="form-control" name="jumlah[]" autocomplete="off" value="0" />
+                                                <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
                                             </div>
                                         </div>
                                         <div class="col-2 d-flex align-items-end gap-2">
@@ -126,10 +126,8 @@ if (isset($_POST['submit'])) {
                                             </select>
                                         </div>
                                         <div class="col-3">
-                                            <div class="input-style-1">
-                                                <label>Jumlah</label>
-                                                <input type="number" class="form-control" name="jumlah[]" autocomplete="off" value="0" />
-                                            </div>
+                                            <label>Jumlah</label>
+                                            <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
                                         </div>
                                         <div class="col-2 d-flex align-items-end gap-2">
                                             <label class="satuan">Satuan</label>
@@ -143,10 +141,8 @@ if (isset($_POST['submit'])) {
                                             </select>
                                         </div>
                                         <div class="col-3">
-                                            <div class="input-style-1">
-                                                <label>Jumlah</label>
-                                                <input type="number" class="form-control" name="jumlah[]" autocomplete="off" value="0" />
-                                            </div>
+                                            <label>Jumlah</label>
+                                            <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
                                         </div>
                                         <div class="col-2 d-flex align-items-end gap-2">
                                             <label class="satuan">Satuan</label>
@@ -186,10 +182,8 @@ if (isset($_POST['submit'])) {
                     </select>
                 </div>
                 <div class="col-3">
-                    <div class="input-style-1">
-                        <label>Jumlah</label>
-                        <input type="number" class="form-control" name="jumlah[]" autocomplete="off" value="0" />
-                    </div>
+                    <label>Jumlah</label>
+                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
                 </div>
                 <div class="col-2 d-flex align-items-end gap-2">
                     <label class="satuan">Satuan</label>

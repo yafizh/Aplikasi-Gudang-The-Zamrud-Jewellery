@@ -155,10 +155,8 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                     </select>
                 </div>
                 <div class="col-3">
-                    <div class="input-style-1">
-                        <label>Jumlah</label>
-                        <input type="number" class="form-control" name="jumlah[]" autocomplete="off" value="0" />
-                    </div>
+                    <label>Jumlah</label>
+                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
                 </div>
                 <div class="col-2 d-flex align-items-end gap-2">
                     <label class="satuan">Satuan</label>
@@ -218,10 +216,8 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                     </select>
                 </div>
                 <div class="col-3">
-                    <div class="input-style-1">
-                        <label>Jumlah</label>
-                        <input type="number" class="form-control" name="jumlah[]" autocomplete="off" value="${barangDisuplai[index]['jumlah']}" />
-                    </div>
+                    <label>Jumlah</label>
+                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="${barangDisuplai[index]['jumlah']}" />
                 </div>
                 <div class="col-2 d-flex align-items-end gap-2">
                     <label class="satuan">${barangDisuplai[index]['satuan']}</label>

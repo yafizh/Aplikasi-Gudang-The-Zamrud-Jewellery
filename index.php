@@ -68,9 +68,15 @@ $_SESSION['old'] = [];
                             case "penyuplaian":
                                 include_once "halaman/tampil/penyuplaian.php";
                                 break;
+                            case "return_barang":
+                                include_once "halaman/tampil/return_barang.php";
+                                break;
                                 // Detail
                             case "detail_penyuplaian":
                                 include_once "halaman/detail/penyuplaian.php";
+                                break;
+                            case "detail_return_barang":
+                                include_once "halaman/detail/return_barang.php";
                                 break;
                                 // Tambah
                             case "tambah_admin":
@@ -91,6 +97,9 @@ $_SESSION['old'] = [];
                             case "tambah_penyuplaian":
                                 include_once "halaman/tambah/penyuplaian.php";
                                 break;
+                            case "tambah_return_barang":
+                                include_once "halaman/tambah/return_barang.php";
+                                break;
                                 // Hapus
                             case "edit_admin":
                                 include_once "halaman/edit/admin.php";
@@ -106,6 +115,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "edit_pemasok":
                                 include_once "halaman/edit/pemasok.php";
+                                break;
+                            case "edit_return_barang":
+                                include_once "halaman/edit/return_barang.php";
                                 break;
                             case "edit_penyuplaian":
                                 include_once "halaman/edit/penyuplaian.php";
@@ -128,6 +140,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "hapus_penyuplaian":
                                 include_once "halaman/hapus/penyuplaian.php";
+                                break;
+                            case "hapus_return_barang":
+                                include_once "halaman/hapus/return_barang.php";
                                 break;
                             default:
                                 include_once "beranda.php";
