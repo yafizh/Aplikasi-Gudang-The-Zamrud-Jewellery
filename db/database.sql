@@ -51,6 +51,7 @@ CREATE TABLE `db_gudang`.`pemasok` (
     nomor_telepon VARCHAR(255),
     email VARCHAR(255),
     alamat TEXT,
+    tanggal_terdaftar DATE,
     PRIMARY KEY (id) 
 );
 

@@ -50,3 +50,11 @@ function indoensiaDateWithDay($date)
   $tahun = explode('-', $date)[0];
   return DAY_IN_INDONESIA[Date("w", strtotime($date))] . ', ' . $tanggal . ' ' . MONTH_IN_INDONESIA[$bulan - 1] . ' ' . $tahun;
 }
+
+function indonesiaDate($date)
+{
+    $tanggal = explode('-', $date)[2];
+    $bulan = explode('-', $date)[1];
+    $tahun = explode('-', $date)[0];
+    return $tanggal . ' ' . MONTH_IN_INDONESIA[$bulan - 1] . ' ' . $tahun;
+}

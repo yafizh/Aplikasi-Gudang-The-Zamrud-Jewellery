@@ -4,18 +4,21 @@ if (isset($_POST['submit'])) {
     $nomor_telepon = $mysqli->real_escape_string($_POST['nomor_telepon']);
     $email = $mysqli->real_escape_string($_POST['email']);
     $alamat = $mysqli->real_escape_string($_POST['alamat']);
+    $tanggal_terdaftar = $mysqli->real_escape_string($_POST['tanggal_terdaftar']);
 
     $q = "
         INSERT INTO pemasok (
             nama, 
             nomor_telepon,
             email,
-            alamat
+            alamat,
+            tanggal_terdaftar
         ) VALUES (
             '$nama', 
             '$nomor_telepon',
             '$email',
-            '$alamat' 
+            '$alamat',
+            '$tanggal_terdaftar'
         )";
 
     if ($mysqli->query($q)) {
@@ -57,6 +60,10 @@ if (isset($_POST['submit'])) {
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
                             <textarea name="alamat" autocomplete="off" id="alamat" class="form-control" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tanggal_terdaftar" class="form-label">Tanggal Terdaftar Sebagai Pemasok</label>
+                            <input type="date" class="form-control" id="tanggal_terdaftar" name="tanggal_terdaftar" required autocomplete="off" value="<?= Date("Y-m-d"); ?>">
                         </div>
                         <hr>
                         <div class="d-flex justify-content-end">

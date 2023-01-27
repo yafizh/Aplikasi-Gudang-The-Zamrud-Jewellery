@@ -71,6 +71,7 @@ INSERT INTO `db_gudang`.`pemasok` (
     nama,
     nomor_telepon,
     email,
-    alamat 
+    alamat,
+    tanggal_terdaftar  
 ) VALUES 
-(1, 'A', '0', 'email@example.com', 'jalan');
+(1, 'A', '0', 'email@example.com', 'jalan', CURRENT_DATE());

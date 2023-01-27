@@ -25,6 +25,7 @@
                             <thead>
                                 <tr>
                                     <th class="td-fit text-center">No</th>
+                                    <th class="text-center">Tanggal Terdaftar</th>
                                     <th class="text-center">Nama</th>
                                     <th class="text-center">Nomor Telepon</th>
                                     <th class="text-center">Email</th>
@@ -40,6 +41,7 @@
                                 <?php while ($row = $result->fetch_assoc()) : ?>
                                     <tr>
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
+                                        <td class="align-middle text-center"><?= indonesiaDate($row['tanggal_terdaftar']); ?></td>
                                         <td class="align-middle"><?= $row['nama']; ?></td>
                                         <td class="align-middle text-center"><?= $row['nomor_telepon']; ?></td>
                                         <td class="align-middle text-center"><?= $row['email']; ?></td>

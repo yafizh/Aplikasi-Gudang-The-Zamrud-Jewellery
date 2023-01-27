@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
                                 </div>
                                 <div class="mb-3">
                                     <label for="tanggal_terdaftar" class="form-label">Tanggal Mulai Bekerja</label>
-                                    <input type="date" class="form-control" id="tanggal_terdaftar" name="tanggal_terdaftar" required autocomplete="off" value="<?= $_SESSION['old']['tanggal_terdaftar'] ?? ''; ?>">
+                                    <input type="date" class="form-control" id="tanggal_terdaftar" name="tanggal_terdaftar" required autocomplete="off" value="<?= $_SESSION['old']['tanggal_terdaftar'] ?? Date("Y-m-d"); ?>">
                                 </div>
                             </div>
                         </div>

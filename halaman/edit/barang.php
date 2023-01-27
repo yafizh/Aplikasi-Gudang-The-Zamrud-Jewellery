@@ -1,6 +1,5 @@
 <?php
 $jenis_barang = $mysqli->query("SELECT * FROM jenis_barang WHERE id=" . $_GET['id_jenis_barang'])->fetch_assoc();
-$barang = $mysqli->query("SELECT * FROM barang WHERE id_jenis_barang=" . $_GET['id_jenis_barang']);
 $data = $mysqli->query("SELECT * FROM barang WHERE id=" . $_GET['id'])->fetch_assoc();
 if (isset($_POST['submit'])) {
     $nama = $mysqli->real_escape_string($_POST['nama']);

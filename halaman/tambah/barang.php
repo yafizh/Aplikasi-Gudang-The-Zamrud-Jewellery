@@ -1,6 +1,6 @@
 <?php
 $jenis_barang = $mysqli->query("SELECT * FROM jenis_barang WHERE id=" . $_GET['id_jenis_barang'])->fetch_assoc();
-$barang = $mysqli->query("SELECT * FROM barang WHERE id_jenis_barang=" . $_GET['id_jenis_barang']);
+$barang = $mysqli->query("SELECT * FROM barang WHERE id_jenis_barang=" . $_GET['id_jenis_barang'] . " ORDER BY kode DESC")->fetch_assoc();
 
 if (isset($_POST['submit'])) {
     $nama = $mysqli->real_escape_string($_POST['nama']);
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
             satuan 
         ) VALUES (
             " . $_GET['id_jenis_barang'] . ",
-            " . ($barang->num_rows + 1) . ",
+            " . (($barang['kode'] ?? 0) + 1) . ",
             '$nama',
             '$harga_toko',
             '$harga_label',
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Kode Barang</label>
-                            <input type="text" class="form-control" disabled value="<?= $jenis_barang['kode'] . generateKodeBarang($barang->num_rows + 1); ?>">
+                            <input type="text" class="form-control" disabled value="<?= $jenis_barang['kode'] . generateKodeBarang(($barang['kode'] ?? 0) + 1); ?>">
                         </div>
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Barang</label>
