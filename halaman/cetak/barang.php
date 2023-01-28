@@ -12,24 +12,24 @@
 <body>
     <?php include_once('../../templates/header.php'); ?>
     <h4 class="text-center my-3">Laporan Barang</h4>
-    <?php if (isset($_POST['id_jenis_barang'])) : ?>
-        <section class="px-3">
+    <section class="px-3">
+        <?php if (isset($_POST['id_jenis_barang'])) : ?>
             <?php $jenis_barang = $mysqli->query("SELECT * FROM jenis_barang WHERE id=" . $_POST['id_jenis_barang'])->fetch_assoc(); ?>
-            <div class="row">
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <table class="table">
-                        <tr>
-                            <th colspan="2">Filter</th>
-                        </tr>
-                        <tr>
-                            <td class="align-middle td-fit">Jenis Barang</td>
-                            <td class="pl-5"><?= $jenis_barang['nama']; ?></td>
-                        </tr>
-                    </table>
-                </div>
+        <?php endif; ?>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Filter</th>
+                    </tr>
+                    <tr>
+                        <td class="align-middle td-fit">Jenis Barang</td>
+                        <td class="pl-5">: <?= $jenis_barang['nama'] ?? 'Semua Jenis Barang'; ?></td>
+                    </tr>
+                </table>
             </div>
-        </section>
-    <?php endif; ?>
+        </div>
+    </section>
     <main class="p-3">
         <table class="table table-bordered">
             <thead>

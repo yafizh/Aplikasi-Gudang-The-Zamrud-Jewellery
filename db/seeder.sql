@@ -93,3 +93,19 @@ INSERT INTO `db_gudang`.`detail_penyuplaian` (
 (1, 1, 1, 5),
 (2, 1, 2, 5),
 (3, 1, 3, 5);
+
+INSERT INTO `db_gudang`.`return_barang` (
+    id,
+    id_penyuplaian,
+    tanggal 
+) VALUES 
+(1, 1, CURRENT_DATE());
+
+INSERT INTO `db_gudang`.`detail_return_barang` (
+    id,
+    id_return_barang,
+    id_barang,
+    jumlah,
+    alasan 
+) VALUES 
+(1, 1, 1, 1, 'Barang Rusak');
