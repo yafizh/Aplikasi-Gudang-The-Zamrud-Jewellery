@@ -150,6 +150,7 @@ $barang_pameran = $mysqli->query($q);
                                         <td class="align-middle"><?= $row['nama']; ?></td>
                                         <td class="align-middle text-center"><?= $row['nomor_telepon']; ?></td>
                                         <td class="text-center td-fit">
+                                            <a title="Detail Penjualan" href="?h=detail_penjualan_pameran&id=<?= $row['id']; ?>" class="btn btn-sm btn-info"><i class="far fa-eye"></i></a>
                                             <a href="?h=edit_penjualan_pameran&id=<?= $row['id']; ?>" class="btn btn-sm btn-warning"><i class="far fa-edit"></i></a>
                                             <a href="?h=hapus_penjualan_pameran&id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="far fa-trash-alt"></i></a>
                                         </td>

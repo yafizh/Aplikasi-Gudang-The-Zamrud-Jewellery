@@ -121,7 +121,7 @@ CREATE TABLE `db_gudang`.`penjualan_pameran` (
     id_pameran INT NOT NULL,
     nama VARCHAR(255),
     nomor_telepon VARCHAR(255),
-    telepon DATE,
+    tanggal DATE,
     PRIMARY KEY (id),
     FOREIGN KEY (id_pameran) REFERENCES pameran (id) ON DELETE CASCADE 
 );
@@ -129,11 +129,11 @@ CREATE TABLE `db_gudang`.`penjualan_pameran` (
 
 CREATE TABLE `db_gudang`.`detail_penjualan_pameran` (
     id INT NOT NULL AUTO_INCREMENT,
-    id_pameran INT NOT NULL,
+    id_penjualan_pameran INT NOT NULL,
     id_barang INT NOT NULL,
     jumlah INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_pameran) REFERENCES pameran (id) ON DELETE CASCADE,
+    FOREIGN KEY (id_penjualan_pameran) REFERENCES penjualan_pameran (id) ON DELETE CASCADE,
     FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
 );
 

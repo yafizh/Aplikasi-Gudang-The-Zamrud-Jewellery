@@ -37,9 +37,9 @@ $_SESSION['old'] = [];
     <script>
         const generateKodeBarang = function($number) {
             if ($number < 10)
-                return ("00"+$number);
+                return ("00" + $number);
             else if ($number < 100)
-                return ("0"+$number);
+                return ("0" + $number);
             else if ($number < 1000)
                 return $number;
         }
@@ -94,6 +94,9 @@ $_SESSION['old'] = [];
                             case "detail_pameran":
                                 include_once "halaman/detail/pameran.php";
                                 break;
+                            case "detail_penjualan_pameran":
+                                include_once "halaman/detail/penjualan_pameran.php";
+                                break;
                                 // Tambah
                             case "tambah_admin":
                                 include_once "halaman/tambah/admin.php";
@@ -118,6 +121,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "tambah_pameran":
                                 include_once "halaman/tambah/pameran.php";
+                                break;
+                            case "tambah_penjualan_pameran":
+                                include_once "halaman/tambah/penjualan_pameran.php";
                                 break;
                                 // Edit
                             case "edit_admin":
@@ -144,6 +150,9 @@ $_SESSION['old'] = [];
                             case "edit_pameran":
                                 include_once "halaman/edit/pameran.php";
                                 break;
+                            case "edit_penjualan_pameran":
+                                include_once "halaman/edit/penjualan_pameran.php";
+                                break;
                                 // Hapus
                             case "hapus_admin":
                                 include_once "halaman/hapus/admin.php";
@@ -168,6 +177,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "hapus_pameran":
                                 include_once "halaman/hapus/pameran.php";
+                                break;
+                            case "hapus_penjualan_pameran":
+                                include_once "halaman/hapus/penjualan_pameran.php";
                                 break;
                             default:
                                 include_once "beranda.php";
