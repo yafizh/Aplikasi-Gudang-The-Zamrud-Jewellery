@@ -109,3 +109,47 @@ INSERT INTO `db_gudang`.`detail_return_barang` (
     alasan 
 ) VALUES 
 (1, 1, 1, 1, 'Barang Rusak');
+
+INSERT INTO `db_gudang`.`pameran` (
+    id,
+    id_petugas,
+    nama,
+    tempat,
+    tanggal_mulai,
+    tanggal_selesai,
+    penyelenggara
+) VALUES 
+(1, 1, 'The Jewellery', 'Banjarbaru', CURRENT_DATE(), CURRENT_DATE(), 'Pemerintah');
+
+INSERT INTO `db_gudang`.`detail_pameran` (
+    id,
+    id_pameran,
+    id_barang,
+    jumlah
+) VALUES 
+(1, 1, 1, 1);
+
+INSERT INTO `db_gudang`.`detail_pameran` (
+    id,
+    id_pameran,
+    id_barang,
+    jumlah
+) VALUES 
+(1, 1, 1, 1);
+
+INSERT INTO `db_gudang`.`penjualan_pameran` (
+    id,
+    id_pameran,
+    nama,
+    nomor_telepon,
+    tanggal
+) VALUES 
+(1, 1, 'Pembeli', 'Nomor Telepon Pembeli', CURRENT_DATE());
+
+INSERT INTO `db_gudang`.`detail_penjualan_pameran` (
+    id,
+    id_penjualan_pameran,
+    id_barang,
+    jumlah
+) VALUES 
+(1, 1, 1, 1);

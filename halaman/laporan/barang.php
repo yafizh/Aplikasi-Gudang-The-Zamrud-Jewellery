@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end" style="gap: .5rem;">
-                        <a href="?h=laporan_barang" class="btn btn-secondary">Reset</a>
+                        <a href="" class="btn btn-secondary">Reset</a>
                         <button class="btn-primary btn">Filter</button>
                     </div>
                 </form>
