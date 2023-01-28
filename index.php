@@ -181,6 +181,22 @@ $_SESSION['old'] = [];
                             case "hapus_penjualan_pameran":
                                 include_once "halaman/hapus/penjualan_pameran.php";
                                 break;
+                                // Laporan
+                            case "laporan_barang":
+                                include_once "halaman/laporan/barang.php";
+                                break;
+                            case "laporan_penyuplaian":
+                                include_once "halaman/laporan/penyuplaian.php";
+                                break;
+                            case "laporan_return_barang":
+                                include_once "halaman/laporan/return_barang.php";
+                                break;
+                            case "laporan_pameran":
+                                include_once "halaman/laporan/pameran.php";
+                                break;
+                            case "laporan_penjualan_pameran":
+                                include_once "halaman/laporan/penjualan_pameran.php";
+                                break;
                             default:
                                 include_once "beranda.php";
                         }
