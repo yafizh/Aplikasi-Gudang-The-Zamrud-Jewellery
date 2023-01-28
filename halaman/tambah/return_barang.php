@@ -22,7 +22,9 @@ $q = "
     SELECT 
         dp.jumlah,
         dp.id_barang,
-        b.satuan, 
+        b.satuan,
+        jb.kode kode_jenis_barang,
+        b.kode, 
         b.nama 
     FROM 
         detail_penyuplaian dp 
@@ -30,6 +32,10 @@ $q = "
         barang b 
     ON 
         b.id=dp.id_barang 
+    INNER JOIN 
+        jenis_barang jb 
+    ON 
+        jb.id=b.id_jenis_barang
     WHERE 
         dp.id_penyuplaian=" . $_GET['id_penyuplaian'] . "
 ";
@@ -132,7 +138,7 @@ if (isset($_POST['submit'])) {
                                         <div class="row field-barang mb-3">
                                             <div class="mb-3 col-4">
                                                 <label for="id_barang" class="form-label">Barang</label>
-                                                <input type="text" class="form-control" disabled value="<?= $row['nama']; ?>">
+                                                <input type="text" class="form-control" disabled value="<?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']) . ': ' . $row['nama']; ?>">
                                             </div>
                                             <div class="mb-3 col-3">
                                                 <label>Jumlah Disuplai</label>

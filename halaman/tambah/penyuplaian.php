@@ -164,7 +164,7 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </div>
-<?php $barang = $mysqli->query("SELECT * FROM barang ORDER BY nama")->fetch_all(MYSQLI_ASSOC); ?>
+<?php $barang = $mysqli->query("SELECT jb.kode kode_jenis_barang, b.* FROM barang b INNER JOIN jenis_barang jb ON jb.id=b.id_jenis_barang")->fetch_all(MYSQLI_ASSOC); ?>
 <script>
     const containerPenyuplaianBarnag = document.getElementById('container-penyuplaian-barang');
     const barang = JSON.parse('<?= json_encode($barang); ?>');
@@ -215,7 +215,7 @@ if (isset($_POST['submit'])) {
                     if (!barangTerpilih.includes(barang[key]['id'])) {
                         const option = document.createElement('option');
                         option.value = barang[key]['id'];
-                        option.text = barang[key]['nama'];
+                        option.text = `${barang[key]['kode_jenis_barang']}${generateKodeBarang(barang[key]['kode'])}: ${barang[key]['nama']}`;
                         option.setAttribute('data-satuan', barang[key]['satuan']);
                         element.append(option);
                     }

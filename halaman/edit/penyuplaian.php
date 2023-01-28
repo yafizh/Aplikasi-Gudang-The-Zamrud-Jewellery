@@ -119,13 +119,15 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </div>
-<?php $barang = $mysqli->query("SELECT * FROM barang ORDER BY nama")->fetch_all(MYSQLI_ASSOC); ?>
+<?php $barang = $mysqli->query("SELECT jb.kode kode_jenis_barang, b.* FROM barang b INNER JOIN jenis_barang jb ON jb.id=b.id_jenis_barang")->fetch_all(MYSQLI_ASSOC); ?>
 <?php
 $q = "
     SELECT 
         dp.jumlah,
         b.id, 
         b.satuan, 
+        jb.kode kode_jenis_barang,
+        b.kode,
         b.nama 
     FROM 
         detail_penyuplaian dp 
@@ -133,6 +135,10 @@ $q = "
         barang b 
     ON 
         b.id=dp.id_barang 
+    INNER JOIN 
+        jenis_barang jb 
+    ON 
+        jb.id=b.id_jenis_barang
     WHERE 
         dp.id_penyuplaian=" . $_GET['id'] . "
 ";
@@ -188,7 +194,7 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                     if (!barangTerpilih.includes(barang[key]['id'])) {
                         const option = document.createElement('option');
                         option.value = barang[key]['id'];
-                        option.text = barang[key]['nama'];
+                        option.text = `${barang[key]['kode_jenis_barang']}${generateKodeBarang(barang[key]['kode'])}: ${barang[key]['nama']}`;
                         option.setAttribute('data-satuan', barang[key]['satuan']);
                         element.append(option);
                     }
@@ -212,7 +218,7 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                     <label for="id_barang" class="form-label">Barang</label>
                     <select name="id_barang[]" id="id_barang" class="form-control barang">
                         <option value="" disabled>Pilih Barang</option>
-                        <option value="${barangDisuplai[index]['id']}" selected>${barangDisuplai[index]['nama']}</option>
+                        <option value="${barangDisuplai[index]['id']}" selected>${barangDisuplai[index]['kode_jenis_barang']}${generateKodeBarang(barangDisuplai[index]['kode'])}: ${barangDisuplai[index]['nama']}</option>
                     </select>
                 </div>
                 <div class="col-3">

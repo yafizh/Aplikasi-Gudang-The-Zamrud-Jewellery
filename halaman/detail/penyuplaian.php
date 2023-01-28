@@ -23,6 +23,8 @@ $q = "
         dp.jumlah,
         b.id, 
         b.satuan, 
+        jb.kode kode_jenis_barang,
+        b.kode, 
         b.nama 
     FROM 
         detail_penyuplaian dp 
@@ -30,6 +32,10 @@ $q = "
         barang b 
     ON 
         b.id=dp.id_barang 
+    INNER JOIN 
+        jenis_barang jb 
+    ON 
+        jb.id=b.id_jenis_barang
     WHERE 
         dp.id_penyuplaian=" . $_GET['id'] . "
 ";
@@ -81,11 +87,11 @@ $barang_disuplai = $mysqli->query($q);
                                         <div class="row field-barang mb-3">
                                             <div class="col-4">
                                                 <label for="id_barang" class="form-label">Barang</label>
-                                                <input type="text" class="form-control" disabled value="<?= $row['nama']; ?>">
+                                                <input type="text" class="form-control" disabled value="<?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']) . ': ' . $row['nama']; ?>">
                                             </div>
                                             <div class="col-3">
-                                                    <label>Jumlah</label>
-                                                    <input type="number" class="form-control text-center" disabled name="jumlah[]" autocomplete="off" value="<?= $row['jumlah']; ?>" />
+                                                <label>Jumlah</label>
+                                                <input type="number" class="form-control text-center" disabled name="jumlah[]" autocomplete="off" value="<?= $row['jumlah']; ?>" />
                                             </div>
                                             <div class="col-2 d-flex align-items-end gap-2">
                                                 <label class="satuan"><?= $row['satuan']; ?></label>
