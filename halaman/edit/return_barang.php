@@ -166,7 +166,7 @@ if (isset($_POST['submit'])) {
                                             </div>
                                             <div class="col-12">
                                                 <label for="alasan">Alasan Return Barang</label>
-                                                <input type="text" class="form-control" id="alasan" name="alasan[]" required value="<?= $row['alasan']; ?>">
+                                                <input type="text" class="form-control" id="alasan" name="alasan[]" autocomplete="off" required value="<?= $row['alasan']; ?>">
                                             </div>
                                         </div>
                                         <hr>

@@ -65,8 +65,8 @@
             </div>
         </div>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pameran', 'detail_pameran', 'tambah_pameran', 'edit_pameran']) ? 'active' : '' ?>">
+        <a class="nav-link" href="?h=pameran">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Pameran</span></a>
     </li>

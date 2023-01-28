@@ -74,12 +74,10 @@ $barang_direturn = $mysqli->query($q);
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <?php $pemasok = $mysqli->query("SELECT * FROM pemasok ORDER BY nama"); ?>
                                     <label class="form-label">Pemasok</label>
                                     <input type="text" class="form-control" disabled value="<?= $return_barang['nama_pemasok']; ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <?php $petugas = $mysqli->query("SELECT * FROM petugas ORDER BY nama"); ?>
                                     <label class="form-label">Petugas Yang Menerima</label>
                                     <input type="text" class="form-control" disabled value="<?= $return_barang['nama_petugas']; ?>">
                                 </div>

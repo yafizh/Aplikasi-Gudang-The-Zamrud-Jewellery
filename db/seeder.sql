@@ -19,7 +19,7 @@ INSERT INTO `db_gudang`.`petugas` (
     tempat_lahir,
     tanggal_terdaftar 
 ) VALUES 
-(1, 2, '18631863', 'Nama', 'Jabatan', 'Nomor Telepon', 'Laki - Laki', '2000-01-01', 'Martapura', CURRENT_DATE());
+(1, 2, '18631863', 'Ichwan', 'Jabatan', '0895340832959', 'Laki - Laki', '2000-01-01', 'Martapura', CURRENT_DATE());
 
 INSERT INTO `db_gudang`.`jenis_barang` (
     id,

@@ -99,8 +99,8 @@ CREATE TABLE `db_gudang`.`pameran` (
     id_petugas INT NOT NULL,
     nama VARCHAR(255),
     tempat VARCHAR(255),
-    tanggal_waktu_mulai DATETIME,
-    tanggal_waktu_selesai DATETIME,
+    tanggal_mulai DATE,
+    tanggal_selesai DATE,
     penyelenggara VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (id_petugas) REFERENCES petugas (id) ON DELETE CASCADE
@@ -116,7 +116,18 @@ CREATE TABLE `db_gudang`.`detail_pameran` (
     FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
 );
 
-CREATE TABLE `db_gudang`.`barang_terjual` (
+CREATE TABLE `db_gudang`.`penjualan_pameran` (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_pameran INT NOT NULL,
+    nama VARCHAR(255),
+    nomor_telepon VARCHAR(255),
+    telepon DATE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_pameran) REFERENCES pameran (id) ON DELETE CASCADE 
+);
+
+
+CREATE TABLE `db_gudang`.`detail_penjualan_pameran` (
     id INT NOT NULL AUTO_INCREMENT,
     id_pameran INT NOT NULL,
     id_barang INT NOT NULL,
