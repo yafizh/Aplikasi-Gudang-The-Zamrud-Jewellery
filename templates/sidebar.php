@@ -7,7 +7,7 @@
 
     <li class="nav-item <?= isset($_GET['h']) ? (($_GET['h'] == "") ? "active" : "")  : "active" ?>">
         <a class="nav-link" href="?">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-home"></i>
             <span>Beranda</span></a>
     </li>
 
@@ -22,7 +22,7 @@
                         }
                         ?>">
         <a class="nav-link" href="?h=admin">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-user"></i>
             <span>Admin</span></a>
     </li>
     <li class="nav-item <?php
@@ -33,7 +33,7 @@
                         }
                         ?>">
         <a class="nav-link" href="?h=petugas">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-users"></i>
             <span>Petugas</span></a>
     </li>
 
@@ -42,7 +42,7 @@
     </div>
     <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'active' : '' ?>">
         <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#barang" aria-expanded="true" aria-controls="barang">
-            <i class="fas fa-fw fa-folder"></i>
+            <i class="fas fa-cubes"></i>
             <span>Barang</span>
         </a>
         <div id="barang" class="collapse <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -54,7 +54,7 @@
     </li>
     <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? 'active' : '' ?>">
         <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#pemasok" aria-expanded="true" aria-controls="pemasok">
-            <i class="fas fa-fw fa-folder"></i>
+            <i class="fas fa-truck"></i>
             <span>Pemasok</span>
         </a>
         <div id="pemasok" class="collapse <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -67,25 +67,25 @@
     </li>
     <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pameran', 'detail_pameran', 'tambah_pameran', 'edit_pameran']) ? 'active' : '' ?>">
         <a class="nav-link" href="?h=pameran">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-store"></i>
             <span>Pameran</span></a>
     </li>
 
     <div class="sidebar-heading mt-3">
         Laporan
     </div>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
-            <i class="fas fa-fw fa-folder"></i>
+    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'lapora_pameran', 'laporan_penjualan_pameran']) ? 'active' : '' ?>">
+        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'lapora_pameran', 'laporan_penjualan_pameran']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
+            <i class="far fa-file-pdf"></i>
             <span>Laporan</span>
         </a>
-        <div id="laporan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="laporan" class="collapse <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'lapora_pameran', 'laporan_penjualan_pameran']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">1</a>
-                <a class="collapse-item" href="#">2</a>
-                <a class="collapse-item" href="#">3</a>
-                <a class="collapse-item" href="#">4</a>
-                <a class="collapse-item" href="#">5</a>
+                <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_barang") ? "active" : "")  : "" ?>" href="?h=laporan_barang">Barang</a>
+                <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_penyuplaian") ? "active" : "")  : "" ?>" href="?h=laporan_penyuplaian">Penyuplaian</a>
+                <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_return_barang") ? "active" : "")  : "" ?>" href="?h=laporan_return_barang">Return Barang</a>
+                <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_pameran") ? "active" : "")  : "" ?>" href="?h=laporan_pameran">Pameran</a>
+                <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_penjualan_pameran") ? "active" : "")  : "" ?>" href="?h=laporan_penjualan_pameran">Penjualan Pameran</a>
             </div>
         </div>
     </li>
