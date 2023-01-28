@@ -58,8 +58,8 @@
                     SELECT 
                         pameran.*,
                         petugas.nama nama_petugas,
-                        (SELECT SUM(jumlah) FROM detail_pameran WHERE id_pameran=pameran.id) jumlah_pameran,
-                        (SELECT SUM(jumlah) FROM detail_penjualan_pameran dpp INNER JOIN penjualan_pameran pp ON dpp.id_penjualan_pameran=pp.id WHERE pp.id_pameran=pameran.id) jumlah_terjual
+                        IFNULL((SELECT SUM(jumlah) FROM detail_pameran WHERE id_pameran=pameran.id), 0) jumlah_pameran,
+                        IFNULL((SELECT SUM(jumlah) FROM detail_penjualan_pameran dpp INNER JOIN penjualan_pameran pp ON dpp.id_penjualan_pameran=pp.id WHERE pp.id_pameran=pameran.id), 0) jumlah_terjual
                     FROM 
                         pameran 
                     INNER JOIN 
