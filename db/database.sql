@@ -185,4 +185,28 @@ BEGIN
     WHERE 
         id=OLD.id_barang;
 END$$
+
+DELIMITER $$
+CREATE TRIGGER after_insert_detail_penjualan_pameran 
+    AFTER INSERT 
+    ON detail_penjualan_pameran 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok-NEW.jumlah) 
+    WHERE 
+        id=NEW.id_barang;
+END$$
+
+DELIMITER $$
+CREATE TRIGGER after_delete_detail_penjualan_pameran 
+    AFTER DELETE 
+    ON detail_penjualan_pameran 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok+OLD.jumlah) 
+    WHERE 
+        id=OLD.id_barang;
+END$$
 DELIMITER ;

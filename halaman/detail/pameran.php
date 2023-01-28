@@ -139,7 +139,7 @@ $barang_pameran = $mysqli->query($q);
                                 </tr>
                             </thead>
                             <?php
-                            $result = $mysqli->query("SELECT * FROM penjualan_pameran WHERE id_pameran=" . $_GET['id']);
+                            $result = $mysqli->query("SELECT * FROM penjualan_pameran WHERE id_pameran=" . $_GET['id'] . " ORDER BY tanggal DESC, id DESC");
                             $no = 1;
                             ?>
                             <tbody>
