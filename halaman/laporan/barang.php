@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <?php $jenis_barang = $mysqli->query("SELECT * FROM jenis_barang ORDER BY nama"); ?>
-                            <label for="id_jenis_barang" class="form-label">Jenis Barang</label>
+                            <label for="id_jenis_barang" class="form-label">Semua Jenis Barang</label>
                             <select name="id_jenis_barang" id="id_jenis_barang" class="form-control" required>
                                 <option value="" selected disabled>Pilih Jenis Barang</option>
                                 <?php while ($row = $jenis_barang->fetch_assoc()) : ?>
