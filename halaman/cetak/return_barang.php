@@ -20,7 +20,7 @@
             <?php $jenis_barang = $mysqli->query("SELECT * FROM jenis_barang WHERE id=" . $_POST['id_jenis_barang'])->fetch_assoc(); ?>
         <?php endif; ?>
         <div class="row">
-            <div class="col-12 col-sm-6 col-lg-4">
+            <div class="col-12 col-sm-6">
                 <table class="table">
                     <tr>
                         <th colspan="2">Filter</th>
