@@ -48,7 +48,7 @@
                                 ON 
                                     petugas.id=penyuplaian.id_petugas 
                                 ORDER BY 
-                                    penyuplaian.tanggal DESC 
+                                    penyuplaian.tanggal DESC, penyuplaian.id DESC 
                             ";
                             $result = $mysqli->query($q);
                             $no = 1;

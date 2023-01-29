@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <?php
-                            $result = $mysqli->query("SELECT * FROM pengguna");
+                            $result = $mysqli->query("SELECT * FROM pengguna WHERE status='ADMIN'");
                             $no = 1;
                             ?>
                             <tbody>
