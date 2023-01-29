@@ -5,7 +5,7 @@ INSERT INTO `db_gudang`.`pengguna` (
     status
 ) VALUES 
 (1, 'admin', 'admin', 'ADMIN'),
-(2, '18631863', '18631863', 'ADMIN');
+(2, '18631863', '18631863', 'PETUGAS');
 
 INSERT INTO `db_gudang`.`petugas` (
     id,
@@ -141,10 +141,11 @@ INSERT INTO `db_gudang`.`penjualan_pameran` (
     id,
     id_pameran,
     nama,
+    domisili,
     nomor_telepon,
     tanggal
 ) VALUES 
-(1, 1, 'Pembeli', 'Nomor Telepon Pembeli', CURRENT_DATE());
+(1, 1, 'Pembeli', 'Martapura', 'Nomor Telepon Pembeli', CURRENT_DATE());
 
 INSERT INTO `db_gudang`.`detail_penjualan_pameran` (
     id,

@@ -134,6 +134,7 @@ $barang_pameran = $mysqli->query($q);
                                     <th class="td-fit text-center">No</th>
                                     <th class="text-center">Tanggal</th>
                                     <th class="text-center">Nama</th>
+                                    <th class="text-center">Domisili</th>
                                     <th class="text-center">Nomor Telepon</th>
                                     <th class="td-fit text-center">Aksi</th>
                                 </tr>
@@ -148,6 +149,7 @@ $barang_pameran = $mysqli->query($q);
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
                                         <td class="align-middle text-center"><?= indonesiaDate($row['tanggal']); ?></td>
                                         <td class="align-middle"><?= $row['nama']; ?></td>
+                                        <td class="align-middle"><?= $row['domisili']; ?></td>
                                         <td class="align-middle text-center"><?= $row['nomor_telepon']; ?></td>
                                         <td class="text-center td-fit">
                                             <a title="Detail Penjualan" href="?h=detail_penjualan_pameran&id=<?= $row['id']; ?>" class="btn btn-sm btn-info"><i class="far fa-eye"></i></a>

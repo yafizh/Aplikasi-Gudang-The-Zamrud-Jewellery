@@ -38,6 +38,7 @@ $q = "
 $barang_pameran = $mysqli->query($q);
 if (isset($_POST['submit'])) {
     $nama = $mysqli->real_escape_string($_POST['nama']);
+    $domisili = $mysqli->real_escape_string($_POST['domisili']);
     $nomor_telepon = $mysqli->real_escape_string($_POST['nomor_telepon']);
     $tanggal = $mysqli->real_escape_string($_POST['tanggal']);
     $jumlah = $_POST['jumlah'];
@@ -49,11 +50,13 @@ if (isset($_POST['submit'])) {
             INSERT INTO penjualan_pameran (
                 id_pameran,
                 nama,
+                domisili,
                 nomor_telepon,
                 tanggal  
             ) VALUES (
                 '" . $_GET['id_pameran'] . "',
                 '$nama',
+                '$domisili',
                 '$nomor_telepon',
                 '$tanggal' 
             )
@@ -133,6 +136,10 @@ if (isset($_POST['submit'])) {
                                 <div class="mb-3">
                                     <label for="nama" class="form-label">Nama Pembeli</label>
                                     <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="domisili" class="form-label">Domisili Pembeli</label>
+                                    <input type="text" class="form-control" id="domisili" name="domisili" required autocomplete="off">
                                 </div>
                                 <div class="mb-3">
                                     <label for="nomor_telepon" class="form-label">Nomor Telepon</label>

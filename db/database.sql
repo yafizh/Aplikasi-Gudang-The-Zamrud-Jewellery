@@ -120,6 +120,7 @@ CREATE TABLE `db_gudang`.`penjualan_pameran` (
     id INT NOT NULL AUTO_INCREMENT,
     id_pameran INT NOT NULL,
     nama VARCHAR(255),
+    domisili VARCHAR(255),
     nomor_telepon VARCHAR(255),
     tanggal DATE,
     PRIMARY KEY (id),
