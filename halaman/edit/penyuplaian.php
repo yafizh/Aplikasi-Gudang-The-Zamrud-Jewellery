@@ -119,7 +119,22 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </div>
-<?php $barang = $mysqli->query("SELECT jb.kode kode_jenis_barang, b.* FROM barang b INNER JOIN jenis_barang jb ON jb.id=b.id_jenis_barang")->fetch_all(MYSQLI_ASSOC); ?>
+<?php
+$q = "
+    SELECT 
+        jb.nama nama_jenis_barang,
+        jb.kode kode_jenis_barang, 
+        b.* 
+    FROM 
+        barang b 
+    INNER JOIN 
+        jenis_barang jb 
+    ON 
+        jb.id=b.id_jenis_barang 
+    ORDER BY 
+        jb.nama";
+$barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
+?>
 <?php
 $q = "
     SELECT 
@@ -155,8 +170,8 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
         containerPenyuplaianBarnag.insertAdjacentHTML('beforeend', `
             <div class="row field-barang mb-3">
                 <div class="col-4">
-                    <label for="id_barang" class="form-label">Barang</label>
-                    <select name="id_barang[]" id="id_barang" class="form-control barang">
+                    <label  class="form-label">Barang</label>
+                    <select name="id_barang[]" class="form-control barang">
                         <option value="" selected disabled>Pilih Barang</option>
                     </select>
                 </div>
@@ -190,23 +205,50 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
         document.querySelectorAll('.barang').forEach((element, index) => {
             if (!ignoreIndex.includes(index)) {
                 element.innerHTML = '<option value="" selected disabled>Pilih Barang</option>';
+                let optgroup = document.createElement('optgroup');
+                let group = null;
                 for (const key in barang) {
                     if (!barangTerpilih.includes(barang[key]['id'])) {
                         const option = document.createElement('option');
                         option.value = barang[key]['id'];
                         option.text = `${barang[key]['kode_jenis_barang']}${generateKodeBarang(barang[key]['kode'])}: ${barang[key]['nama']}`;
                         option.setAttribute('data-satuan', barang[key]['satuan']);
-                        element.append(option);
+                        optgroup.append(option);
+
+                        // If total of barang is 1
+                        if (Object.keys(barang).length == 1) {
+                            optgroup.setAttribute('label', barang[key]['nama_jenis_barang']);
+                            element.append(optgroup);
+                            optgroup = document.createElement('optgroup');
+                            break;
+                        }
+
+                        // If total of barang more than 1
+                        if (key == (Object.keys(barang).length - 1)) {
+                            optgroup.setAttribute('label', barang[key]['nama_jenis_barang']);
+                            element.append(optgroup);
+                            optgroup = document.createElement('optgroup');
+                            break;
+                        }
+                        if (barang[key]['id_jenis_barang'] != barang[parseInt(key) + 1]['id_jenis_barang']) {
+                            optgroup.setAttribute('label', barang[key]['nama_jenis_barang']);
+                            element.append(optgroup);
+                            optgroup = document.createElement('optgroup');
+                        }
+
                     }
                 }
-                element.addEventListener('change', () => {
-                    barangTerpilih.push(element[element.selectedIndex].value);
-                    satuanBarang[index].innerText = element[element.selectedIndex].getAttribute('data-satuan');
-                    ignoreIndex.push(index);
-                    setOptions();
+                $('.barang').each((index, value) => {
+                    $(value).on('select2:select', function(element) {
+                        barangTerpilih.push(element.currentTarget[element.currentTarget.selectedIndex].value);
+                        satuanBarang[index].innerText = element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-satuan');
+                        ignoreIndex.push(index);
+                        setOptions();
+                    });
                 });
             }
         });
+
     }
 
     for (let index = 0; index < Object.keys(barangDisuplai).length; index++) {
@@ -215,8 +257,8 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
         containerPenyuplaianBarnag.insertAdjacentHTML('beforeend', `
             <div class="row field-barang mb-3">
                 <div class="col-4">
-                    <label for="id_barang" class="form-label">Barang</label>
-                    <select name="id_barang[]" id="id_barang" class="form-control barang">
+                    <label class="form-label">Barang</label>
+                    <select name="id_barang[]" class="form-control barang">
                         <option value="" disabled>Pilih Barang</option>
                         <option value="${barangDisuplai[index]['id']}" selected>${barangDisuplai[index]['kode_jenis_barang']}${generateKodeBarang(barangDisuplai[index]['kode'])}: ${barangDisuplai[index]['nama']}</option>
                     </select>

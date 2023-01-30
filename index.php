@@ -28,10 +28,38 @@ $_SESSION['old'] = [];
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <style>
         .td-fit {
             width: 1%;
             white-space: nowrap;
+        }
+    </style>
+    <style>
+        .select2-container .select2-selection--single {
+            box-sizing: border-box;
+            cursor: pointer;
+            display: block;
+            /* height: 28px; */
+            height: 38px;
+            user-select: none;
+            -webkit-user-select: none;
+            opacity: .55;
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            display: block;
+            padding-left: 8px;
+            padding-top: 4px;
+            padding-right: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: black !important;
         }
     </style>
     <script>
@@ -266,7 +294,7 @@ $_SESSION['old'] = [];
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -282,6 +310,11 @@ $_SESSION['old'] = [];
     <!-- Page level custom scripts -->
     <script src="assets/js/demo/datatables-demo.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('.barang').select2();
+        });
+    </script>
 </body>
 
 </html>
