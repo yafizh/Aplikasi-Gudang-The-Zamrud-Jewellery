@@ -52,6 +52,18 @@
             </div>
         </div>
     </li>
+    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['toko', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_toko', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_toko', 'edit_penyuplaian', 'edit_return_barang']) ? 'active' : '' ?>">
+        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['toko', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_toko', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_toko', 'edit_penyuplaian', 'edit_return_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#toko" aria-expanded="true" aria-controls="toko">
+            <i class="fas fa-truck"></i>
+            <span>Toko</span>
+        </a>
+        <div id="toko" class="collapse <?= in_array(($_GET['h'] ?? ''), ['toko', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_toko', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_toko', 'edit_penyuplaian', 'edit_return_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['toko', 'tambah_toko', 'edit_toko']) ? 'active' : '' ?>" href="?h=toko">Daftar Toko</a>
+                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['penyuplaian', 'detail_penyuplaian', 'tambah_penyuplaian', 'edit_penyuplaian']) ? 'active' : '' ?>" href="?h=penyuplaian">Pendistribusian</a>
+            </div>
+        </div>
+    </li>
     <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? 'active' : '' ?>">
         <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#pemasok" aria-expanded="true" aria-controls="pemasok">
             <i class="fas fa-truck"></i>
