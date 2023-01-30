@@ -2,7 +2,10 @@
 
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="h3 mb-0 text-gray-800">Data Jenis Barang</h1>
-        <a href="?h=tambah_jenis_barang" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+        <div>
+            <a href="halaman/cetak/jenis_barang.php" target="_blank" class="btn btn-danger btn-sm"><i class="far fa-file-pdf"></i>&nbsp;&nbsp;Cetak</a>
+            <a href="?h=tambah_jenis_barang" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+        </div>
     </div>
 
     <hr>
