@@ -75,6 +75,9 @@ $_SESSION['old'] = [];
                             case "toko":
                                 include_once "halaman/tampil/toko.php";
                                 break;
+                            case "distribusi_barang":
+                                include_once "halaman/tampil/distribusi_barang.php";
+                                break;
                             case "pemasok":
                                 include_once "halaman/tampil/pemasok.php";
                                 break;
@@ -88,6 +91,9 @@ $_SESSION['old'] = [];
                                 include_once "halaman/tampil/pameran.php";
                                 break;
                                 // Detail
+                            case "detail_distribusi_barang":
+                                include_once "halaman/detail/distribusi_barang.php";
+                                break;
                             case "detail_penyuplaian":
                                 include_once "halaman/detail/penyuplaian.php";
                                 break;
@@ -115,6 +121,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "tambah_toko":
                                 include_once "halaman/tambah/toko.php";
+                                break;
+                            case "tambah_distribusi_barang":
+                                include_once "halaman/tambah/distribusi_barang.php";
                                 break;
                             case "tambah_pemasok":
                                 include_once "halaman/tambah/pemasok.php";
@@ -147,6 +156,9 @@ $_SESSION['old'] = [];
                             case "edit_toko":
                                 include_once "halaman/edit/toko.php";
                                 break;
+                            case "edit_distribusi_barang":
+                                include_once "halaman/edit/distribusi_barang.php";
+                                break;
                             case "edit_pemasok":
                                 include_once "halaman/edit/pemasok.php";
                                 break;
@@ -178,6 +190,9 @@ $_SESSION['old'] = [];
                             case "hapus_toko":
                                 include_once "halaman/hapus/toko.php";
                                 break;
+                            case "hapus_distribusi_barang":
+                                include_once "halaman/hapus/distribusi_barang.php";
+                                break;
                             case "hapus_pemasok":
                                 include_once "halaman/hapus/pemasok.php";
                                 break;
@@ -196,6 +211,9 @@ $_SESSION['old'] = [];
                                 // Laporan
                             case "laporan_barang":
                                 include_once "halaman/laporan/barang.php";
+                                break;
+                            case "laporan_distribusi_barang":
+                                include_once "halaman/laporan/distribusi_barang.php";
                                 break;
                             case "laporan_penyuplaian":
                                 include_once "halaman/laporan/penyuplaian.php";

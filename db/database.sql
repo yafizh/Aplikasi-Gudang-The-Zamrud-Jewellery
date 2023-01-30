@@ -65,11 +65,11 @@ CREATE TABLE `db_gudang`.`distribusi_barang` (
 
 CREATE TABLE `db_gudang`.`detail_distribusi_barang` (
     id INT NOT NULL AUTO_INCREMENT,
-    id_distribusi INT NOT NULL,
+    id_distribusi_barang INT NOT NULL,
     id_barang INT NOT NULL,
     jumlah INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_distribusi) REFERENCES distribusi (id) ON DELETE CASCADE,
+    FOREIGN KEY (id_distribusi_barang) REFERENCES distribusi_barang (id) ON DELETE CASCADE,
     FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
 );
 

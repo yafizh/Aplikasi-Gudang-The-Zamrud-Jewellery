@@ -66,6 +66,17 @@ INSERT INTO `db_gudang`.`barang` (
 (13, 2, 9, 'Natural Yellow Sapphire', 4600000, 9200000, 0, 'PCS'), 
 (14, 2, 10, 'Natural Rubby 18.74 CT', 5150000, 10300000, 0, 'PCS');
 
+INSERT INTO `db_gudang`.`toko` (
+    id,
+    nama,
+    alamat 
+) VALUES 
+(1, 'Toko A', 'Jalan A'),
+(2, 'Toko B', 'Jalan B'),
+(3, 'Toko C', 'Jalan C'),
+(4, 'Toko D', 'Jalan D'),
+(5, 'Toko E', 'Jalan E');
+
 INSERT INTO `db_gudang`.`pemasok` (
     id,
     nama,
