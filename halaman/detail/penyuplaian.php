@@ -79,25 +79,33 @@ $barang_disuplai = $mysqli->query($q);
                     <div class="col-12 col-md-8">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Form Penyuplaian Barang</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Data Penyuplaian Barang</h6>
                             </div>
                             <div class="card-body">
-                                <div id="container-penyuplaian-barang">
-                                    <?php while ($row = $barang_disuplai->fetch_assoc()) : ?>
-                                        <div class="row field-barang mb-3">
-                                            <div class="col-4">
-                                                <label for="id_barang" class="form-label">Barang</label>
-                                                <input type="text" class="form-control" disabled value="<?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']) . ': ' . $row['nama']; ?>">
-                                            </div>
-                                            <div class="col-3">
-                                                <label>Jumlah</label>
-                                                <input type="number" class="form-control text-center" disabled name="jumlah[]" autocomplete="off" value="<?= $row['jumlah']; ?>" />
-                                            </div>
-                                            <div class="col-2 d-flex align-items-end gap-2">
-                                                <label class="satuan"><?= $row['satuan']; ?></label>
-                                            </div>
-                                        </div>
-                                    <?php endwhile; ?>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th class="td-fit text-center">No</th>
+                                                <th class="text-center">Kode Barang</th>
+                                                <th class="text-center">Nama Barang</th>
+                                                <th class="text-center">Jumlah</th>
+                                            </tr>
+                                        </thead>
+                                        <?php
+                                        $no = 1;
+                                        ?>
+                                        <tbody>
+                                            <?php while ($row = $barang_disuplai->fetch_assoc()) : ?>
+                                                <tr>
+                                                    <td class="td-fit align-middle text-center"><?= $no++; ?></td>
+                                                    <td class="align-middle text-center"><?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']); ?></td>
+                                                    <td class="align-middle"><?= $row['nama']; ?></td>
+                                                    <td class="align-middle text-center"><?= $row['jumlah']; ?> <?= $row['satuan']; ?></td>
+                                                </tr>
+                                            <?php endwhile; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
