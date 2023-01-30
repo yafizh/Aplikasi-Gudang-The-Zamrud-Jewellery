@@ -79,20 +79,29 @@ if (isset($_POST['submit'])) {
                                         <?php endwhile; ?>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <?php $petugas = $mysqli->query("SELECT * FROM petugas ORDER BY nama"); ?>
-                                    <label for="id_petugas" class="form-label">Petugas Yang Menerima</label>
-                                    <select name="id_petugas" id="id_petugas" class="form-control" required>
-                                        <option value="" selected disabled>Pilih Petugas</option>
-                                        <?php while ($row = $petugas->fetch_assoc()) : ?>
-                                            <?php if ($data['id_petugas'] == $row['id']) : ?>
-                                                <option selected value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
-                                            <?php else : ?>
-                                                <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
-                                            <?php endif; ?>
-                                        <?php endwhile; ?>
-                                    </select>
-                                </div>
+                                <?php if (is_null($_SESSION['user']['id_petugas'])) : ?>
+                                    <div class="mb-3">
+                                        <?php $petugas = $mysqli->query("SELECT * FROM petugas ORDER BY nama"); ?>
+                                        <label for="id_petugas" class="form-label">Petugas Yang Menerima</label>
+                                        <select name="id_petugas" id="id_petugas" class="form-control" required>
+                                            <option value="" selected disabled>Pilih Petugas</option>
+                                            <?php while ($row = $petugas->fetch_assoc()) : ?>
+                                                <?php if ($data['id_petugas'] == $row['id']) : ?>
+                                                    <option selected value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
+                                                <?php endif; ?>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                <?php else : ?>
+                                    <div class="mb-3">
+                                        <?php $petugas = $mysqli->query("SELECT * FROM petugas WHERE id=" . $_SESSION['user']['id_petugas'])->fetch_assoc(); ?>
+                                        <label for="id_petugas" class="form-label">Petugas Yang Menerima</label>
+                                        <input type="text" hidden name="id_petugas" id="id_petugas" value="<?= $petugas['id']; ?>" readonly>
+                                        <input type="text" class="form-control" value="<?= $petugas['nama']; ?>" disabled>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="tanggal" class="form-label">Tanggal Penyuplaian</label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" required autocomplete="off" value="<?= $data['tanggal']; ?>">

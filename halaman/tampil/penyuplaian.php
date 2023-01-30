@@ -47,9 +47,12 @@
                                     petugas 
                                 ON 
                                     petugas.id=penyuplaian.id_petugas 
-                                ORDER BY 
-                                    penyuplaian.tanggal DESC, penyuplaian.id DESC 
                             ";
+
+                            if (!is_null($_SESSION['user']['id_petugas']))
+                                $q .= " WHERE penyuplaian.id_petugas=" . $_SESSION['user']['id_petugas'];
+
+                            $q .= " ORDER BY penyuplaian.tanggal DESC, penyuplaian.id DESC";
                             $result = $mysqli->query($q);
                             $no = 1;
                             ?>

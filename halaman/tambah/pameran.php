@@ -84,16 +84,25 @@ if (isset($_POST['submit'])) {
                                     <label for="penyelenggara" class="form-label">Penyelenggara</label>
                                     <input type="text" class="form-control" id="penyelenggara" name="penyelenggara" required autocomplete="off">
                                 </div>
-                                <div class="mb-3">
-                                    <?php $petugas = $mysqli->query("SELECT * FROM petugas ORDER BY nama"); ?>
-                                    <label for="id_petugas" class="form-label">Petugas Yang Bertanggung Jawab</label>
-                                    <select name="id_petugas" id="id_petugas" class="form-control" required>
-                                        <option value="" selected disabled>Pilih Petugas</option>
-                                        <?php while ($row = $petugas->fetch_assoc()) : ?>
-                                            <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
-                                        <?php endwhile; ?>
-                                    </select>
-                                </div>
+                                <?php if (is_null($_SESSION['user']['id_petugas'])) : ?>
+                                    <div class="mb-3">
+                                        <?php $petugas = $mysqli->query("SELECT * FROM petugas ORDER BY nama"); ?>
+                                        <label for="id_petugas" class="form-label">Petugas Yang Bertanggung Jawab</label>
+                                        <select name="id_petugas" id="id_petugas" class="form-control" required>
+                                            <option value="" selected disabled>Pilih Petugas</option>
+                                            <?php while ($row = $petugas->fetch_assoc()) : ?>
+                                                <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                <?php else : ?>
+                                    <div class="mb-3">
+                                        <?php $petugas = $mysqli->query("SELECT * FROM petugas WHERE id=" . $_SESSION['user']['id_petugas'])->fetch_assoc(); ?>
+                                        <label for="id_petugas" class="form-label">Petugas Yang Bertanggung Jawab</label>
+                                        <input type="text" hidden name="id_petugas" id="id_petugas" value="<?= $petugas['id']; ?>" readonly>
+                                        <input type="text" class="form-control" value="<?= $petugas['nama']; ?>" disabled>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="tanggal_mulai" class="form-label">Tanggal Mulai Pameran</label>
                                     <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" required autocomplete="off" value="<?= Date("Y-m-d"); ?>">

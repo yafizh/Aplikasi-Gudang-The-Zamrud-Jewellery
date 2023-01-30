@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
     $q = "
         SELECT 
             pengguna.*,
+            petugas.id id_petugas,
             petugas.nik,
             petugas.nama,
             petugas.jabatan

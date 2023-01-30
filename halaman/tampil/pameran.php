@@ -44,10 +44,13 @@
                                 INNER JOIN 
                                     petugas 
                                 ON 
-                                    petugas.id=pameran.id_petugas 
-                                ORDER BY 
-                                    pameran.tanggal_mulai DESC, id DESC  
+                                    petugas.id=pameran.id_petugas   
                             ";
+
+                            if (!is_null($_SESSION['user']['id_petugas']))
+                                $q .= " WHERE pameran.id_petugas=" . $_SESSION['user']['id_petugas'];
+
+                            $q .= " ORDER BY pameran.tanggal_mulai DESC, id DESC";
                             $result = $mysqli->query($q);
                             $no = 1;
                             ?>

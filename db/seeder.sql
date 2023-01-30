@@ -5,7 +5,8 @@ INSERT INTO `db_gudang`.`pengguna` (
     status
 ) VALUES 
 (1, 'admin', 'admin', 'ADMIN'),
-(2, '18631863', '18631863', 'PETUGAS');
+(2, '11111111', '11111111', 'PETUGAS'),
+(3, '22222222', '22222222', 'PETUGAS');
 
 INSERT INTO `db_gudang`.`petugas` (
     id,
@@ -19,7 +20,8 @@ INSERT INTO `db_gudang`.`petugas` (
     tempat_lahir,
     tanggal_terdaftar 
 ) VALUES 
-(1, 2, '18631863', 'Ichwan', 'Jabatan', '0895340832959', 'Laki - Laki', '2000-01-01', 'Martapura', CURRENT_DATE());
+(1, 2, '11111111', 'Petugas 1', 'Jabatan 1', '0895340832959', 'Laki - Laki', '2000-01-01', 'Martapura', CURRENT_DATE()),
+(2, 3, '22222222', 'Petugas 2', 'Jabatan 2', '6468168136816', 'Perempuan', '2000-01-01', 'Martapura', CURRENT_DATE());
 
 INSERT INTO `db_gudang`.`jenis_barang` (
     id,
