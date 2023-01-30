@@ -45,6 +45,34 @@ CREATE TABLE `db_gudang`.`barang` (
     FOREIGN KEY (id_jenis_barang) REFERENCES jenis_barang (id) ON DELETE CASCADE
 );
 
+
+CREATE TABLE `db_gudang`.`toko` (
+    id INT NOT NULL AUTO_INCREMENT,
+    nama VARCHAR(255),
+    alamat TEXT,
+    PRIMARY KEY (id) 
+);
+
+CREATE TABLE `db_gudang`.`distribusi_barang` (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_toko INT NOT NULL,
+    id_petugas INT NOT NULL,
+    tanggal DATE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_toko) REFERENCES toko (id) ON DELETE CASCADE,
+    FOREIGN KEY (id_petugas) REFERENCES petugas (id) ON DELETE CASCADE
+);
+
+CREATE TABLE `db_gudang`.`detail_distribusi_barang` (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_distribusi INT NOT NULL,
+    id_barang INT NOT NULL,
+    jumlah INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_distribusi) REFERENCES distribusi (id) ON DELETE CASCADE,
+    FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
+);
+
 CREATE TABLE `db_gudang`.`pemasok` (
     id INT NOT NULL AUTO_INCREMENT,
     nama VARCHAR(255),
@@ -137,6 +165,31 @@ CREATE TABLE `db_gudang`.`detail_penjualan_pameran` (
     FOREIGN KEY (id_penjualan_pameran) REFERENCES penjualan_pameran (id) ON DELETE CASCADE,
     FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
 );
+
+DELIMITER $$
+CREATE TRIGGER after_insert_detail_distribusi_barang 
+    AFTER INSERT 
+    ON detail_distribusi_barang 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok+NEW.jumlah) 
+    WHERE 
+        id=NEW.id_barang;
+END$$
+
+DELIMITER $$
+CREATE TRIGGER after_delete_detail_distribusi_barang 
+    AFTER DELETE 
+    ON detail_distribusi_barang 
+    FOR EACH ROW 
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok-OLD.jumlah) 
+    WHERE 
+        id=OLD.id_barang;
+END$$
+DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER after_insert_detail_penyuplaian 
