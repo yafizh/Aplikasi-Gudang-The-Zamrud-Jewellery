@@ -250,7 +250,9 @@ $barang_pameran = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                 });
             }
         });
-
+        $(document).ready(function() {
+            $('.barang').select2();
+        });
     }
 
 

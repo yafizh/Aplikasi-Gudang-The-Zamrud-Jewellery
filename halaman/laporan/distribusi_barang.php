@@ -92,14 +92,15 @@
                         <table class="table table-bordered" id="reportTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th class="td-fit text-center">No</th>
-                                    <th class="text-center">Tanggal</th>
-                                    <th class="text-center">Nama Toko Yang Menerima</th>
-                                    <th class="text-center">Petugas Yang Menerima</th>
-                                    <th class="text-center">Jenis Barang</th>
-                                    <th class="text-center">Kode Barang</th>
-                                    <th class="text-center">Nama Barang</th>
-                                    <th class="text-center">Jumlah</th>
+                                    <th class="td-fit text-center align-middle">No</th>
+                                    <th class="text-center align-middle">Tanggal</th>
+                                    <th class="text-center align-middle">Nama Toko Yang Menerima</th>
+                                    <th class="text-center align-middle">Petugas Yang Menerima</th>
+                                    <th class="text-center align-middle">Jenis Barang</th>
+                                    <th class="text-center align-middle">Kode Barang</th>
+                                    <th class="text-center align-middle">Nama Barang</th>
+                                    <th class="text-center align-middle">Harga Label</th>
+                                    <th class="text-center align-middle">Jumlah</th>
                                 </tr>
                             </thead>
                             <?php
@@ -112,6 +113,7 @@
                                     jb.kode kode_jenis_barang,
                                     b.kode kode_barang,
                                     b.nama nama_barang,
+                                    b.harga_label,
                                     dp.jumlah 
                                 FROM 
                                     detail_distribusi_barang dp 
@@ -162,6 +164,7 @@
                                         <td class="align-middle text-center"><?= $row['jenis_barang']; ?></td>
                                         <td class="align-middle text-center"><?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode_barang']); ?></td>
                                         <td class="align-middle"><?= $row['nama_barang']; ?></td>
+                                        <td class="align-middle text-right"><?= number_format($row['harga_label']   , 0, ",", "."); ?></td>
                                         <td class="align-middle text-center"><?= $row['jumlah']; ?></td>
                                     </tr>
                                 <?php endwhile; ?>

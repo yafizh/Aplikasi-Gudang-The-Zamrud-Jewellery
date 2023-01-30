@@ -179,7 +179,7 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
         containerPenyuplaianBarnag.insertAdjacentHTML('beforeend', `
             <div class="row field-barang mb-3">
                 <div class="col-4">
-                    <label  class="form-label">Barang</label>
+                    <label class="form-label">Barang</label>
                     <select name="id_barang[]" class="form-control barang">
                         <option value="" selected disabled>Pilih Barang</option>
                     </select>
@@ -257,7 +257,9 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                 });
             }
         });
-
+        $(document).ready(function() {
+            $('.barang').select2();
+        });
     }
 
     for (let index = 0; index < Object.keys(barangDisuplai).length; index++) {

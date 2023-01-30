@@ -173,7 +173,7 @@ CREATE TRIGGER after_insert_detail_distribusi_barang
     FOR EACH ROW 
 BEGIN 
     UPDATE barang SET 
-        stok=(stok+NEW.jumlah) 
+        stok=(stok-NEW.jumlah) 
     WHERE 
         id=NEW.id_barang;
 END$$
@@ -185,7 +185,7 @@ CREATE TRIGGER after_delete_detail_distribusi_barang
     FOR EACH ROW 
 BEGIN 
     UPDATE barang SET 
-        stok=(stok-OLD.jumlah) 
+        stok=(stok+OLD.jumlah) 
     WHERE 
         id=OLD.id_barang;
 END$$
