@@ -6,7 +6,7 @@ CREATE TABLE `db_gudang`.`pengguna` (
     id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(255) UNIQUE,
     password VARCHAR(255),
-    status VARCHAR(255),
+    status ENUM('ADMIN', 'PETUGAS'),
     PRIMARY KEY (id)
 );
 
