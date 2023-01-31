@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
                                 <?php if (is_null($_SESSION['user']['id_petugas'])) : ?>
                                     <div class="mb-3">
                                         <?php $petugas = $mysqli->query("SELECT * FROM petugas ORDER BY nama"); ?>
-                                        <label for="id_petugas" class="form-label">Petugas Yang Menerima</label>
+                                        <label for="id_petugas" class="form-label">Petugas Yang Mengirim</label>
                                         <select name="id_petugas" id="id_petugas" class="form-control" required>
                                             <option value="" selected disabled>Pilih Petugas</option>
                                             <?php while ($row = $petugas->fetch_assoc()) : ?>

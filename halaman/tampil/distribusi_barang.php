@@ -27,7 +27,7 @@
                                     <th class="td-fit text-center">No</th>
                                     <th class="text-center">Tanggal</th>
                                     <th class="text-center">Nama Toko Yang Menerima</th>
-                                    <th class="text-center">Petugas Yang Menerima</th>
+                                    <th class="text-center">Petugas Yang Mengirim</th>
                                     <th class="td-fit text-center">Aksi</th>
                                 </tr>
                             </thead>

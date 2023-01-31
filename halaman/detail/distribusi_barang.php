@@ -66,7 +66,7 @@ $barang_didistribusi = $mysqli->query($q);
                                     <input type="text" class="form-control" disabled value="<?= $data['nama_toko']; ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Petugas Yang Menerima</label>
+                                    <label class="form-label">Petugas Yang Mengirim</label>
                                     <input type="text" class="form-control" disabled value="<?= $data['nama_petugas']; ?>">
                                 </div>
                                 <div class="mb-3">

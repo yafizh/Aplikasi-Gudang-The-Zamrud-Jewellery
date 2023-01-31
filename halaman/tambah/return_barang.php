@@ -61,20 +61,22 @@ if (isset($_POST['submit'])) {
 
         $id_return_barang = $mysqli->insert_id;
         foreach ($barang_disuplai as $i => $value) {
-            $q = "
-                INSERT INTO detail_return_barang (
-                    id_return_barang,
-                    id_barang,
-                    jumlah, 
-                    alasan 
-                ) VALUES (
-                    '$id_return_barang',
-                    '" . $value['id_barang'] . "',
-                    '" . $jumlah[$i] . "',
-                    '" . $alasan[$i] . "'
-                ) 
-            ";
-            $mysqli->query($q);
+            if ((int)$jumlah[$i]) {
+                $q = "
+                    INSERT INTO detail_return_barang (
+                        id_return_barang,
+                        id_barang,
+                        jumlah, 
+                        alasan 
+                    ) VALUES (
+                        '$id_return_barang',
+                        '" . $value['id_barang'] . "',
+                        '" . $jumlah[$i] . "',
+                        '" . $alasan[$i] . "'
+                    ) 
+                ";
+                $mysqli->query($q);
+            }
         }
 
 
@@ -149,14 +151,14 @@ if (isset($_POST['submit'])) {
                                             </div>
                                             <div class="mb-3 col-3">
                                                 <label>Jumlah Return</label>
-                                                <input type="number" class="form-control text-center" name="jumlah[]" required autocomplete="off" value="0" max="<?= $row['jumlah']; ?>" />
+                                                <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" max="<?= $row['jumlah']; ?>" />
                                             </div>
                                             <div class="mb-3 col-auto d-flex align-items-end">
                                                 <label class="satuan"><?= $row['satuan']; ?></label>
                                             </div>
                                             <div class="col-12">
                                                 <label for="alasan">Alasan Return Barang</label>
-                                                <input type="text" class="form-control" id="alasan" name="alasan[]" autocomplete="off" required>
+                                                <input type="text" class="form-control" id="alasan" name="alasan[]" autocomplete="off">
                                             </div>
                                         </div>
                                         <hr>
