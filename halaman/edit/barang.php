@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
                             <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" required value="<?= $data['nama']; ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="harga_toko" class="form-label">Harga Toko</label>
+                            <label for="harga_toko" class="form-label">Harga Modal</label>
                             <input type="text" class="form-control" id="harga_toko" name="harga_toko" autocomplete="off" required value="<?= $data['harga_toko']; ?>">
                         </div>
                         <div class="mb-3">

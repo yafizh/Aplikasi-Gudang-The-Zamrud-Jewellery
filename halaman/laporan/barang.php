@@ -52,7 +52,7 @@
                                     <th class="text-center">Jenis Barang</th>
                                     <th class="text-center">Kode Barang</th>
                                     <th class="text-center">Nama Barang</th>
-                                    <th class="text-center">Harga Toko</th>
+                                    <th class="text-center">Harga Modal</th>
                                     <th class="text-center">Harga Label</th>
                                     <th class="text-center">Stok</th>
                                     <th class="text-center">Satuan</th>

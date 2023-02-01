@@ -38,7 +38,7 @@
                     <th class="text-center align-middle">Jenis Barang</th>
                     <th class="text-center align-middle">Kode Barang</th>
                     <th class="text-center align-middle">Nama Barang</th>
-                    <th class="text-center align-middle">Harga Toko</th>
+                    <th class="text-center align-middle">Harga Modal</th>
                     <th class="text-center align-middle">Harga Label</th>
                     <th class="text-center align-middle">Stok</th>
                     <th class="text-center align-middle">Satuan</th>
