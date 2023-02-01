@@ -42,20 +42,21 @@
     <div class="sidebar-heading mt-3">
         Utama
     </div>
-    <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
-        <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'active' : '' ?>">
-            <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#barang" aria-expanded="true" aria-controls="barang">
-                <i class="fas fa-cubes"></i>
-                <span>Barang</span>
-            </a>
-            <div id="barang" class="collapse <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
+
+    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'active' : '' ?>">
+        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#barang" aria-expanded="true" aria-controls="barang">
+            <i class="fas fa-cubes"></i>
+            <span>Barang</span>
+        </a>
+        <div id="barang" class="collapse <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'barang', 'barang_per_jenis_barang', 'tambah_jenis_barang', 'tambah_barang', 'edit_jenis_barang', 'edit_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
                     <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['jenis_barang', 'tambah_jenis_barang', 'edit_jenis_barang']) ? 'active' : '' ?>" href="?h=jenis_barang">Jenis Barang</a>
-                    <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['barang', 'barang_per_jenis_barang', 'tambah_barang', 'edit_barang']) ? 'active' : '' ?>" href="?h=barang">Daftar Barang</a>
-                </div>
+                <?php endif; ?>
+                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['barang', 'barang_per_jenis_barang', 'tambah_barang', 'edit_barang']) ? 'active' : '' ?>" href="?h=barang">Daftar Barang</a>
             </div>
-        </li>
-    <?php endif; ?>
+        </div>
+    </li>
     <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['toko', 'distribusi_barang', 'detail_distribusi_barang', 'tambah_toko', 'tambah_distribusi_barang', 'edit_toko', 'edit_distribusi_barang']) ? 'active' : '' ?>">
         <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['toko', 'distribusi_barang', 'detail_distribusi_barang', 'tambah_toko', 'tambah_distribusi_barang', 'edit_toko', 'edit_distribusi_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#toko" aria-expanded="true" aria-controls="toko">
             <i class="fas fa-truck"></i>
