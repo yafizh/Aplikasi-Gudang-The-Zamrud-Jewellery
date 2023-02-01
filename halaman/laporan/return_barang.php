@@ -82,11 +82,13 @@
                                     <th class="td-fit text-center">No</th>
                                     <th class="text-center">Tanggal Return</th>
                                     <th class="text-center">Tanggal Penyupalain</th>
+                                    <th class="text-center">Lama Return Barang</th>
                                     <th class="text-center">Pemasok</th>
                                     <th class="text-center">Jenis Barang</th>
                                     <th class="text-center">Kode Barang</th>
                                     <th class="text-center">Nama Barang</th>
                                     <th class="text-center">Jumlah</th>
+                                    <th class="text-center">Alasan</th>
                                 </tr>
                             </thead>
                             <?php
@@ -99,6 +101,7 @@
                                     jb.kode kode_jenis_barang,
                                     b.kode kode_barang,
                                     b.nama nama_barang,
+                                    drp.alasan,
                                     drp.jumlah 
                                 FROM 
                                     detail_return_barang drp 
@@ -143,11 +146,13 @@
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
                                         <td class="align-middle text-center"><?= indonesiaDate($row['tanggal_return']); ?></td>
                                         <td class="align-middle text-center"><?= indonesiaDate($row['tanggal_penyuplaian']); ?></td>
+                                        <td class="align-middle text-center"><?= compareDate($row['tanggal_penyuplaian'], $row['tanggal_return']); ?></td>
                                         <td class="align-middle text-center"><?= $row['pemasok']; ?></td>
                                         <td class="align-middle text-center"><?= $row['jenis_barang']; ?></td>
                                         <td class="align-middle text-center"><?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode_barang']); ?></td>
                                         <td class="align-middle"><?= $row['nama_barang']; ?></td>
                                         <td class="align-middle text-center"><?= $row['jumlah']; ?></td>
+                                        <td class="align-middle"><?= $row['alasan']; ?></td>
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>

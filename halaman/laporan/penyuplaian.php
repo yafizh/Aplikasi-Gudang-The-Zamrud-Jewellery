@@ -158,7 +158,7 @@
                                     <tr>
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
                                         <td class="align-middle text-center"><?= indonesiaDate($row['tanggal']); ?></td>
-                                        <td class="align-middle text-center"><?= umurBarang($row['tanggal']); ?></td>
+                                        <td class="align-middle text-center"><?= compareDate($row['tanggal']); ?></td>
                                         <td class="align-middle text-center"><?= $row['pemasok']; ?></td>
                                         <td class="align-middle text-center"><?= $row['petugas']; ?></td>
                                         <td class="align-middle text-center"><?= $row['jenis_barang']; ?></td>

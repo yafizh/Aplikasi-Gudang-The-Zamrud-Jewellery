@@ -59,10 +59,10 @@ function indonesiaDate($date)
   return $tanggal . ' ' . MONTH_IN_INDONESIA[$bulan - 1] . ' ' . $tahun;
 }
 
-function umurBarang($tanggal_penyuplaian)
+function compareDate($first_date, $second_date = null)
 {
-  $date1 = new DateTime($tanggal_penyuplaian);
-  $date2 = new DateTime();
+  $date1 = new DateTime($first_date);
+  $date2 = new DateTime(($second_date ?? Date("Y-m-d")));
   $interval = $date1->diff($date2);
 
   $umur = "";
@@ -75,5 +75,7 @@ function umurBarang($tanggal_penyuplaian)
     $umur = " " . $interval->d . " Hari ";
 
   if (!($interval->d || $interval->m || $interval->y))
-    return "1 Hari";
+    $umur = "1 Hari";
+
+  return $umur;
 }
