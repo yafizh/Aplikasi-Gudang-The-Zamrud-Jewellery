@@ -142,14 +142,6 @@ INSERT INTO `db_gudang`.`detail_pameran` (
 ) VALUES 
 (1, 1, 1, 1);
 
-INSERT INTO `db_gudang`.`detail_pameran` (
-    id,
-    id_pameran,
-    id_barang,
-    jumlah
-) VALUES 
-(1, 1, 1, 1);
-
 INSERT INTO `db_gudang`.`penjualan_pameran` (
     id,
     id_pameran,

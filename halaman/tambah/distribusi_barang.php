@@ -192,7 +192,6 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
 <script>
     const containerDistribusiBarang = document.getElementById('container-distribusi-barang');
     const barang = JSON.parse('<?= json_encode($barang); ?>');
-    const satuanBarang = document.querySelectorAll('.satuan');
     const barangTerpilih = [];
     const ignoreIndex = [];
 
@@ -243,6 +242,7 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
                         option.value = barang[key]['id'];
                         option.text = `${barang[key]['kode_jenis_barang']}${generateKodeBarang(barang[key]['kode'])}: ${barang[key]['nama']}`;
                         option.setAttribute('data-satuan', barang[key]['satuan']);
+                        option.setAttribute('data-max', barang[key]['stok']);
                         optgroup.append(option);
 
                         // If total of barang is 1
@@ -271,7 +271,8 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
                 $('.barang').each((index, value) => {
                     $(value).on('select2:select', function(element) {
                         barangTerpilih.push(element.currentTarget[element.currentTarget.selectedIndex].value);
-                        satuanBarang[index].innerText = element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-satuan');
+                        document.querySelectorAll('.satuan')[index].innerText = element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-satuan');
+                        document.querySelectorAll('input[name="jumlah[]"]')[index].setAttribute('max', element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-max'));
                         ignoreIndex.push(index);
                         setOptions();
                     });
@@ -280,6 +281,5 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
         });
 
     }
-
     setOptions();
 </script>

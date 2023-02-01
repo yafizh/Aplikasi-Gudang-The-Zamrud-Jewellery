@@ -22,18 +22,20 @@ if (isset($_POST['submit'])) {
 
         $mysqli->query("DELETE FROM detail_distribusi_barang WHERE id_distribusi_barang=" . $_GET['id']);
         foreach ($id_barang as $i => $id) {
-            $q = "
-                INSERT INTO detail_distribusi_barang (
-                    id_distribusi_barang,
-                    id_barang,
-                    jumlah 
-                ) VALUES (
-                    '" . $_GET['id'] . "',
-                    '" . $id . "',
-                    '" . $jumlah[$i] . "'
-                ) 
-            ";
-            $mysqli->query($q);
+            if ((int)$jumlah[$i]) {
+                $q = "
+                    INSERT INTO detail_distribusi_barang (
+                        id_distribusi_barang,
+                        id_barang,
+                        jumlah 
+                    ) VALUES (
+                        '" . $_GET['id'] . "',
+                        '" . $id . "',
+                        '" . $jumlah[$i] . "'
+                    ) 
+                ";
+                $mysqli->query($q);
+            }
         }
 
 
@@ -147,6 +149,7 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
 <?php
 $q = "
     SELECT 
+        b.stok,
         dp.jumlah,
         b.id, 
         b.satuan, 
@@ -170,7 +173,6 @@ $barang_didistribusi = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
 <script>
     const containerDistribusiBarang = document.getElementById('container-distribusi-barang');
     const barang = JSON.parse('<?= json_encode($barang); ?>');
-    const satuanBarang = document.querySelectorAll('.satuan');
     const barangTerpilih = [];
     const ignoreIndex = [];
     const barangDidistribusi = JSON.parse('<?= json_encode($barang_didistribusi); ?>');
@@ -250,7 +252,11 @@ $barang_didistribusi = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                 $('.barang').each((index, value) => {
                     $(value).on('select2:select', function(element) {
                         barangTerpilih.push(element.currentTarget[element.currentTarget.selectedIndex].value);
-                        satuanBarang[index].innerText = element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-satuan');
+                        document.querySelectorAll('.satuan')[index].innerText = element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-satuan');
+
+                        const jumlah = document.querySelectorAll('input[name="jumlah[]"]')[index];
+                        jumlah.setAttribute('max', parseInt(element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-max')) + parseInt(jumlah.value));
+
                         ignoreIndex.push(index);
                         setOptions();
                     });
@@ -276,7 +282,7 @@ $barang_didistribusi = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                 </div>
                 <div class="col-3">
                     <label>Jumlah</label>
-                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="${barangDidistribusi[index]['jumlah']}" />
+                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" min="1" max="${parseInt(barangDidistribusi[index]['jumlah'])+parseInt(barangDidistribusi[index]['stok'])}" value="${barangDidistribusi[index]['jumlah']}" />
                 </div>
                 <div class="col-2 d-flex align-items-end gap-2">
                     <label class="satuan">${barangDidistribusi[index]['satuan']}</label>
