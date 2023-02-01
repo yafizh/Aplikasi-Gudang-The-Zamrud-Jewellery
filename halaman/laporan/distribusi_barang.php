@@ -95,7 +95,7 @@
                                     <th class="td-fit text-center align-middle">No</th>
                                     <th class="text-center align-middle">Tanggal</th>
                                     <th class="text-center align-middle">Nama Toko Yang Menerima</th>
-                                    <th class="text-center align-middle">Petugas Yang Menerima</th>
+                                    <th class="text-center align-middle">Petugas Yang Mengirim</th>
                                     <th class="text-center align-middle">Jenis Barang</th>
                                     <th class="text-center align-middle">Kode Barang</th>
                                     <th class="text-center align-middle">Nama Barang</th>

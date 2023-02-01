@@ -94,6 +94,7 @@
                                 <tr>
                                     <th class="td-fit text-center">No</th>
                                     <th class="text-center">Tanggal</th>
+                                    <th class="text-center">Umur Barang</th>
                                     <th class="text-center">Pemasok</th>
                                     <th class="text-center">Petugas Yang Menerima</th>
                                     <th class="text-center">Jenis Barang</th>
@@ -157,6 +158,7 @@
                                     <tr>
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
                                         <td class="align-middle text-center"><?= indonesiaDate($row['tanggal']); ?></td>
+                                        <td class="align-middle text-center"><?= umurBarang($row['tanggal']); ?></td>
                                         <td class="align-middle text-center"><?= $row['pemasok']; ?></td>
                                         <td class="align-middle text-center"><?= $row['petugas']; ?></td>
                                         <td class="align-middle text-center"><?= $row['jenis_barang']; ?></td>

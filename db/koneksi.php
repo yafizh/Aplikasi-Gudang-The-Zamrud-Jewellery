@@ -53,8 +53,27 @@ function indoensiaDateWithDay($date)
 
 function indonesiaDate($date)
 {
-    $tanggal = explode('-', $date)[2];
-    $bulan = explode('-', $date)[1];
-    $tahun = explode('-', $date)[0];
-    return $tanggal . ' ' . MONTH_IN_INDONESIA[$bulan - 1] . ' ' . $tahun;
+  $tanggal = explode('-', $date)[2];
+  $bulan = explode('-', $date)[1];
+  $tahun = explode('-', $date)[0];
+  return $tanggal . ' ' . MONTH_IN_INDONESIA[$bulan - 1] . ' ' . $tahun;
+}
+
+function umurBarang($tanggal_penyuplaian)
+{
+  $date1 = new DateTime($tanggal_penyuplaian);
+  $date2 = new DateTime();
+  $interval = $date1->diff($date2);
+
+  $umur = "";
+
+  if ($interval->y)
+    $umur = $interval->y . " Tahun";
+  if ($interval->m)
+    $umur = " " . $interval->m . " Bulan";
+  if ($interval->d)
+    $umur = " " . $interval->d . " Hari ";
+
+  if (!($interval->d || $interval->m || $interval->y))
+    return "1 Hari";
 }
