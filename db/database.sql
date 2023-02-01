@@ -117,6 +117,7 @@ CREATE TABLE `db_gudang`.`detail_return_barang` (
     id_barang INT NOT NULL,
     jumlah INT,
     alasan TEXT,
+    bentuk_penggantian_barang VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (id_return_barang) REFERENCES return_barang (id) ON DELETE CASCADE,
     FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
@@ -151,6 +152,7 @@ CREATE TABLE `db_gudang`.`penjualan_pameran` (
     domisili VARCHAR(255),
     nomor_telepon VARCHAR(255),
     tanggal DATE,
+    jenis_pembayaran VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (id_pameran) REFERENCES pameran (id) ON DELETE CASCADE 
 );
@@ -178,7 +180,6 @@ BEGIN
         id=NEW.id_barang;
 END$$
 
-DELIMITER $$
 CREATE TRIGGER after_delete_detail_distribusi_barang 
     AFTER DELETE 
     ON detail_distribusi_barang 
@@ -189,9 +190,7 @@ BEGIN
     WHERE 
         id=OLD.id_barang;
 END$$
-DELIMITER ;
 
-DELIMITER $$
 CREATE TRIGGER after_insert_detail_penyuplaian 
     AFTER INSERT 
     ON detail_penyuplaian 
@@ -203,7 +202,6 @@ BEGIN
         id=NEW.id_barang;
 END$$
 
-DELIMITER $$
 CREATE TRIGGER after_delete_detail_penyuplaian 
     AFTER DELETE 
     ON detail_penyuplaian 
@@ -214,33 +212,7 @@ BEGIN
     WHERE 
         id=OLD.id_barang;
 END$$
-DELIMITER ;
 
-DELIMITER $$
-CREATE TRIGGER after_insert_detail_return_barang 
-    AFTER INSERT 
-    ON detail_return_barang 
-    FOR EACH ROW 
-BEGIN 
-    UPDATE barang SET 
-        stok=(stok-NEW.jumlah) 
-    WHERE 
-        id=NEW.id_barang;
-END$$
-
-DELIMITER $$
-CREATE TRIGGER after_delete_detail_return_barang 
-    AFTER DELETE 
-    ON detail_return_barang 
-    FOR EACH ROW 
-BEGIN 
-    UPDATE barang SET 
-        stok=(stok+OLD.jumlah) 
-    WHERE 
-        id=OLD.id_barang;
-END$$
-
-DELIMITER $$
 CREATE TRIGGER after_insert_detail_penjualan_pameran 
     AFTER INSERT 
     ON detail_penjualan_pameran 
@@ -252,7 +224,6 @@ BEGIN
         id=NEW.id_barang;
 END$$
 
-DELIMITER $$
 CREATE TRIGGER after_delete_detail_penjualan_pameran 
     AFTER DELETE 
     ON detail_penjualan_pameran 
@@ -263,4 +234,21 @@ BEGIN
     WHERE 
         id=OLD.id_barang;
 END$$
+
+CREATE PROCEDURE after_insert_detail_return_barang(id_barang INT, new_jumlah INT)
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok-new_jumlah) 
+    WHERE 
+        id=id_barang;
+END$$
+
+CREATE PROCEDURE after_delete_detail_return_barang(id_barang INT, old_jumlah INT)
+BEGIN 
+    UPDATE barang SET 
+        stok=(stok+old_jumlah) 
+    WHERE 
+        id=id_barang;
+END$$
+
 DELIMITER ;

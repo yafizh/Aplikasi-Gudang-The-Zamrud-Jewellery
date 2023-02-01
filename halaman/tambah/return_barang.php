@@ -44,6 +44,7 @@ if (isset($_POST['submit'])) {
     $tanggal = $mysqli->real_escape_string($_POST['tanggal']);
     $jumlah = $_POST['jumlah'];
     $alasan = $_POST['alasan'];
+    $bentuk_penggantian_barang = $_POST['bentuk_penggantian_barang'];
 
     try {
         $mysqli->begin_transaction();
@@ -67,15 +68,20 @@ if (isset($_POST['submit'])) {
                         id_return_barang,
                         id_barang,
                         jumlah, 
-                        alasan 
+                        alasan,
+                        bentuk_penggantian_barang
                     ) VALUES (
                         '$id_return_barang',
                         '" . $value['id_barang'] . "',
                         '" . $jumlah[$i] . "',
-                        '" . $alasan[$i] . "'
+                        '" . $alasan[$i] . "',
+                        '" . $bentuk_penggantian_barang[$i] . "' 
                     ) 
                 ";
                 $mysqli->query($q);
+
+                if ($bentuk_penggantian_barang[$i] == "Uang")
+                    $mysqli->query("CALL after_insert_detail_return_barang(" . $value['id_barang'] . ", " . $jumlah[$i] . ")");
             }
         }
 
@@ -156,9 +162,17 @@ if (isset($_POST['submit'])) {
                                             <div class="mb-3 col-auto d-flex align-items-end">
                                                 <label class="satuan"><?= $row['satuan']; ?></label>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-6">
                                                 <label for="alasan">Alasan Return Barang</label>
                                                 <input type="text" class="form-control" id="alasan" name="alasan[]" autocomplete="off">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="bentuk_penggantian_barang">Bentuk Penggantian Barang</label>
+                                                <select class="form-control" name="bentuk_penggantian_barang[]" id="bentuk_penggantian_barang">
+                                                    <option value="" disabled selected>Pilih Bentuk Penggantian Barang</option>
+                                                    <option value="Barang Baru">Barang Baru</option>
+                                                    <option value="Uang">Uang</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <hr>
