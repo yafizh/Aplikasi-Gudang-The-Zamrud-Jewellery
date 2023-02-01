@@ -17,10 +17,23 @@ $q = "
     SELECT 
         dp.jumlah,
         jb.kode kode_jenis_barang, 
-        b.id, 
-        b.satuan, 
-        b.kode, 
-        b.nama 
+        b.*,
+        (
+            SELECT 
+                SUM(jumlah) 
+            FROM 
+                detail_penjualan_pameran dpp 
+            INNER JOIN 
+                penjualan_pameran pp 
+            ON 
+                pp.id=dpp.id_penjualan_pameran
+            WHERE 
+                pp.id_pameran=" . $_GET['id'] . " 
+                AND 
+                dpp.id_penjualan_pameran=pp.id  
+                AND 
+                id_barang=b.id
+        ) jumlah_terjual 
     FROM 
         detail_pameran dp 
     INNER JOIN 
@@ -43,6 +56,7 @@ $barang_pameran = $mysqli->query($q);
         <div>
             <a href="?h=pameran" class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;Kembali</a>
             <a href="?h=tambah_penjualan_pameran&id_pameran=<?= $_GET['id']; ?>" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Penjualan Pameran</a>
+            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-cubes"></i>&nbsp;&nbsp;Barang Pameran</button>
         </div>
     </div>
 
@@ -80,32 +94,6 @@ $barang_pameran = $mysqli->query($q);
                             <div class="mb-3">
                                 <label class="form-label">Tempat</label>
                                 <input type="text" class="form-control" disabled value="<?= $data['tempat']; ?>">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Form Barang Pameran</h6>
-                        </div>
-                        <div class="card-body">
-                            <div id="container-penyuplaian-barang">
-                                <?php while ($row = $barang_pameran->fetch_assoc()) : ?>
-                                    <div class="row field-barang mb-3">
-                                        <div class="mb-3 col-7">
-                                            <label for="id_barang" class="form-label">Barang</label>
-                                            <input type="text" class="form-control" disabled value="<?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']) . ': ' . $row['nama']; ?>">
-                                        </div>
-                                        <div class="mb-3 col-3">
-                                            <label>Jumlah</label>
-                                            <input type="number" class="form-control text-center" disabled value="<?= $row['jumlah']; ?>" />
-                                        </div>
-                                        <div class="mb-3 col-auto d-flex align-items-end">
-                                            <label class="satuan"><?= $row['satuan']; ?></label>
-                                        </div>
-                                    </div>
-                                <?php endwhile; ?>
                             </div>
                         </div>
                     </div>
@@ -162,6 +150,65 @@ $barang_pameran = $mysqli->query($q);
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="staticBackdropLabel">Barang Pameran</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="td-fit text-center align-middle">No</th>
+                            <th class="text-center align-middle">Barang</th>
+                            <th class="text-center align-middle">Jumlah Barang</th>
+                            <th class="text-center align-middle">Harga Modal</th>
+                            <th class="text-center align-middle">Modal</th>
+                            <th class="text-center align-middle">Harga Label</th>
+                            <th class="text-center align-middle">Jumlah Terjual</th>
+                            <th class="text-center align-middle">Keuntungan</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    $no = 1;
+                    $modal = 0;
+                    $untung = 0;
+                    ?>
+                    <tbody>
+                        <?php while ($row = $barang_pameran->fetch_assoc()) : ?>
+                            <tr>
+                                <td class="td-fit align-middle text-center"><?= $no++; ?></td>
+                                <td class="align-middle text-center"><?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']) . ': ' . $row['nama']; ?></td>
+                                <td class="align-middle text-center"><?= $row['jumlah']; ?> <?= $row['satuan']; ?></td>
+                                <td class="align-middle text-right"><?= number_format($row['harga_toko'], 0, ",", "."); ?></td>
+                                <td class="align-middle text-right"><?= number_format((int)$row['jumlah'] * (int)$row['harga_toko'], 0, ",", "."); ?></td>
+                                <td class="align-middle text-right"><?= number_format($row['harga_label'], 0, ",", "."); ?></td>
+                                <td class="align-middle text-center"><?= $row['jumlah_terjual']; ?> <?= $row['satuan']; ?></td>
+                                <td class="align-middle text-right"><?= number_format((int)$row['jumlah_terjual'] * (int)$row['harga_label'], 0, ",", "."); ?></td>
+                            </tr>
+                            <?php $modal += (int)$row['jumlah'] * (int)$row['harga_toko']; ?>
+                            <?php $untung += (int)$row['jumlah_terjual'] * (int)$row['harga_label']; ?>
+                        <?php endwhile; ?>
+                        <tr>
+                            <th colspan="2">Total</th>
+                            <td colspan="3" class="align-middle text-right"><?= number_format($modal, 0, ",", "."); ?></td>
+                            <td colspan="3" class="align-middle text-right"><?= number_format($untung, 0, ",", "."); ?></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Laba Keuntungan Pameran</th>
+                            <td colspan="6" class="align-middle text-right"><?= number_format(((($untung - $modal) > 0) ? ($untung - $modal) : "0"), 0, ",", "."); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

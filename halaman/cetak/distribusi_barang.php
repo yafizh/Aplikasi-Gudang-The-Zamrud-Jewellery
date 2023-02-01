@@ -33,7 +33,7 @@
                         <td class="pl-5">: <?= $toko['nama'] ?? 'Semua Toko'; ?></td>
                     </tr>
                     <tr>
-                        <td class="align-middle td-fit">Petugas Yang Menerima</td>
+                        <td class="align-middle td-fit">Petugas Yang Mengirim</td>
                         <td class="pl-5">: <?= $petugas['nama'] ?? 'Semua Petugas'; ?></td>
                     </tr>
                     <tr>
@@ -59,7 +59,7 @@
                     <th class="td-fit text-center align-middle">No</th>
                     <th class="text-center align-middle">Tanggal</th>
                     <th class="text-center align-middle">Nama Toko Yang Menerima</th>
-                    <th class="text-center align-middle">Petugas Yang Menerima</th>
+                    <th class="text-center align-middle">Petugas Yang Mengirim</th>
                     <th class="text-center align-middle">Jenis Barang</th>
                     <th class="text-center align-middle">Kode Barang</th>
                     <th class="text-center align-middle">Nama Barang</th>
