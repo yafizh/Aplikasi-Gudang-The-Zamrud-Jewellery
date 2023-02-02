@@ -143,6 +143,9 @@ $_SESSION['old'] = [];
                             case "detail_penjualan_pameran":
                                 include_once "halaman/detail/penjualan_pameran.php";
                                 break;
+                            case "detail_penjualan_toko":
+                                include_once "halaman/detail/penjualan_toko.php";
+                                break;
                                 // Tambah
                             case "tambah_admin":
                                 include_once "halaman/tambah/admin.php";

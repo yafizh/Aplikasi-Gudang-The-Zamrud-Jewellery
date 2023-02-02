@@ -57,18 +57,18 @@
             </div>
         </div>
     </li>
-    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['toko', 'toko-jenis_barang', 'toko-jenis_barang-barang','penjualan_toko', 'distribusi_barang', 'detail_distribusi_barang', 'tambah_penjualan_toko', 'tambah_toko', 'tambah_distribusi_barang', 'edit_penjualan_toko', 'edit_toko', 'edit_distribusi_barang']) ? 'active' : '' ?>">
-        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['toko', 'toko-jenis_barang', 'toko-jenis_barang-barang','penjualan_toko', 'distribusi_barang', 'detail_distribusi_barang', 'tambah_penjualan_toko', 'tambah_toko', 'tambah_distribusi_barang', 'edit_penjualan_toko', 'edit_toko', 'edit_distribusi_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#toko" aria-expanded="true" aria-controls="toko">
+    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['toko', 'toko-jenis_barang', 'toko-jenis_barang-barang', 'penjualan_toko', 'distribusi_barang', 'detail_distribusi_barang', 'detail_penjualan_toko', 'tambah_penjualan_toko', 'tambah_toko', 'tambah_distribusi_barang', 'edit_penjualan_toko', 'edit_toko', 'edit_distribusi_barang']) ? 'active' : '' ?>">
+        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['toko', 'toko-jenis_barang', 'toko-jenis_barang-barang', 'penjualan_toko', 'distribusi_barang', 'detail_distribusi_barang', 'detail_penjualan_toko', 'tambah_penjualan_toko', 'tambah_toko', 'tambah_distribusi_barang', 'edit_penjualan_toko', 'edit_toko', 'edit_distribusi_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#toko" aria-expanded="true" aria-controls="toko">
             <i class="fas fa-truck"></i>
             <span>Toko</span>
         </a>
-        <div id="toko" class="collapse <?= in_array(($_GET['h'] ?? ''), ['toko', 'toko-jenis_barang', 'toko-jenis_barang-barang','penjualan_toko', 'distribusi_barang', 'detail_distribusi_barang', 'tambah_penjualan_toko', 'tambah_toko', 'tambah_distribusi_barang', 'edit_penjualan_toko', 'edit_toko', 'edit_distribusi_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="toko" class="collapse <?= in_array(($_GET['h'] ?? ''), ['toko', 'toko-jenis_barang', 'toko-jenis_barang-barang', 'penjualan_toko', 'distribusi_barang', 'detail_distribusi_barang', 'detail_penjualan_toko', 'tambah_penjualan_toko', 'tambah_toko', 'tambah_distribusi_barang', 'edit_penjualan_toko', 'edit_toko', 'edit_distribusi_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
                     <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['toko', 'toko-jenis_barang', 'toko-jenis_barang-barang', 'tambah_toko', 'edit_toko']) ? 'active' : '' ?>" href="?h=toko">Daftar Toko</a>
                 <?php endif; ?>
                 <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['distribusi_barang', 'detail_distribusi_barang', 'tambah_distribusi_barang', 'edit_distribusi_barang']) ? 'active' : '' ?>" href="?h=distribusi_barang">Pendistribusian</a>
-                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['penjualan_toko', 'detail_penjualan_toko', 'tambah_penjualan_toko', 'edit_penjualan_toko']) ? 'active' : '' ?>" href="?h=penjualan_toko">Penjualan</a>
+                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['penjualan_toko', 'detail_penjualan_toko', 'tambah_penjualan_toko', 'edit_penjualan_toko', 'detail_penjualan_toko']) ? 'active' : '' ?>" href="?h=penjualan_toko">Penjualan</a>
             </div>
         </div>
     </li>
