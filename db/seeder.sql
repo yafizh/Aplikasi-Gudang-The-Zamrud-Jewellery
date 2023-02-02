@@ -107,55 +107,55 @@ INSERT INTO `db_gudang`.`detail_penyuplaian` (
 (2, 1, 2, 5),
 (3, 1, 3, 5);
 
-INSERT INTO `db_gudang`.`return_barang` (
-    id,
-    id_penyuplaian,
-    tanggal 
-) VALUES 
-(1, 1, CURRENT_DATE());
+-- INSERT INTO `db_gudang`.`return_barang` (
+--     id,
+--     id_penyuplaian,
+--     tanggal 
+-- ) VALUES 
+-- (1, 1, CURRENT_DATE());
 
-INSERT INTO `db_gudang`.`detail_return_barang` (
-    id,
-    id_return_barang,
-    id_barang,
-    jumlah,
-    alasan 
-) VALUES 
-(1, 1, 1, 1, 'Barang Rusak');
+-- INSERT INTO `db_gudang`.`detail_return_barang` (
+--     id,
+--     id_return_barang,
+--     id_barang,
+--     jumlah,
+--     alasan 
+-- ) VALUES 
+-- (1, 1, 1, 1, 'Barang Rusak');
 
-INSERT INTO `db_gudang`.`pameran` (
-    id,
-    id_petugas,
-    nama,
-    tempat,
-    tanggal_mulai,
-    tanggal_selesai,
-    penyelenggara
-) VALUES 
-(1, 1, 'The Jewellery', 'Banjarbaru', CURRENT_DATE(), CURRENT_DATE(), 'Pemerintah');
+-- INSERT INTO `db_gudang`.`pameran` (
+--     id,
+--     id_petugas,
+--     nama,
+--     tempat,
+--     tanggal_mulai,
+--     tanggal_selesai,
+--     penyelenggara
+-- ) VALUES 
+-- (1, 1, 'The Jewellery', 'Banjarbaru', CURRENT_DATE(), CURRENT_DATE(), 'Pemerintah');
 
-INSERT INTO `db_gudang`.`detail_pameran` (
-    id,
-    id_pameran,
-    id_barang,
-    jumlah
-) VALUES 
-(1, 1, 1, 1);
+-- INSERT INTO `db_gudang`.`detail_pameran` (
+--     id,
+--     id_pameran,
+--     id_barang,
+--     jumlah
+-- ) VALUES 
+-- (1, 1, 1, 1);
 
-INSERT INTO `db_gudang`.`penjualan_pameran` (
-    id,
-    id_pameran,
-    nama,
-    domisili,
-    nomor_telepon,
-    tanggal
-) VALUES 
-(1, 1, 'Pembeli', 'Martapura', 'Nomor Telepon Pembeli', CURRENT_DATE());
+-- INSERT INTO `db_gudang`.`penjualan_pameran` (
+--     id,
+--     id_pameran,
+--     nama,
+--     domisili,
+--     nomor_telepon,
+--     tanggal
+-- ) VALUES 
+-- (1, 1, 'Pembeli', 'Martapura', 'Nomor Telepon Pembeli', CURRENT_DATE());
 
-INSERT INTO `db_gudang`.`detail_penjualan_pameran` (
-    id,
-    id_penjualan_pameran,
-    id_barang,
-    jumlah
-) VALUES 
-(1, 1, 1, 1);
+-- INSERT INTO `db_gudang`.`detail_penjualan_pameran` (
+--     id,
+--     id_penjualan_pameran,
+--     id_barang,
+--     jumlah
+-- ) VALUES 
+-- (1, 1, 1, 1);
