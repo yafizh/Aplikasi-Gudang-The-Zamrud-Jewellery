@@ -121,6 +121,12 @@ $_SESSION['old'] = [];
                             case "penjualan_toko":
                                 include_once "halaman/tampil/penjualan_toko.php";
                                 break;
+                            case "toko-jenis_barang":
+                                include_once "halaman/tampil/toko-jenis_barang.php";
+                                break;
+                            case "toko-jenis_barang-barang":
+                                include_once "halaman/tampil/toko-jenis_barang-barang.php";
+                                break;
                                 // Detail
                             case "detail_distribusi_barang":
                                 include_once "halaman/detail/distribusi_barang.php";

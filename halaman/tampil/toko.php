@@ -34,7 +34,7 @@
                                 </tr>
                             </thead>
                             <?php
-                            $result = $mysqli->query("SELECT * FROM toko ORDER BY id DESC");
+                            $result = $mysqli->query("SELECT * FROM toko ORDER BY nama");
                             $no = 1;
                             ?>
                             <tbody>
@@ -44,6 +44,7 @@
                                         <td class="align-middle"><?= $row['nama']; ?></td>
                                         <td class="align-middle"><?= $row['alamat']; ?></td>
                                         <td class="text-center td-fit">
+                                            <a href="?h=toko-jenis_barang&id_toko=<?= $row['id']; ?>" class="btn btn-sm btn-info"><i class="far fa-eye"></i></a>
                                             <a href="?h=edit_toko&id=<?= $row['id']; ?>" class="btn btn-sm btn-warning"><i class="far fa-edit"></i></a>
                                             <a href="?h=hapus_toko&id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="far fa-trash-alt"></i></a>
                                         </td>
