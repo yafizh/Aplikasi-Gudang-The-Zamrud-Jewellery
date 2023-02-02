@@ -53,6 +53,24 @@ CREATE TABLE `db_gudang`.`toko` (
     PRIMARY KEY (id) 
 );
 
+CREATE TABLE `db_gudang`.`penjualan_toko` (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_toko INT NOT NULL,
+    tanggal DATE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_toko) REFERENCES toko (id) ON DELETE CASCADE
+);
+
+CREATE TABLE `db_gudang`.`detail_penjualan_toko` (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_penjualan_toko INT NOT NULL,
+    id_barang INT NOT NULL,
+    jumlah INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_penjualan_toko) REFERENCES penjualan_toko (id) ON DELETE CASCADE,
+    FOREIGN KEY (id_barang) REFERENCES barang (id) ON DELETE CASCADE
+);
+
 CREATE TABLE `db_gudang`.`distribusi_barang` (
     id INT NOT NULL AUTO_INCREMENT,
     id_toko INT NOT NULL,

@@ -118,6 +118,9 @@ $_SESSION['old'] = [];
                             case "pameran":
                                 include_once "halaman/tampil/pameran.php";
                                 break;
+                            case "penjualan_toko":
+                                include_once "halaman/tampil/penjualan_toko.php";
+                                break;
                                 // Detail
                             case "detail_distribusi_barang":
                                 include_once "halaman/detail/distribusi_barang.php";
@@ -168,6 +171,9 @@ $_SESSION['old'] = [];
                             case "tambah_penjualan_pameran":
                                 include_once "halaman/tambah/penjualan_pameran.php";
                                 break;
+                            case "tambah_penjualan_toko":
+                                include_once "halaman/tambah/penjualan_toko.php";
+                                break;
                                 // Edit
                             case "edit_admin":
                                 include_once "halaman/edit/admin.php";
@@ -202,6 +208,9 @@ $_SESSION['old'] = [];
                             case "edit_penjualan_pameran":
                                 include_once "halaman/edit/penjualan_pameran.php";
                                 break;
+                            case "edit_penjualan_toko":
+                                include_once "halaman/edit/penjualan_toko.php";
+                                break;
                                 // Hapus
                             case "hapus_admin":
                                 include_once "halaman/hapus/admin.php";
@@ -235,6 +244,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "hapus_penjualan_pameran":
                                 include_once "halaman/hapus/penjualan_pameran.php";
+                                break;
+                            case "hapus_penjualan_toko":
+                                include_once "halaman/hapus/penjualan_toko.php";
                                 break;
                                 // Laporan
                             case "laporan_barang":
