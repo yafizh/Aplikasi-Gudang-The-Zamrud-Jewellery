@@ -114,6 +114,10 @@ $barang_pameran = $mysqli->query($q);
                                 <label class="form-label">Tanggal Penjualan</label>
                                 <input type="text" class="form-control" disabled value="<?= indoensiaDateWithDay($data['tanggal']); ?>">
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">Jenis Pembayaran</label>
+                                <input type="text" class="form-control" disabled value="<?= $data['jenis_pembayaran']; ?>">
+                            </div>
                         </div>
                     </div>
                 </div>

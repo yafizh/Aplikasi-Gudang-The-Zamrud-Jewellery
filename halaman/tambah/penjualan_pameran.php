@@ -41,6 +41,7 @@ if (isset($_POST['submit'])) {
     $domisili = $mysqli->real_escape_string($_POST['domisili']);
     $nomor_telepon = $mysqli->real_escape_string($_POST['nomor_telepon']);
     $tanggal = $mysqli->real_escape_string($_POST['tanggal']);
+    $jenis_pembayaran = $mysqli->real_escape_string($_POST['jenis_pembayaran']);
     $jumlah = $_POST['jumlah'];
 
     try {
@@ -52,31 +53,35 @@ if (isset($_POST['submit'])) {
                 nama,
                 domisili,
                 nomor_telepon,
-                tanggal  
+                tanggal,
+                jenis_pembayaran
             ) VALUES (
                 '" . $_GET['id_pameran'] . "',
                 '$nama',
                 '$domisili',
                 '$nomor_telepon',
-                '$tanggal' 
+                '$tanggal',
+                '$jenis_pembayaran'
             )
         ";
         $mysqli->query($q);
 
         $id_penjualan_pameran = $mysqli->insert_id;
         foreach ($barang_pameran as $i => $value) {
-            $q = "
-                INSERT INTO detail_penjualan_pameran (
-                    id_penjualan_pameran,
-                    id_barang,
-                    jumlah 
-                ) VALUES (
-                    '$id_penjualan_pameran',
-                    '" . $value['id_barang'] . "',
-                    '" . $jumlah[$i] . "'
-                ) 
-            ";
-            $mysqli->query($q);
+            if ((int)$jumlah[$i]) {
+                $q = "
+                    INSERT INTO detail_penjualan_pameran (
+                        id_penjualan_pameran,
+                        id_barang,
+                        jumlah 
+                    ) VALUES (
+                        '$id_penjualan_pameran',
+                        '" . $value['id_barang'] . "',
+                        '" . $jumlah[$i] . "'
+                    ) 
+                ";
+                $mysqli->query($q);
+            }
         }
 
 
@@ -148,6 +153,15 @@ if (isset($_POST['submit'])) {
                                 <div class="mb-3">
                                     <label for="tanggal" class="form-label">Tanggal Penjualan</label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" required autocomplete="off" value="<?= Date("Y-m-d"); ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tanggal" class="form-label">Jenis Pembayaran</label>
+                                    <select name="jenis_pembayaran" id="jenis_pembayaran" class="form-control" required>
+                                        <option value="" disabled selected>Pilih Jenis Pembayaran</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Debit">Debit</option>
+                                        <option value="QRIS">QRIS</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

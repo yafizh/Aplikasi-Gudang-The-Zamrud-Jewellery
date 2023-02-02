@@ -23,45 +23,35 @@ $q = "
 ";
 $data = $mysqli->query($q)->fetch_assoc();
 
+$id_pameran = $mysqli->query("SELECT * FROM penjualan_pameran WHERE id=" . $_GET['id'])->fetch_assoc()['id_pameran'];
 $q = "
     SELECT 
-        dpp.jumlah jumlah_dibeli,
-        dpp.id_barang,
+        dp.jumlah,
+        dp.id_barang,
         jb.kode kode_jenis_barang, 
         b.kode, 
-        dp.jumlah,
         b.satuan, 
-        b.nama 
+        b.nama,
+        IFNULL((SELECT jumlah FROM detail_penjualan_pameran WHERE id_penjualan_pameran=" . $_GET['id'] . " AND id_barang=dp.id_barang), 0) jumlah_dibeli 
     FROM 
-        detail_penjualan_pameran dpp  
-    INNER JOIN 
-        penjualan_pameran pp 
-    ON 
-        pp.id=dpp.id_penjualan_pameran 
-    INNER JOIN 
-        pameran p 
-    ON 
-        p.id=pp.id_pameran   
-    INNER JOIN 
         detail_pameran dp 
-    ON 
-        dp.id_pameran=p.id  
     INNER JOIN 
         barang b 
     ON 
-        b.id=dpp.id_barang=dp.id_barang
+        b.id=dp.id_barang 
     INNER JOIN 
         jenis_barang jb 
     ON 
         jb.id=b.id_jenis_barang 
     WHERE 
-        dpp.id_penjualan_pameran=" . $_GET['id'] . "
+        dp.id_pameran=" . $id_pameran . "
 ";
 $barang_pameran = $mysqli->query($q);
 if (isset($_POST['submit'])) {
     $nama = $mysqli->real_escape_string($_POST['nama']);
     $nomor_telepon = $mysqli->real_escape_string($_POST['nomor_telepon']);
     $tanggal = $mysqli->real_escape_string($_POST['tanggal']);
+    $jenis_pembayaran = $mysqli->real_escape_string($_POST['jenis_pembayaran']);
     $jumlah = $_POST['jumlah'];
 
     try {
@@ -71,7 +61,8 @@ if (isset($_POST['submit'])) {
             UPDATE penjualan_pameran SET
                 nama='$nama',
                 nomor_telepon='$nomor_telepon',
-                tanggal='$tanggal' 
+                tanggal='$tanggal', 
+                jenis_pembayaran='$jenis_pembayaran' 
             WHERE 
                 id=" . $data['id'] . "
         ";
@@ -80,18 +71,20 @@ if (isset($_POST['submit'])) {
 
         $mysqli->query("DELETE FROM detail_penjualan_pameran WHERE id_penjualan_pameran=" . $data['id']);
         foreach ($barang_pameran as $i => $value) {
-            $q = "
-                INSERT INTO detail_penjualan_pameran (
-                    id_penjualan_pameran,
-                    id_barang,
-                    jumlah 
-                ) VALUES (
-                    '" . $data['id'] . "',
-                    '" . $value['id_barang'] . "',
-                    '" . $jumlah[$i] . "'
-                ) 
-            ";
-            $mysqli->query($q);
+            if ((int)$jumlah[$i]) {
+                $q = "
+                    INSERT INTO detail_penjualan_pameran (
+                        id_penjualan_pameran,
+                        id_barang,
+                        jumlah 
+                    ) VALUES (
+                        '" . $data['id'] . "',
+                        '" . $value['id_barang'] . "',
+                        '" . $jumlah[$i] . "'
+                    ) 
+                ";
+                $mysqli->query($q);
+            }
         }
 
 
@@ -159,6 +152,15 @@ if (isset($_POST['submit'])) {
                                 <div class="mb-3">
                                     <label for="tanggal" class="form-label">Tanggal Penjualan</label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" required autocomplete="off" value="<?= $data['tanggal']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tanggal" class="form-label">Jenis Pembayaran</label>
+                                    <select name="jenis_pembayaran" id="jenis_pembayaran" class="form-control" required>
+                                        <option value="" disabled selected>Pilih Jenis Pembayaran</option>
+                                        <option <?= $data['jenis_pembayaran'] == 'Cash' ? 'selected' : ''; ?> value="Cash">Cash</option>
+                                        <option <?= $data['jenis_pembayaran'] == 'Debit' ? 'selected' : ''; ?> value="Debit">Debit</option>
+                                        <option <?= $data['jenis_pembayaran'] == 'QRIS' ? 'selected' : ''; ?> value="QRIS">QRIS</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
