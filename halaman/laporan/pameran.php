@@ -68,6 +68,7 @@
                                     <th class="text-center">Penyelenggara</th>
                                     <th class="text-center">Barang Pameran</th>
                                     <th class="text-center">Barang Terjual</th>
+                                    <th class="text-center">Sisa Barang</th>
                                 </tr>
                             </thead>
                             <?php
@@ -107,6 +108,7 @@
                                         <td class="align-middle"><?= $row['penyelenggara']; ?></td>
                                         <td class="align-middle text-center"><?= $row['jumlah_pameran']; ?></td>
                                         <td class="align-middle text-center"><?= $row['jumlah_terjual']; ?></td>
+                                        <td class="align-middle text-center"><?= (int)$row['jumlah_pameran'] - (int)$row['jumlah_terjual']; ?></td>
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>
