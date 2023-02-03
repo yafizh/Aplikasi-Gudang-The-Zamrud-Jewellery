@@ -9,16 +9,20 @@ if (isset($_POST['submit'])) {
     $q = "
         SELECT 
             pengguna.*,
+            petugas.nama nama_petugas,
             petugas.id id_petugas,
-            petugas.nik,
-            petugas.nama,
-            petugas.jabatan
+            pegawai.nama nama_pegawai,
+            pegawai.id id_pegawai 
         FROM 
             pengguna 
         LEFT JOIN 
             petugas 
         ON 
             pengguna.id=petugas.id_pengguna 
+        LEFT JOIN 
+            pegawai 
+        ON 
+            pengguna.id=pegawai.id_pengguna
         WHERE 
             pengguna.username='$username' 
             AND 

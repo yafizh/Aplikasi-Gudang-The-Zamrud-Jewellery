@@ -40,8 +40,11 @@
                                 INNER JOIN 
                                     toko 
                                 ON 
-                                    toko.id=penjualan_toko.id 
+                                    toko.id=penjualan_toko.id_toko 
                             ";
+
+                            if ($_SESSION['user']['status'] == "PEGAWAI")
+                                $q .= " WHERE toko.id_pegawai=" . $_SESSION['user']['id_pegawai'];
 
                             $q .= " ORDER BY penjualan_toko.tanggal DESC, penjualan_toko.id DESC";
                             $result = $mysqli->query($q);

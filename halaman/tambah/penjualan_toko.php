@@ -64,16 +64,25 @@ if (isset($_POST['submit'])) {
                                 <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Toko</h6>
                             </div>
                             <div class="card-body">
-                                <div class="mb-3">
-                                    <?php $toko = $mysqli->query("SELECT * FROM toko ORDER BY nama"); ?>
-                                    <label for="id_toko" class="form-label">Nama Toko</label>
-                                    <select name="id_toko" id="id_toko" class="form-control" required>
-                                        <option value="" selected disabled>Pilih Toko</option>
-                                        <?php while ($row = $toko->fetch_assoc()) : ?>
-                                            <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
-                                        <?php endwhile; ?>
-                                    </select>
-                                </div>
+                                <?php if ($_SESSION['user']['status']) : ?>
+                                    <?php $toko_pegawai = $mysqli->query("SELECT * FROM toko WHERE id_pegawai=" . $_SESSION['user']['id_pegawai'])->fetch_assoc(); ?>
+                                    <div class="mb-3">
+                                        <label for="id_toko" class="form-label">Nama Toko</label>
+                                        <input type="text" hidden name="id_toko" id="id_toko" value="<?= $toko_pegawai['id']; ?>" readonly>
+                                        <input type="text" class="form-control" value="<?= $toko_pegawai['nama']; ?>" disabled>
+                                    </div>
+                                <?php else : ?>
+                                    <div class="mb-3">
+                                        <?php $toko = $mysqli->query("SELECT * FROM toko ORDER BY nama"); ?>
+                                        <label for="id_toko" class="form-label">Nama Toko</label>
+                                        <select name="id_toko" id="id_toko" class="form-control" required>
+                                            <option value="" selected disabled>Pilih Toko</option>
+                                            <?php while ($row = $toko->fetch_assoc()) : ?>
+                                                <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="tanggal" class="form-label">Tanggal Penjualan</label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" required autocomplete="off" value="<?= Date("Y-m-d"); ?>">

@@ -26,7 +26,15 @@
 
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['user']['status'] == 'ADMIN' ? $_SESSION['user']['username'] : $_SESSION['user']['nama']; ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
+                        <?= $_SESSION['user']['username']; ?>
+                    <?php elseif ($_SESSION['user']['status'] == 'PEGAWAI') : ?>
+                        <?= $_SESSION['user']['nama_pegawai']; ?>
+                    <?php elseif ($_SESSION['user']['status'] == 'PETUGAS') : ?>
+                        <?= $_SESSION['user']['nama_petugas']; ?>
+                    <?php endif; ?>
+                </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="?h=ganti_password">

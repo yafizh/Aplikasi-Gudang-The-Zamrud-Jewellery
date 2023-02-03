@@ -72,11 +72,9 @@ CREATE TABLE `db_gudang`.`toko` (
 
 CREATE TABLE `db_gudang`.`penjualan_toko` (
     id INT NOT NULL AUTO_INCREMENT,
-    id_pegawai INT NOT NULL,
     id_toko INT NOT NULL,
     tanggal DATE,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_pegawai) REFERENCES pegawai (id) ON DELETE CASCADE,
     FOREIGN KEY (id_toko) REFERENCES toko (id) ON DELETE CASCADE
 );
 
