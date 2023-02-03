@@ -29,12 +29,26 @@
                                 <tr>
                                     <th class="td-fit text-center">No</th>
                                     <th class="text-center">Nama Toko</th>
+                                    <th class="text-center">Pegawai Yang Bertanggung Jawab</th>
                                     <th class="text-center">Alamat</th>
                                     <th class="td-fit text-center">Aksi</th>
                                 </tr>
                             </thead>
-                            <?php
-                            $result = $mysqli->query("SELECT * FROM toko ORDER BY nama");
+                            <?php 
+                            $q = "
+                                SELECT 
+                                    t.*,
+                                    p.nama nama_pegawai 
+                                FROM 
+                                    toko t 
+                                INNER JOIN 
+                                    pegawai p 
+                                ON 
+                                    p.id=t.id_pegawai 
+                                ORDER BY 
+                                    t.nama 
+                            ";
+                            $result = $mysqli->query($q);
                             $no = 1;
                             ?>
                             <tbody>
@@ -42,6 +56,7 @@
                                     <tr>
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
                                         <td class="align-middle"><?= $row['nama']; ?></td>
+                                        <td class="align-middle"><?= $row['nama_pegawai']; ?></td>
                                         <td class="align-middle"><?= $row['alamat']; ?></td>
                                         <td class="text-center td-fit">
                                             <a href="?h=toko-jenis_barang&id_toko=<?= $row['id']; ?>" class="btn btn-sm btn-info"><i class="far fa-eye"></i></a>

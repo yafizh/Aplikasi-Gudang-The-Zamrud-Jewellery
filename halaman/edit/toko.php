@@ -1,11 +1,13 @@
 <?php
 $data = $mysqli->query("SELECT * FROM toko WHERE id=" . $_GET['id'])->fetch_assoc();
 if (isset($_POST['submit'])) {
+    $id_pegawai = $mysqli->real_escape_string($_POST['id_pegawai']);
     $nama = $mysqli->real_escape_string($_POST['nama']);
     $alamat = $mysqli->real_escape_string($_POST['alamat']);
 
     $q = "
         UPDATE toko SET 
+            id_pegawai='$id_pegawai',  
             nama='$nama',  
             alamat='$alamat' 
         WHERE 
@@ -39,6 +41,20 @@ if (isset($_POST['submit'])) {
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Toko</label>
                             <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off" value="<?= $data['nama']; ?>">
+                        </div>
+                        <div class="mb-3">
+                            <?php $pegawai = $mysqli->query("SELECT * FROM pegawai ORDER BY nama"); ?>
+                            <label for="id_pegawai" class="form-label">Pegawai Yang Bertanggung Jawab</label>
+                            <select name="id_pegawai" id="id_pegawai" class="form-control" required>
+                                <option value="" disabled selected>Pilih Pegawai</option>
+                                <?php while ($row = $pegawai->fetch_assoc()) : ?>
+                                    <?php if ($row['id'] == $data['id_pegawai']) : ?>
+                                        <option selected value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
+                                    <?php else : ?>
+                                        <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
+                                    <?php endif; ?>
+                                <?php endwhile; ?>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
