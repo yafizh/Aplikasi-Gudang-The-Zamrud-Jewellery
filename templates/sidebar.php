@@ -99,15 +99,16 @@
         <div class="sidebar-heading mt-3">
             Laporan
         </div>
-        <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_distribusi_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'laporan_pameran', 'laporan_penjualan_pameran']) ? 'active' : '' ?>">
-            <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_distribusi_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'laporan_pameran', 'laporan_penjualan_pameran']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
+        <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_penjualan_toko', 'laporan_distribusi_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'laporan_pameran', 'laporan_penjualan_pameran']) ? 'active' : '' ?>">
+            <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_penjualan_toko', 'laporan_distribusi_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'laporan_pameran', 'laporan_penjualan_pameran']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
                 <i class="far fa-file-pdf"></i>
                 <span>Laporan</span>
             </a>
-            <div id="laporan" class="collapse <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_distribusi_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'laporan_pameran', 'laporan_penjualan_pameran']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="laporan" class="collapse <?= in_array(($_GET['h'] ?? ''), ['laporan_barang', 'laporan_penjualan_toko', 'laporan_distribusi_barang', 'laporan_penyuplaian', 'laporan_return_barang', 'laporan_pameran', 'laporan_penjualan_pameran']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_barang") ? "active" : "")  : "" ?>" href="?h=laporan_barang">Barang</a>
                     <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_distribusi_barang") ? "active" : "")  : "" ?>" href="?h=laporan_distribusi_barang">Pendistribusian</a>
+                    <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_penjualan_toko") ? "active" : "")  : "" ?>" href="?h=laporan_penjualan_toko">Penjualan Toko</a>
                     <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_penyuplaian") ? "active" : "")  : "" ?>" href="?h=laporan_penyuplaian">Penyuplaian</a>
                     <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_return_barang") ? "active" : "")  : "" ?>" href="?h=laporan_return_barang">Return Barang</a>
                     <a class="collapse-item <?= isset($_GET['h']) ? (($_GET['h'] == "laporan_pameran") ? "active" : "")  : "" ?>" href="?h=laporan_pameran">Pameran</a>

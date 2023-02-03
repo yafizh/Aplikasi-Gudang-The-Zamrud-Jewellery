@@ -276,6 +276,9 @@ $_SESSION['old'] = [];
                             case "laporan_penjualan_pameran":
                                 include_once "halaman/laporan/penjualan_pameran.php";
                                 break;
+                            case "laporan_penjualan_toko":
+                                include_once "halaman/laporan/penjualan_toko.php";
+                                break;
                                 // Ganti Password
                             case "ganti_password":
                                 include_once "halaman/auth/ganti_password.php";
