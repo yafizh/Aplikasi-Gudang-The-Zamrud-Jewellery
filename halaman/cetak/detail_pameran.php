@@ -108,20 +108,18 @@
                         <td class="align-middle text-end"><?= number_format((int)$row['jumlah'] * (int)$row['harga_toko'], 0, ",", "."); ?></td>
                         <td class="align-middle text-end"><?= number_format($row['harga_label'], 0, ",", "."); ?></td>
                         <td class="align-middle text-center"><?= $row['jumlah_terjual']; ?> <?= $row['satuan']; ?></td>
-                        <td class="align-middle text-end"><?= number_format((int)$row['jumlah_terjual'] * (int)$row['harga_label'], 0, ",", "."); ?></td>
+                        <td class="align-middle text-end"><?= number_format(((int)$row['jumlah_terjual'] * (int)$row['harga_label']) - ((int)$row['jumlah_terjual'] * (int)$row['harga_toko']), 0, ",", "."); ?></td>
                         <td class="align-middle text-center"><?= (int)$row['jumlah'] - (int)$row['jumlah_terjual']; ?> <?= $row['satuan']; ?></td>
                     </tr>
                     <?php $modal += (int)$row['jumlah'] * (int)$row['harga_toko']; ?>
-                    <?php $untung += (int)$row['jumlah_terjual'] * (int)$row['harga_label']; ?>
+                    <?php $untung += (((int)$row['jumlah_terjual'] * (int)$row['harga_label']) - ((int)$row['jumlah_terjual'] * (int)$row['harga_toko'])); ?>
                 <?php endwhile; ?>
                 <tr>
                     <th colspan="2">Total</th>
-                    <td colspan="3" class="align-middle text-end"><?= number_format($modal, 0, ",", "."); ?></td>
-                    <td colspan="4" class="align-middle text-end"><?= number_format($untung, 0, ",", "."); ?></td>
-                </tr>
-                <tr>
-                    <th colspan="2">Laba Keuntungan Pameran</th>
-                    <td colspan="7" class="align-middle text-end"><?= number_format(((($untung - $modal) > 0) ? ($untung - $modal) : "0"), 0, ",", "."); ?></td>
+                    <th colspan="2" class="align-middle text-end">Total Modal</th>
+                    <td class="align-middle text-end"><?= number_format($modal, 0, ",", "."); ?></td>
+                    <th colspan="3" class="align-middle text-end">Total Keuntungan</th>
+                    <td class="align-middle text-end"><?= number_format($untung, 0, ",", "."); ?></td>
                 </tr>
             </tbody>
         </table>

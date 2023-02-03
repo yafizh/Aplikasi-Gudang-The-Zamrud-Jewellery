@@ -69,6 +69,7 @@
                                     <th class="text-center">Barang Pameran</th>
                                     <th class="text-center">Barang Terjual</th>
                                     <th class="text-center">Sisa Barang</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <?php
@@ -109,6 +110,7 @@
                                         <td class="align-middle text-center"><?= $row['jumlah_pameran']; ?></td>
                                         <td class="align-middle text-center"><?= $row['jumlah_terjual']; ?></td>
                                         <td class="align-middle text-center"><?= (int)$row['jumlah_pameran'] - (int)$row['jumlah_terjual']; ?></td>
+                                        <td class="align-middle text-center"><a href="halaman/cetak/detail_pameran.php?id=<?= $row['id']; ?>" target="_blank" class="btn btn-danger btn-sm"><i class="far fa-file-pdf"></i>&nbsp;&nbsp;Cetak</a></td>
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>

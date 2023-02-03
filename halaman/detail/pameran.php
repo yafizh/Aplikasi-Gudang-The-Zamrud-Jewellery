@@ -57,7 +57,6 @@ $barang_pameran = $mysqli->query($q);
             <a href="?h=pameran" class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;Kembali</a>
             <a href="?h=tambah_penjualan_pameran&id_pameran=<?= $_GET['id']; ?>" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Penjualan Pameran</a>
             <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-cubes"></i>&nbsp;&nbsp;Barang Pameran</button>
-            <a href="halaman/cetak/detail_pameran.php?id=<?= $_GET['id']; ?>" target="_blank" class="btn btn-danger btn-sm"><i class="far fa-file-pdf"></i>&nbsp;&nbsp;Cetak</a>
         </div>
     </div>
 
@@ -189,26 +188,24 @@ $barang_pameran = $mysqli->query($q);
                         <?php while ($row = $barang_pameran->fetch_assoc()) : ?>
                             <tr>
                                 <td class="td-fit align-middle text-center"><?= $no++; ?></td>
-                                <td class="align-middle text-center"><?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']) . ': ' . $row['nama']; ?></td>
+                                <td class="align-middle"><?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']) . ': ' . $row['nama']; ?></td>
                                 <td class="align-middle text-center"><?= $row['jumlah']; ?> <?= $row['satuan']; ?></td>
                                 <td class="align-middle text-right"><?= number_format($row['harga_toko'], 0, ",", "."); ?></td>
                                 <td class="align-middle text-right"><?= number_format((int)$row['jumlah'] * (int)$row['harga_toko'], 0, ",", "."); ?></td>
                                 <td class="align-middle text-right"><?= number_format($row['harga_label'], 0, ",", "."); ?></td>
                                 <td class="align-middle text-center"><?= $row['jumlah_terjual']; ?> <?= $row['satuan']; ?></td>
-                                <td class="align-middle text-right"><?= number_format((int)$row['jumlah_terjual'] * (int)$row['harga_label'], 0, ",", "."); ?></td>
+                                <td class="align-middle text-right"><?= number_format(((int)$row['jumlah_terjual'] * (int)$row['harga_label']) - ((int)$row['jumlah_terjual'] * $row['harga_toko']), 0, ",", "."); ?></td>
                                 <td class="align-middle text-center"><?= (int)$row['jumlah'] - (int)$row['jumlah_terjual']; ?> <?= $row['satuan']; ?></td>
                             </tr>
                             <?php $modal += (int)$row['jumlah'] * (int)$row['harga_toko']; ?>
-                            <?php $untung += (int)$row['jumlah_terjual'] * (int)$row['harga_label']; ?>
+                            <?php $untung += ((int)$row['jumlah_terjual'] * (int)$row['harga_label']) - ((int)$row['jumlah_terjual'] * $row['harga_toko']); ?>
                         <?php endwhile; ?>
                         <tr>
                             <th colspan="2">Total</th>
-                            <td colspan="3" class="align-middle text-right"><?= number_format($modal, 0, ",", "."); ?></td>
-                            <td colspan="4" class="align-middle text-right"><?= number_format($untung, 0, ",", "."); ?></td>
-                        </tr>
-                        <tr>
-                            <th colspan="2">Laba Keuntungan Pameran</th>
-                            <td colspan="7" class="align-middle text-right"><?= number_format(((($untung - $modal) > 0) ? ($untung - $modal) : "0"), 0, ",", "."); ?></td>
+                            <th colspan="2" class="align-middle text-right">Total Modal</th>
+                            <td colspan="1" class="align-middle text-right"><?= number_format($modal, 0, ",", "."); ?></td>
+                            <th colspan="2" class="align-middle text-right">Total Keuntungan</th>
+                            <td colspan="2" class="align-middle text-right"><?= number_format($untung, 0, ",", "."); ?></td>
                         </tr>
                     </tbody>
                 </table>
