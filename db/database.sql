@@ -6,11 +6,26 @@ CREATE TABLE `db_gudang`.`pengguna` (
     id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(255) UNIQUE,
     password VARCHAR(255),
-    status ENUM('ADMIN', 'PETUGAS'),
+    status ENUM('ADMIN', 'PETUGAS', 'PEGAWAI'),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE `db_gudang`.`petugas` (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_pengguna INT NOT NULL,
+    nik VARCHAR(255),
+    nama VARCHAR(255),
+    jabatan VARCHAR(255),
+    nomor_telepon VARCHAR(255),
+    tempat_lahir VARCHAR(255),
+    tanggal_lahir DATE,
+    jenis_kelamin VARCHAR(255),
+    tanggal_terdaftar DATE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_pengguna) REFERENCES pengguna (id) ON DELETE CASCADE
+);
+
+CREATE TABLE `db_gudang`.`pegawai` (
     id INT NOT NULL AUTO_INCREMENT,
     id_pengguna INT NOT NULL,
     nik VARCHAR(255),
@@ -48,16 +63,20 @@ CREATE TABLE `db_gudang`.`barang` (
 
 CREATE TABLE `db_gudang`.`toko` (
     id INT NOT NULL AUTO_INCREMENT,
+    id_pegawai INT NOT NULL,
     nama VARCHAR(255),
     alamat TEXT,
-    PRIMARY KEY (id) 
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_pegawai) REFERENCES pegawai (id) ON DELETE CASCADE
 );
 
 CREATE TABLE `db_gudang`.`penjualan_toko` (
     id INT NOT NULL AUTO_INCREMENT,
+    id_pegawai INT NOT NULL,
     id_toko INT NOT NULL,
     tanggal DATE,
     PRIMARY KEY (id),
+    FOREIGN KEY (id_pegawai) REFERENCES pegawai (id) ON DELETE CASCADE,
     FOREIGN KEY (id_toko) REFERENCES toko (id) ON DELETE CASCADE
 );
 

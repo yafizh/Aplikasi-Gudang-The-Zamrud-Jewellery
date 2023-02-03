@@ -6,7 +6,12 @@ INSERT INTO `db_gudang`.`pengguna` (
 ) VALUES 
 (1, 'admin', 'admin', 'ADMIN'),
 (2, '11111111', '11111111', 'PETUGAS'),
-(3, '22222222', '22222222', 'PETUGAS');
+(3, '22222222', '22222222', 'PETUGAS'),
+(4, '33333333', '33333333', 'PEGAWAI'),
+(5, '44444444', '44444444', 'PEGAWAI'),
+(6, '55555555', '55555555', 'PEGAWAI'),
+(7, '66666666', '66666666', 'PEGAWAI'),
+(8, '77777777', '77777777', 'PEGAWAI');
 
 INSERT INTO `db_gudang`.`petugas` (
     id,
@@ -22,6 +27,25 @@ INSERT INTO `db_gudang`.`petugas` (
 ) VALUES 
 (1, 2, '11111111', 'Petugas 1', 'Jabatan 1', '0895340832959', 'Laki - Laki', '2000-01-01', 'Martapura', CURRENT_DATE()),
 (2, 3, '22222222', 'Petugas 2', 'Jabatan 2', '6468168136816', 'Perempuan', '2000-01-01', 'Martapura', CURRENT_DATE());
+
+INSERT INTO `db_gudang`.`pegawai` (
+    id,
+    id_pengguna,
+    nik,
+    nama,
+    jabatan,
+    nomor_telepon,
+    jenis_kelamin,
+    tanggal_lahir,
+    tempat_lahir,
+    tanggal_terdaftar 
+) VALUES 
+(1, 4, '33333333', 'Pegawai 1', 'Jabatan 1', '0895340832959', 'Laki - Laki', '2000-01-01', 'Martapura', CURRENT_DATE()),
+(2, 5, '44444444', 'Pegawai 2', 'Jabatan 2', '6468168136816', 'Perempuan', '2000-01-01', 'Martapura', CURRENT_DATE()),
+(3, 6, '55555555', 'Pegawai 3', 'Jabatan 3', '6468168136816', 'Perempuan', '2000-01-01', 'Martapura', CURRENT_DATE()),
+(4, 7, '66666666', 'Pegawai 4', 'Jabatan 3', '6468168136816', 'Perempuan', '2000-01-01', 'Martapura', CURRENT_DATE()),
+(5, 8, '77777777', 'Pegawai 5', 'Jabatan 5', '6468168136816', 'Perempuan', '2000-01-01', 'Martapura', CURRENT_DATE());
+
 
 INSERT INTO `db_gudang`.`jenis_barang` (
     id,
@@ -70,14 +94,15 @@ INSERT INTO `db_gudang`.`barang` (
 
 INSERT INTO `db_gudang`.`toko` (
     id,
+    id_pegawai,
     nama,
     alamat 
 ) VALUES 
-(1, 'Toko A', 'Jalan A'),
-(2, 'Toko B', 'Jalan B'),
-(3, 'Toko C', 'Jalan C'),
-(4, 'Toko D', 'Jalan D'),
-(5, 'Toko E', 'Jalan E');
+(1, 1, 'Toko A', 'Jalan A'),
+(2, 2, 'Toko B', 'Jalan B'),
+(3, 3, 'Toko C', 'Jalan C'),
+(4, 4, 'Toko D', 'Jalan D'),
+(5, 5, 'Toko E', 'Jalan E');
 
 INSERT INTO `db_gudang`.`pemasok` (
     id,
@@ -87,7 +112,11 @@ INSERT INTO `db_gudang`.`pemasok` (
     alamat,
     tanggal_terdaftar  
 ) VALUES 
-(1, 'A', '0', 'email@example.com', 'jalan', CURRENT_DATE());
+(1, 'Pemasok 1', '0', 'email@example.com', 'Jalan A', CURRENT_DATE()),
+(2, 'Pemasok 2', '0', 'email@example.com', 'Jalan B', CURRENT_DATE()),
+(3, 'Pemasok 3', '0', 'email@example.com', 'Jalan C', CURRENT_DATE()),
+(4, 'Pemasok 4', '0', 'email@example.com', 'Jalan D', CURRENT_DATE()),
+(5, 'Pemasok 5', '0', 'email@example.com', 'Jalan E', CURRENT_DATE());
 
 INSERT INTO `db_gudang`.`penyuplaian` (
     id,
