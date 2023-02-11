@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
                                 <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Toko</h6>
                             </div>
                             <div class="card-body">
-                                <?php if ($_SESSION['user']['status']) : ?>
+                                <?php if ($_SESSION['user']['status'] == 'PEGAWAI') : ?>
                                     <?php $toko_pegawai = $mysqli->query("SELECT * FROM toko WHERE id_pegawai=" . $_SESSION['user']['id_pegawai'])->fetch_assoc(); ?>
                                     <div class="mb-3">
                                         <label for="id_toko" class="form-label">Nama Toko</label>
