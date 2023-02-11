@@ -37,6 +37,17 @@
                 <i class="fas fa-users"></i>
                 <span>Petugas</span></a>
         </li>
+        <li class="nav-item <?php
+                            if (isset($_GET['h'])) {
+                                if ($_GET['h'] == "pegawai") echo "active";
+                                else if ($_GET['h'] == "tambah_pegawai") echo "active";
+                                else if ($_GET['h'] == "edit_pegawai") echo "active";
+                            }
+                            ?>">
+            <a class="nav-link" href="?h=pegawai">
+                <i class="fas fa-users"></i>
+                <span>Pegawai</span></a>
+        </li>
     <?php endif; ?>
 
     <div class="sidebar-heading mt-3">

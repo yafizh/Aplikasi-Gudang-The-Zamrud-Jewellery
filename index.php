@@ -91,6 +91,9 @@ $_SESSION['old'] = [];
                             case "petugas":
                                 include_once "halaman/tampil/petugas.php";
                                 break;
+                            case "pegawai":
+                                include_once "halaman/tampil/pegawai.php";
+                                break;
                             case "jenis_barang":
                                 include_once "halaman/tampil/jenis_barang.php";
                                 break;
@@ -153,6 +156,9 @@ $_SESSION['old'] = [];
                             case "tambah_petugas":
                                 include_once "halaman/tambah/petugas.php";
                                 break;
+                            case "tambah_pegawai":
+                                include_once "halaman/tambah/pegawai.php";
+                                break;
                             case "tambah_jenis_barang":
                                 include_once "halaman/tambah/jenis_barang.php";
                                 break;
@@ -190,6 +196,9 @@ $_SESSION['old'] = [];
                             case "edit_petugas":
                                 include_once "halaman/edit/petugas.php";
                                 break;
+                            case "edit_pegawai":
+                                include_once "halaman/edit/pegawai.php";
+                                break;
                             case "edit_jenis_barang":
                                 include_once "halaman/edit/jenis_barang.php";
                                 break;
@@ -226,6 +235,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "hapus_petugas":
                                 include_once "halaman/hapus/petugas.php";
+                                break;
+                            case "hapus_pegawai":
+                                include_once "halaman/hapus/pegawai.php";
                                 break;
                             case "hapus_jenis_barang":
                                 include_once "halaman/hapus/jenis_barang.php";
