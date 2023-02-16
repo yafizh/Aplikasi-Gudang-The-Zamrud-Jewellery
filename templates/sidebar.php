@@ -94,7 +94,7 @@
                     <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'tambah_pemasok', 'edit_pemasok']) ? 'active' : '' ?>" href="?h=pemasok">Daftar Pemasok</a>
                 <?php endif; ?>
                 <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['penyuplaian', 'detail_penyuplaian', 'tambah_penyuplaian', 'edit_penyuplaian']) ? 'active' : '' ?>" href="?h=penyuplaian">Penyuplaian</a>
-                <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
+                <?php if ($_SESSION['user']['status'] == 'ADMIN' || $_SESSION['user']['status'] == 'PETUGAS') : ?>
                     <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['return_barang', 'detail_return_barang', 'tambah_return_barang', 'edit_return_barang']) ? 'active' : '' ?>" href="?h=return_barang">Return Barang</a>
                 <?php endif; ?>
             </div>
