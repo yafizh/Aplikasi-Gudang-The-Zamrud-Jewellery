@@ -106,7 +106,7 @@
             <span>Pameran</span></a>
     </li>
 
-    <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
+    <?php if ($_SESSION['user']['status'] == 'ADMIN' || $_SESSION['user']['status'] == 'PETUGAS') : ?>
         <div class="sidebar-heading mt-3">
             Laporan
         </div>
