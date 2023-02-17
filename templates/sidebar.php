@@ -78,34 +78,37 @@
                 <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
                     <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['toko', 'toko-jenis_barang', 'toko-jenis_barang-barang', 'tambah_toko', 'edit_toko']) ? 'active' : '' ?>" href="?h=toko">Daftar Toko</a>
                 <?php endif; ?>
-                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['distribusi_barang', 'detail_distribusi_barang', 'tambah_distribusi_barang', 'edit_distribusi_barang']) ? 'active' : '' ?>" href="?h=distribusi_barang">Pendistribusian</a>
+                <?php if ($_SESSION['user']['status'] == 'ADMIN' || $_SESSION['user']['status'] == 'PETUGAS') : ?>
+                    <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['distribusi_barang', 'detail_distribusi_barang', 'tambah_distribusi_barang', 'edit_distribusi_barang']) ? 'active' : '' ?>" href="?h=distribusi_barang">Pendistribusian</a>
+                <?php endif; ?>
                 <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['penjualan_toko', 'detail_penjualan_toko', 'tambah_penjualan_toko', 'edit_penjualan_toko', 'detail_penjualan_toko']) ? 'active' : '' ?>" href="?h=penjualan_toko">Penjualan</a>
             </div>
         </div>
     </li>
-    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? 'active' : '' ?>">
-        <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#pemasok" aria-expanded="true" aria-controls="pemasok">
-            <i class="fas fa-truck"></i>
-            <span>Pemasok</span>
-        </a>
-        <div id="pemasok" class="collapse <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
-                    <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'tambah_pemasok', 'edit_pemasok']) ? 'active' : '' ?>" href="?h=pemasok">Daftar Pemasok</a>
-                <?php endif; ?>
-                <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['penyuplaian', 'detail_penyuplaian', 'tambah_penyuplaian', 'edit_penyuplaian']) ? 'active' : '' ?>" href="?h=penyuplaian">Penyuplaian</a>
-                <?php if ($_SESSION['user']['status'] == 'ADMIN' || $_SESSION['user']['status'] == 'PETUGAS') : ?>
+    <?php if ($_SESSION['user']['status'] == 'ADMIN' || $_SESSION['user']['status'] == 'PETUGAS') : ?>
+        <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? 'active' : '' ?>">
+            <a class="nav-link <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? '' : 'collapsed' ?>" href="#" data-toggle="collapse" data-target="#pemasok" aria-expanded="true" aria-controls="pemasok">
+                <i class="fas fa-truck"></i>
+                <span>Pemasok</span>
+            </a>
+            <div id="pemasok" class="collapse <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'penyuplaian', 'detail_penyuplaian', 'detail_return_barang', 'return_barang', 'tambah_pemasok', 'tambah_penyuplaian', 'tambah_return_barang', 'edit_pemasok', 'edit_penyuplaian', 'edit_return_barang']) ? 'show' : '' ?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
+                        <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['pemasok', 'tambah_pemasok', 'edit_pemasok']) ? 'active' : '' ?>" href="?h=pemasok">Daftar Pemasok</a>
+                    <?php endif; ?>
+                    <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['penyuplaian', 'detail_penyuplaian', 'tambah_penyuplaian', 'edit_penyuplaian']) ? 'active' : '' ?>" href="?h=penyuplaian">Penyuplaian</a>
                     <a class="collapse-item <?= in_array(($_GET['h'] ?? ''), ['return_barang', 'detail_return_barang', 'tambah_return_barang', 'edit_return_barang']) ? 'active' : '' ?>" href="?h=return_barang">Return Barang</a>
-                <?php endif; ?>
+                </div>
             </div>
-        </div>
-    </li>
-    <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pameran', 'detail_pameran', 'tambah_pameran', 'edit_pameran']) ? 'active' : '' ?>">
-        <a class="nav-link" href="?h=pameran">
-            <i class="fas fa-store"></i>
-            <span>Pameran</span></a>
-    </li>
-
+        </li>
+    <?php endif; ?>
+    <?php if ($_SESSION['user']['status'] == 'ADMIN' || $_SESSION['user']['status'] == 'PETUGAS') : ?>
+        <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pameran', 'detail_pameran', 'tambah_pameran', 'edit_pameran']) ? 'active' : '' ?>">
+            <a class="nav-link" href="?h=pameran">
+                <i class="fas fa-store"></i>
+                <span>Pameran</span></a>
+        </li>
+    <?php endif; ?>
     <?php if ($_SESSION['user']['status'] == 'ADMIN' || $_SESSION['user']['status'] == 'PETUGAS') : ?>
         <div class="sidebar-heading mt-3">
             Laporan
