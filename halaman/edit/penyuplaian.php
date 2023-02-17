@@ -247,6 +247,9 @@ $barang_disuplai = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
 
                     }
                 }
+                $(document).ready(function() {
+                    $('.barang').select2();
+                });
                 $('.barang').each((index, value) => {
                     $(value).on('select2:select', function(element) {
                         barangTerpilih.push(element.currentTarget[element.currentTarget.selectedIndex].value);
