@@ -16,7 +16,25 @@ $pameran = $mysqli->query($q)->fetch_assoc();
 
 $q = "
     SELECT 
-        dp.jumlah,
+        (
+            dp.jumlah 
+            - 
+            IFNULL(
+                (
+                    SELECT 
+                        SUM(dpp.jumlah) 
+                    FROM 
+                        detail_penjualan_pameran dpp  
+                    INNER JOIN
+                         penjualan_pameran pp 
+                    ON 
+                        pp.id=dpp.id_penjualan_pameran 
+                    WHERE 
+                        dpp.id_barang=b.id
+                        AND 
+                        pp.id=" . $_GET['id_pameran'] . "
+                ), 0)
+        ) jumlah,
         dp.id_barang,
         jb.kode kode_jenis_barang, 
         b.kode, 

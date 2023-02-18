@@ -103,7 +103,7 @@
         </li>
     <?php endif; ?>
     <?php if ($_SESSION['user']['status'] == 'ADMIN' || $_SESSION['user']['status'] == 'PETUGAS') : ?>
-        <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pameran', 'detail_pameran', 'tambah_pameran', 'edit_pameran']) ? 'active' : '' ?>">
+        <li class="nav-item <?= in_array(($_GET['h'] ?? ''), ['pameran', 'detail_pameran', 'tambah_pameran', 'edit_pameran', 'tambah_penjualan_pameran', 'edit_penjualan_pameran']) ? 'active' : '' ?>">
             <a class="nav-link" href="?h=pameran">
                 <i class="fas fa-store"></i>
                 <span>Pameran</span></a>
