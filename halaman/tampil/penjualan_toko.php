@@ -33,7 +33,7 @@
                             <?php
                             $q = "
                                 SELECT 
-                                    *,
+                                    penjualan_toko.*,
                                     toko.nama nama_toko 
                                 FROM 
                                     penjualan_toko 

@@ -47,11 +47,12 @@
                                             b.id_jenis_barang=jb.id 
                                             AND 
                                             t.id=" . $toko['id'] . "
-                                        GROUP BY b.id 
+                                        GROUP BY b.id_jenis_barang
                                     ), 0) jumlah_barang
                                 FROM 
                                     jenis_barang jb
                             ";
+
                             $result = $mysqli->query($q);
                             $no = 1;
                             ?>

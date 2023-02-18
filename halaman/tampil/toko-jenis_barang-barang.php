@@ -32,41 +32,33 @@
                                     b.*,
                                     IFNULL((
                                         SELECT 
-                                            SUM(ddb.jumlah) 
+                                            SUM(jumlah) 
                                         FROM 
                                             detail_distribusi_barang ddb 
                                         INNER JOIN 
                                             distribusi_barang db 
                                         ON 
                                             db.id=ddb.id_distribusi_barang 
-                                        INNER JOIN 
-                                            toko t 
-                                        ON 
-                                            t.id=db.id_toko 
                                         WHERE 
-                                            b.id=jb.id 
+                                            ddb.id_barang=b.id 
                                             AND 
-                                            t.id=" . $toko['id'] . "
-                                        GROUP BY b.id 
-                                    ), 0) jumlah_pendistribusian, 
+                                            db.id_toko=".$toko['id']."
+                                        GROUP BY id_barang
+                                    ),0) jumlah_pendistribusian,
                                     IFNULL((
                                         SELECT 
-                                            SUM(ddb.jumlah) 
+                                            SUM(dpt.jumlah) 
                                         FROM 
-                                            detail_penjualan_toko ddb 
+                                            detail_penjualan_toko dpt 
                                         INNER JOIN 
-                                            penjualan_toko db 
+                                            penjualan_toko pt 
                                         ON 
-                                            db.id=ddb.id_penjualan_toko 
-                                        INNER JOIN 
-                                            toko t 
-                                        ON 
-                                            t.id=db.id_toko 
+                                            pt.id=dpt.id_penjualan_toko 
                                         WHERE 
-                                            b.id=jb.id 
+                                            dpt.id_barang=b.id 
                                             AND 
-                                            t.id=" . $toko['id'] . "
-                                        GROUP BY b.id 
+                                            pt.id_toko=" . $toko['id'] . "
+                                        GROUP BY id_barang
                                     ), 0) jumlah_terjual 
                                 FROM 
                                     barang b 
