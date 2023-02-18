@@ -63,7 +63,7 @@ $barang_direturn = $mysqli->query($q);
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="h3 mb-0 text-gray-800">Detail Penyuplaian</h1>
+        <h1 class="h3 mb-0 text-gray-800">Detail Return Barang</h1>
         <a href="?h=return_barang" class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;Kembali</a>
     </div>
 

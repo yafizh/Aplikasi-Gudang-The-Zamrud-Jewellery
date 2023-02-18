@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="h3 mb-0 text-gray-800">Tambah Penyuplaian</h1>
+        <h1 class="h3 mb-0 text-gray-800">Tambah Return Barang</h1>
         <a href="?h=penyuplaian" class="btn btn-secondary btn-sm"><i class="fas fa-caret-left"></i>&nbsp;&nbsp;Kembali</a>
     </div>
 
