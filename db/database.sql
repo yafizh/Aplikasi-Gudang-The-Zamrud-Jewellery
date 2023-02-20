@@ -13,13 +13,13 @@ CREATE TABLE `db_gudang`.`pengguna` (
 CREATE TABLE `db_gudang`.`petugas` (
     id INT NOT NULL AUTO_INCREMENT,
     id_pengguna INT NOT NULL,
-    nik VARCHAR(255),
+    nik VARCHAR(16),
     nama VARCHAR(255),
     jabatan VARCHAR(255),
-    nomor_telepon VARCHAR(255),
+    nomor_telepon VARCHAR(20),
     tempat_lahir VARCHAR(255),
     tanggal_lahir DATE,
-    jenis_kelamin VARCHAR(255),
+    jenis_kelamin VARCHAR(50),
     tanggal_terdaftar DATE,
     PRIMARY KEY (id),
     FOREIGN KEY (id_pengguna) REFERENCES pengguna (id) ON DELETE CASCADE
@@ -28,13 +28,13 @@ CREATE TABLE `db_gudang`.`petugas` (
 CREATE TABLE `db_gudang`.`pegawai` (
     id INT NOT NULL AUTO_INCREMENT,
     id_pengguna INT NOT NULL,
-    nik VARCHAR(255),
+    nik VARCHAR(16),
     nama VARCHAR(255),
     jabatan VARCHAR(255),
-    nomor_telepon VARCHAR(255),
+    nomor_telepon VARCHAR(20),
     tempat_lahir VARCHAR(255),
     tanggal_lahir DATE,
-    jenis_kelamin VARCHAR(255),
+    jenis_kelamin VARCHAR(50),
     tanggal_terdaftar DATE,
     PRIMARY KEY (id),
     FOREIGN KEY (id_pengguna) REFERENCES pengguna (id) ON DELETE CASCADE
@@ -43,7 +43,7 @@ CREATE TABLE `db_gudang`.`pegawai` (
 CREATE TABLE `db_gudang`.`jenis_barang` (
     id INT NOT NULL AUTO_INCREMENT,
     nama VARCHAR(255) NOT NULL,
-    kode VARCHAR(255) NOT NULL,
+    kode VARCHAR(10) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE `db_gudang`.`barang` (
     harga_toko INT,
     harga_label INT,
     stok INT,
-    satuan VARCHAR(255),
+    satuan VARCHAR(20),
     PRIMARY KEY (id),
     FOREIGN KEY (id_jenis_barang) REFERENCES jenis_barang (id) ON DELETE CASCADE
 );
@@ -111,8 +111,8 @@ CREATE TABLE `db_gudang`.`detail_distribusi_barang` (
 CREATE TABLE `db_gudang`.`pemasok` (
     id INT NOT NULL AUTO_INCREMENT,
     nama VARCHAR(255),
-    nomor_telepon VARCHAR(255),
-    email VARCHAR(255),
+    nomor_telepon VARCHAR(20),
+    email VARCHAR(50),
     alamat TEXT,
     tanggal_terdaftar DATE,
     PRIMARY KEY (id) 
@@ -185,7 +185,7 @@ CREATE TABLE `db_gudang`.`penjualan_pameran` (
     id_pameran INT NOT NULL,
     nama VARCHAR(255),
     domisili VARCHAR(255),
-    nomor_telepon VARCHAR(255),
+    nomor_telepon VARCHAR(20),
     tanggal DATE,
     jenis_pembayaran VARCHAR(255),
     PRIMARY KEY (id),

@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="#">Lupa Password</a>
+                                        <a class="small" href="#" onclick="alert('Hubungi Admin!')">Lupa Password</a>
                                     </div>
                                 </div>
                             </div>
