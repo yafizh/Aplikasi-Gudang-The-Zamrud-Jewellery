@@ -51,7 +51,7 @@ $q = "
     INNER JOIN 
         barang b 
     ON 
-        b.id=drb.id_barang=dp.id_barang 
+        (b.id=drb.id_barang AND b.id=dp.id_barang) 
     INNER JOIN 
         jenis_barang jb 
     ON 

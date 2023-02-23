@@ -68,11 +68,11 @@ function compareDate($first_date, $second_date = null)
   $umur = "";
 
   if ($interval->y)
-    $umur = $interval->y . " Tahun";
+    $umur .= $interval->y . " Tahun";
   if ($interval->m)
-    $umur = " " . $interval->m . " Bulan";
+    $umur .= " " . $interval->m . " Bulan";
   if ($interval->d)
-    $umur = " " . $interval->d . " Hari ";
+    $umur .= " " . $interval->d . " Hari ";
 
   if (!($interval->d || $interval->m || $interval->y))
     $umur = "1 Hari";

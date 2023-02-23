@@ -42,15 +42,15 @@ $q = "
     INNER JOIN 
         penyuplaian p 
     ON 
-        p.id=rb.id_penyuplaian 
+        p.id=rb.id_penyuplaian
     INNER JOIN 
         detail_penyuplaian dp 
     ON 
-        dp.id_penyuplaian=p.id  
+        dp.id_penyuplaian=p.id 
     INNER JOIN 
         barang b 
     ON 
-        b.id=drb.id_barang=dp.id_barang 
+        (b.id=drb.id_barang AND b.id=dp.id_barang) 
     INNER JOIN 
         jenis_barang jb 
     ON 
@@ -58,6 +58,7 @@ $q = "
     WHERE 
         drb.id_return_barang=" . $_GET['id'] . "
 ";
+
 $barang_direturn = $mysqli->query($q);
 ?>
 <div class="container-fluid">
