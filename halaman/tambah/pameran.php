@@ -335,7 +335,8 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
                 $('.barang').each((index, value) => {
                     $(value).on('select2:select', function(element) {
                         barangTerpilih.push(element.currentTarget[element.currentTarget.selectedIndex].value);
-                        satuanBarang[index].innerText = element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-satuan');
+                        document.querySelectorAll('.satuan')[index].innerText = element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-satuan');
+                        document.querySelectorAll('input[name="jumlah[]"]')[index].setAttribute('max', element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-max'));
                         ignoreIndex.push(index);
                         setOptions();
                     });
