@@ -332,14 +332,12 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
                 $(document).ready(function() {
                     $('.barang').select2();
                 });
-                $('.barang').each((index, value) => {
-                    $(value).on('select2:select', function(element) {
-                        barangTerpilih.push(element.currentTarget[element.currentTarget.selectedIndex].value);
-                        document.querySelectorAll('.satuan')[index].innerText = element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-satuan');
-                        document.querySelectorAll('input[name="jumlah[]"]')[index].setAttribute('max', element.currentTarget[element.currentTarget.selectedIndex].getAttribute('data-max'));
-                        ignoreIndex.push(index);
-                        setOptions();
-                    });
+                $(element).on('select2:select', function(element2) {
+                    barangTerpilih.push(element2.currentTarget[element2.currentTarget.selectedIndex].value);
+                    document.querySelectorAll('.satuan')[index].innerText = element2.currentTarget[element2.currentTarget.selectedIndex].getAttribute('data-satuan');
+                    document.querySelectorAll('input[name="jumlah[]"]')[index].setAttribute('max', element2.currentTarget[element2.currentTarget.selectedIndex].getAttribute('data-max'));
+                    ignoreIndex.push(index);
+                    setOptions();
                 });
             }
         });
