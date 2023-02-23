@@ -23,39 +23,28 @@ $q = "
 ";
 $data = $mysqli->query($q)->fetch_assoc();
 
+$id_pameran = $mysqli->query("SELECT * FROM penjualan_pameran WHERE id=" . $_GET['id'])->fetch_assoc()['id_pameran'];
 $q = "
     SELECT 
-        dpp.jumlah jumlah_dibeli,
-        dpp.id_barang,
+        dp.jumlah,
+        dp.id_barang,
         jb.kode kode_jenis_barang, 
         b.kode, 
-        dp.jumlah,
         b.satuan, 
-        b.nama 
+        b.nama,
+        IFNULL((SELECT jumlah FROM detail_penjualan_pameran WHERE id_penjualan_pameran=" . $_GET['id'] . " AND id_barang=dp.id_barang), 0) jumlah_dibeli 
     FROM 
-        detail_penjualan_pameran dpp  
-    INNER JOIN 
-        penjualan_pameran pp 
-    ON 
-        pp.id=dpp.id_penjualan_pameran 
-    INNER JOIN 
-        pameran p 
-    ON 
-        p.id=pp.id_pameran   
-    INNER JOIN 
         detail_pameran dp 
-    ON 
-        dp.id_pameran=p.id  
     INNER JOIN 
         barang b 
     ON 
-        b.id=dpp.id_barang=dp.id_barang
+        b.id=dp.id_barang 
     INNER JOIN 
         jenis_barang jb 
     ON 
         jb.id=b.id_jenis_barang 
     WHERE 
-        dpp.id_penjualan_pameran=" . $_GET['id'] . "
+        dp.id_pameran=" . $id_pameran . "
 ";
 $barang_pameran = $mysqli->query($q);
 ?>
