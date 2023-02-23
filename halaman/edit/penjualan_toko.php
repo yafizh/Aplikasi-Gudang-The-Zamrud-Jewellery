@@ -243,9 +243,6 @@ $barang_didistribusi = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
                 });
             }
         });
-        $(document).ready(function() {
-            $('.barang').select2();
-        });
     }
 
     for (let index = 0; index < Object.keys(barangDidistribusi).length; index++) {
