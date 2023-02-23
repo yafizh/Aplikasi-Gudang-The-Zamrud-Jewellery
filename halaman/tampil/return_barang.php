@@ -39,6 +39,10 @@
                                 FROM 
                                     return_barang 
                                 INNER JOIN 
+                                    detail_return_barang 
+                                ON 
+                                    detail_return_barang.id_return_barang=return_barang.id
+                                INNER JOIN 
                                     penyuplaian 
                                 ON 
                                     penyuplaian.id=return_barang.id_penyuplaian 
@@ -46,7 +50,6 @@
                                     pemasok 
                                 ON 
                                     pemasok.id=penyuplaian.id_pemasok 
-                             
                                 ORDER BY 
                                     return_barang.tanggal DESC, id DESC 
                             ";

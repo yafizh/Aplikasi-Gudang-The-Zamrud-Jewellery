@@ -79,16 +79,16 @@
                         <table class="table table-bordered" id="reportTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th class="td-fit text-center">No</th>
-                                    <th class="text-center">Tanggal Return</th>
-                                    <th class="text-center">Tanggal Penyupalain</th>
-                                    <th class="text-center">Lama Return Barang</th>
-                                    <th class="text-center">Pemasok</th>
-                                    <th class="text-center">Jenis Barang</th>
-                                    <th class="text-center">Kode Barang</th>
-                                    <th class="text-center">Nama Barang</th>
-                                    <th class="text-center">Jumlah</th>
-                                    <th class="text-center">Alasan</th>
+                                    <th class="td-fit text-center middle">No</th>
+                                    <th class="text-center middle">Tanggal Return</th>
+                                    <th class="text-center middle">Tanggal Penyupalain</th>
+                                    <th class="text-center middle">Lama Return Barang</th>
+                                    <th class="text-center middle">Pemasok</th>
+                                    <th class="text-center middle">Jenis Barang</th>
+                                    <th class="text-center middle">Kode Barang</th>
+                                    <th class="text-center middle">Nama Barang</th>
+                                    <th class="text-center middle">Jumlah</th>
+                                    <th class="text-center middle">Alasan</th>
                                 </tr>
                             </thead>
                             <?php
@@ -104,9 +104,9 @@
                                     drp.alasan,
                                     drp.jumlah 
                                 FROM 
-                                    detail_return_barang drp 
-                                INNER JOIN 
                                     return_barang rb 
+                                INNER JOIN 
+                                    detail_return_barang drp 
                                 ON 
                                     rb.id=drp.id_return_barang 
                                 INNER JOIN 
