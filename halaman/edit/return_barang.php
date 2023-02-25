@@ -177,7 +177,7 @@ if (isset($_POST['submit'])) {
                                             </div>
                                             <div class="mb-3 col-3">
                                                 <label>Jumlah Return</label>
-                                                <input type="number" class="form-control text-center" name="jumlah[]" required autocomplete="off" value="<?= $row['jumlah_return']; ?>" max="<?= $row['jumlah_suplai']; ?>" />
+                                                <input type="number" class="form-control text-center" name="jumlah[]" required min="0" autocomplete="off" value="<?= $row['jumlah_return']; ?>" max="<?= $row['jumlah_suplai']; ?>" />
                                             </div>
                                             <div class="mb-3 col-auto d-flex align-items-end">
                                                 <label class="satuan"><?= $row['satuan']; ?></label>

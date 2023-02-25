@@ -211,7 +211,7 @@ if (isset($_POST['submit'])) {
                                         </div>
                                         <div class="col-3">
                                             <label>Jumlah</label>
-                                            <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
+                                            <input type="number" class="form-control text-center" min="0" name="jumlah[]" autocomplete="off" value="0" />
                                         </div>
                                         <div class="col-2 d-flex align-items-end gap-2">
                                             <label class="satuan">Satuan</label>
@@ -267,7 +267,7 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
                 </div>
                 <div class="col-3">
                     <label>Jumlah</label>
-                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
+                    <input type="number" class="form-control text-center" min="0" name="jumlah[]" autocomplete="off" value="0" />
                 </div>
                 <div class="col-2 d-flex align-items-end gap-2">
                     <label class="satuan">Satuan</label>
