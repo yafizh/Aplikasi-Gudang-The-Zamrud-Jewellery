@@ -63,29 +63,11 @@ if (isset($_POST['submit'])) {
                                 <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Toko</h6>
                             </div>
                             <div class="card-body">
-                                <?php if ($_SESSION['user']['status'] == 'PEGAWAI') : ?>
-                                    <?php $toko_pegawai = $mysqli->query("SELECT * FROM toko WHERE id_pegawai=" . $_SESSION['user']['id_pegawai'])->fetch_assoc(); ?>
-                                    <div class="mb-3">
-                                        <label for="id_toko" class="form-label">Nama Toko</label>
-                                        <input type="text" hidden name="id_toko" id="id_toko" value="<?= $toko_pegawai['id']; ?>" readonly>
-                                        <input type="text" class="form-control" value="<?= $toko_pegawai['nama']; ?>" disabled>
-                                    </div>
-                                <?php else : ?>
-                                    <div class="mb-3">
-                                        <?php $toko = $mysqli->query("SELECT * FROM toko ORDER BY nama"); ?>
-                                        <label for="id_toko" class="form-label">Nama Toko</label>
-                                        <select name="id_toko" id="id_toko" class="form-control" required>
-                                            <option value="" selected disabled>Pilih Toko</option>
-                                            <?php while ($row = $toko->fetch_assoc()) : ?>
-                                                <?php if ($data['id_toko'] == $row['id']) : ?>
-                                                    <option selected value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
-                                                <?php else : ?>
-                                                    <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
-                                                <?php endif; ?>
-                                            <?php endwhile; ?>
-                                        </select>
-                                    </div>
-                                <?php endif; ?>
+                                <div class="mb-3">
+                                    <?php $toko = $mysqli->query("SELECT * FROM toko WHERE id=" . $data['id_toko'])->fetch_assoc(); ?>
+                                    <label for="id_toko" class="form-label">Nama Toko</label>
+                                    <input type="text" class="form-control" name="id_toko" id="id_toko" readonly value="<?= $toko['nama']; ?>">
+                                </div>
                                 <div class="mb-3">
                                     <label for="tanggal" class="form-label">Tanggal Penjualan Toko</label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" required autocomplete="off" value="<?= $data['tanggal']; ?>">
@@ -107,7 +89,6 @@ if (isset($_POST['submit'])) {
                             </div>
                         </div>
                     </div>
-                </div>
             </form>
         </div>
     </div>
@@ -117,15 +98,47 @@ $q = "
     SELECT 
         jb.nama nama_jenis_barang,
         jb.kode kode_jenis_barang, 
-        b.* 
+        b.nama,
+        (SUM(ddb.jumlah) 
+        - 
+        IFNULL(
+            (
+                SELECT
+                    SUM(dpt.jumlah) 
+                FROM 
+                    detail_penjualan_toko dpt 
+                INNER JOIN 
+                    penjualan_toko pt 
+                ON 
+                    pt.id=dpt.id_penjualan_toko 
+                WHERE 
+                    pt.id_toko=" . $data['id_toko'] . " 
+                    AND 
+                    dpt.id_barang=b.id
+            ), 
+        0)
+        ) jumlah
     FROM 
+        distribusi_barang db 
+    INNER JOIN 
+        detail_distribusi_barang ddb 
+    ON 
+        ddb.id_distribusi_barang=db.id 
+    INNER JOIN 
         barang b 
+    ON 
+        b.id=ddb.id_barang 
     INNER JOIN 
         jenis_barang jb 
     ON 
-        jb.id=b.id_jenis_barang 
-    ORDER BY 
-        jb.nama";
+        jb.id=b.id_jenis_barang
+    WHERE 
+        db.id_toko=" . $data['id_toko'] . " 
+        AND 
+        ddb.id_barang=b.id 
+    GROUP BY b.id 
+    ORDER BY jb.nama 
+";
 $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
 ?>
 <?php

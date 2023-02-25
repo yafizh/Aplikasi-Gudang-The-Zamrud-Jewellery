@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
                                     <div class="mb-3">
                                         <?php $toko = $mysqli->query("SELECT * FROM toko ORDER BY nama"); ?>
                                         <label for="id_toko" class="form-label">Nama Toko</label>
-                                        <select name="id_toko" id="id_toko" class="form-control" required>
+                                        <select name="id_toko" onchange="changeToko(this)" id="id_toko" class="form-control" required>
                                             <option value="" selected disabled>Pilih Toko</option>
                                             <?php while ($row = $toko->fetch_assoc()) : ?>
                                                 <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
@@ -90,95 +90,132 @@ if (isset($_POST['submit'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-8">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Barang</h6>
-                            </div>
-                            <div class="card-body">
-                                <div id="container-distribusi-barang">
-                                    <div class="row field-barang mb-3">
-                                        <div class="col-4">
-                                            <label class="form-label">Barang</label>
-                                            <select name="id_barang[]" class="form-control barang" required>
-                                                <option value="" selected disabled>Pilih Barang</option>
-                                            </select>
+                    <div id="penjualan" class="col-12 col-md-8">
+                        <?php if ($_SESSION['user']['status'] == 'PEGAWAI') : ?>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Barang</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="container-distribusi-barang">
+                                        <div class="row field-barang mb-3">
+                                            <div class="col-4">
+                                                <label class="form-label">Barang</label>
+                                                <select name="id_barang[]" class="form-control barang" required>
+                                                    <option value="" selected disabled>Pilih Barang</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="input-style-1">
+                                                    <label>Jumlah</label>
+                                                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
+                                                </div>
+                                            </div>
+                                            <div class="col-2 d-flex align-items-end gap-2">
+                                                <label class="satuan">Satuan</label>
+                                            </div>
                                         </div>
-                                        <div class="col-3">
-                                            <div class="input-style-1">
+                                        <div class="row field-barang mb-3">
+                                            <div class="col-4">
+                                                <label class="form-label">Barang</label>
+                                                <select name="id_barang[]" class="form-control barang">
+                                                    <option value="" selected disabled>Pilih Barang</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-3">
                                                 <label>Jumlah</label>
                                                 <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
                                             </div>
+                                            <div class="col-2 d-flex align-items-end gap-2">
+                                                <label class="satuan">Satuan</label>
+                                            </div>
                                         </div>
-                                        <div class="col-2 d-flex align-items-end gap-2">
-                                            <label class="satuan">Satuan</label>
+                                        <div class="row field-barang mb-3">
+                                            <div class="col-4">
+                                                <label class="form-label">Barang</label>
+                                                <select name="id_barang[]" class="form-control barang">
+                                                    <option value="" selected disabled>Pilih Barang</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-3">
+                                                <label>Jumlah</label>
+                                                <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
+                                            </div>
+                                            <div class="col-2 d-flex align-items-end gap-2">
+                                                <label class="satuan">Satuan</label>
+                                            </div>
+                                            <div class="col-3 d-flex align-items-end gap-2 button-container">
+                                                <button onclick="addFieldBarang(this)" class="btn btn-success">Tambah</button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row field-barang mb-3">
-                                        <div class="col-4">
-                                            <label class="form-label">Barang</label>
-                                            <select name="id_barang[]" class="form-control barang">
-                                                <option value="" selected disabled>Pilih Barang</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-3">
-                                            <label>Jumlah</label>
-                                            <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
-                                        </div>
-                                        <div class="col-2 d-flex align-items-end gap-2">
-                                            <label class="satuan">Satuan</label>
-                                        </div>
-                                    </div>
-                                    <div class="row field-barang mb-3">
-                                        <div class="col-4">
-                                            <label class="form-label">Barang</label>
-                                            <select name="id_barang[]" class="form-control barang">
-                                                <option value="" selected disabled>Pilih Barang</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-3">
-                                            <label>Jumlah</label>
-                                            <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
-                                        </div>
-                                        <div class="col-2 d-flex align-items-end gap-2">
-                                            <label class="satuan">Satuan</label>
-                                        </div>
-                                        <div class="col-3 d-flex align-items-end gap-2 button-container">
-                                            <button onclick="addFieldBarang(this)" class="btn btn-success">Tambah</button>
-                                        </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
-                                </div>
+                            <?php else : ?>
+                            <?php endif; ?>
                             </div>
-                        </div>
                     </div>
-                </div>
             </form>
         </div>
     </div>
 </div>
 <?php
-$q = "
-    SELECT 
-        jb.nama nama_jenis_barang,
-        jb.kode kode_jenis_barang, 
-        b.* 
-    FROM 
-        barang b 
-    INNER JOIN 
-        jenis_barang jb 
-    ON 
-        jb.id=b.id_jenis_barang 
-    ORDER BY 
-        jb.nama";
-$barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
+if ($_SESSION['user']['status'] == 'PEGAWAI') {
+    $id_toko = $mysqli->query("SELECT * FROM toko WHERE id_pegawai=".$_SESSION['user']['id_pegawai'])->fetch_assoc()['id'];
+    $q = "
+        SELECT 
+            jb.nama nama_jenis_barang,
+            jb.kode kode_jenis_barang, 
+            b.nama,
+            (SUM(ddb.jumlah) 
+            - 
+            IFNULL(
+                (
+                    SELECT
+                        SUM(dpt.jumlah) 
+                    FROM 
+                        detail_penjualan_toko dpt 
+                    INNER JOIN 
+                        penjualan_toko pt 
+                    ON 
+                        pt.id=dpt.id_penjualan_toko 
+                    WHERE 
+                        pt.id_toko=$id_toko 
+                        AND 
+                        dpt.id_barang=b.id
+                ), 
+            0)
+            ) jumlah
+        FROM 
+            distribusi_barang db 
+        INNER JOIN 
+            detail_distribusi_barang ddb 
+        ON 
+            ddb.id_distribusi_barang=db.id 
+        INNER JOIN 
+            barang b 
+        ON 
+            b.id=ddb.id_barang 
+        INNER JOIN 
+            jenis_barang jb 
+        ON 
+            jb.id=b.id_jenis_barang
+        WHERE 
+            db.id_toko=$id_toko 
+            AND 
+            ddb.id_barang=b.id 
+        GROUP BY b.id 
+        ORDER BY jb.nama 
+    ";
+    $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
+} else $barang = [];
 ?>
 <script>
-    const containerDistribusiBarang = document.getElementById('container-distribusi-barang');
-    const barang = JSON.parse('<?= json_encode($barang); ?>');
+    let containerDistribusiBarang = document.getElementById('container-distribusi-barang');
+    let barang = JSON.parse('<?= json_encode($barang); ?>');
     const barangTerpilih = [];
     const ignoreIndex = [];
 
@@ -270,4 +307,82 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
 
     }
     setOptions();
+
+    const changeToko = (element) => {
+        const pathparts = location.pathname.split('/');
+        let url = (location.host == 'localhost') ? (location.origin + '/' + pathparts[1].trim('/')) : location.origin;
+        const id_toko = element.value;
+        $.ajax({
+            url: `${url}/ajax/penjualan_toko.php?id_toko=${id_toko}`,
+        }).done(function(response) {
+            barang = JSON.parse(response);
+            $("#penjualan").append(`
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Barang</h6>
+                    </div>
+                    <div class="card-body">
+                        <div id="container-distribusi-barang">
+                            <div class="row field-barang mb-3">
+                                <div class="col-4">
+                                    <label class="form-label">Barang</label>
+                                    <select name="id_barang[]" class="form-control barang" required>
+                                        <option value="" selected disabled>Pilih Barang</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <div class="input-style-1">
+                                        <label>Jumlah</label>
+                                        <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex align-items-end gap-2">
+                                    <label class="satuan">Satuan</label>
+                                </div>
+                            </div>
+                            <div class="row field-barang mb-3">
+                                <div class="col-4">
+                                    <label class="form-label">Barang</label>
+                                    <select name="id_barang[]" class="form-control barang">
+                                        <option value="" selected disabled>Pilih Barang</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label>Jumlah</label>
+                                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
+                                </div>
+                                <div class="col-2 d-flex align-items-end gap-2">
+                                    <label class="satuan">Satuan</label>
+                                </div>
+                            </div>
+                            <div class="row field-barang mb-3">
+                                <div class="col-4">
+                                    <label class="form-label">Barang</label>
+                                    <select name="id_barang[]" class="form-control barang">
+                                        <option value="" selected disabled>Pilih Barang</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label>Jumlah</label>
+                                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
+                                </div>
+                                <div class="col-2 d-flex align-items-end gap-2">
+                                    <label class="satuan">Satuan</label>
+                                </div>
+                                <div class="col-3 d-flex align-items-end gap-2 button-container">
+                                    <button type="button" onclick="addFieldBarang(this)" class="btn btn-success">Tambah</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            `);
+            containerDistribusiBarang = document.getElementById('container-distribusi-barang');
+            setOptions();
+        });
+    }
 </script>
