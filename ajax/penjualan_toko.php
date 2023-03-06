@@ -8,7 +8,10 @@ $q = "
     SELECT 
         jb.nama nama_jenis_barang,
         jb.kode kode_jenis_barang, 
+        b.id,
         b.nama,
+        b.kode,
+        b.satuan,
         (SUM(ddb.jumlah) 
         - 
         IFNULL(

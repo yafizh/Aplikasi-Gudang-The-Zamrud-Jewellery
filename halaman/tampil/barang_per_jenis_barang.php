@@ -51,8 +51,8 @@
                                         <td class="td-fit align-middle text-center"><?= $no++; ?></td>
                                         <td class="align-middle text-center"><?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode']); ?></td>
                                         <td class="align-middle text-center"><?= $row['nama']; ?></td>
-                                        <td class="align-middle text-center"><?= number_format($row['harga_toko'], 0, ",", "."); ?></td>
-                                        <td class="align-middle text-center"><?= number_format($row['harga_label'], 0, ",", "."); ?></td>
+                                        <td class="align-middle text-right"><?= number_format($row['harga_toko'], 0, ",", "."); ?></td>
+                                        <td class="align-middle text-right"><?= number_format($row['harga_label'], 0, ",", "."); ?></td>
                                         <td class="align-middle text-center"><?= $row['stok']; ?> <?= $row['satuan']; ?></td>
                                         <?php if ($_SESSION['user']['status'] == 'ADMIN') : ?>
                                             <td class="text-center td-fit">

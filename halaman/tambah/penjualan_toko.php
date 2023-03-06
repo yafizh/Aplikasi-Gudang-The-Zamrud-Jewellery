@@ -169,7 +169,10 @@ if ($_SESSION['user']['status'] == 'PEGAWAI') {
         SELECT 
             jb.nama nama_jenis_barang,
             jb.kode kode_jenis_barang, 
+            b.id,
             b.nama,
+            b.kode,
+            b.satuan,
             (SUM(ddb.jumlah) 
             - 
             IFNULL(
@@ -316,6 +319,8 @@ if ($_SESSION['user']['status'] == 'PEGAWAI') {
             url: `${url}/ajax/penjualan_toko.php?id_toko=${id_toko}`,
         }).done(function(response) {
             barang = JSON.parse(response);
+            console.log(barang)
+            $("#penjualan").html('');
             $("#penjualan").append(`
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
