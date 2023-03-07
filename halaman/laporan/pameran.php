@@ -13,6 +13,9 @@
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">Filter</h6>
                         <div>
+                            <?php if (!empty($_POST['nama_pemaren'])) : ?>
+                                <input type="text" name="nama_pemaren" hidden value="<?= $_POST['nama_pemaren']; ?>">
+                            <?php endif; ?>
                             <?php if (!empty($_POST['id_petugas'])) : ?>
                                 <input type="text" name="id_petugas" hidden value="<?= $_POST['id_petugas']; ?>">
                             <?php endif; ?>
@@ -26,6 +29,16 @@
                 </form>
                 <form action="" method="POST">
                     <div class="card-body">
+                        <div class="mb-3">
+                            <?php $pameran = $mysqli->query("SELECT * FROM pameran ORDER BY nama"); ?>
+                            <label for="nama_pameran" class="form-label">Nama Pameran</label>
+                            <select name="nama_pameran" id="nama_pameran" class="form-control">
+                                <option value="" selected disabled>Semua Pameran</option>
+                                <?php while ($row = $pameran->fetch_assoc()) : ?>
+                                    <option <?= $row['nama'] == ($_POST['nama_pameran'] ?? '') ? 'selected' : ''; ?> value="<?= $row['nama']; ?>"><?= $row['nama']; ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                        </div>
                         <div class="mb-3">
                             <?php $petugas = $mysqli->query("SELECT * FROM petugas ORDER BY nama"); ?>
                             <label for="id_petugas" class="form-label">Petugas Yang Bertanggung Jawab</label>
@@ -60,16 +73,16 @@
                         <table class="table table-bordered" id="reportTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th class="td-fit text-center">No</th>
-                                    <th class="text-center">Tanggal Mulai</th>
-                                    <th class="text-center">Tanggal Selesai</th>
-                                    <th class="text-center">Penanggung Jawab</th>
-                                    <th class="text-center">Nama Pameran</th>
-                                    <th class="text-center">Penyelenggara</th>
-                                    <th class="text-center">Barang Pameran</th>
-                                    <th class="text-center">Barang Terjual</th>
-                                    <th class="text-center">Sisa Barang</th>
-                                    <th class="text-center">Aksi</th>
+                                    <th class="td-fit text-center align-middle">No</th>
+                                    <th class="text-center align-middle">Tanggal Mulai</th>
+                                    <th class="text-center align-middle">Tanggal Selesai</th>
+                                    <th class="text-center align-middle">Penanggung Jawab</th>
+                                    <th class="text-center align-middle">Nama Pameran</th>
+                                    <th class="text-center align-middle">Penyelenggara</th>
+                                    <th class="text-center align-middle">Barang Pameran</th>
+                                    <th class="text-center align-middle">Barang Terjual</th>
+                                    <th class="text-center align-middle">Sisa Barang</th>
+                                    <th class="text-center align-middle">Aksi</th>
                                 </tr>
                             </thead>
                             <?php
@@ -89,6 +102,8 @@
                                     1=1 
                             ";
 
+                            if (!empty($_POST['nama_pameran'] ?? ''))
+                                $q .= " AND pameran.nama='" . $_POST['nama_pameran'] . "'";
                             if (!empty($_POST['id_petugas'] ?? ''))
                                 $q .= " AND pameran.id_petugas=" . $_POST['id_petugas'];
                             if (!empty($_POST['dari_tanggal'] ?? '') && !empty($_POST['sampai_tanggal'] ?? ''))

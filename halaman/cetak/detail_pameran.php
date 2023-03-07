@@ -89,6 +89,7 @@
                     <th class="text-center align-middle">Modal</th>
                     <th class="text-center align-middle">Harga Label</th>
                     <th class="text-center align-middle">Jumlah Terjual</th>
+                    <th class="text-center align-middle">Jumlah Uang</th>
                     <th class="text-center align-middle">Keuntungan</th>
                     <th class="text-center align-middle">Sisa Barang</th>
                 </tr>
@@ -108,6 +109,7 @@
                         <td class="align-middle text-end"><?= number_format((int)$row['jumlah'] * (int)$row['harga_toko'], 0, ",", "."); ?></td>
                         <td class="align-middle text-end"><?= number_format($row['harga_label'], 0, ",", "."); ?></td>
                         <td class="align-middle text-center"><?= $row['jumlah_terjual']; ?> <?= $row['satuan']; ?></td>
+                        <td class="align-middle text-end"><?= number_format(((int)$row['jumlah_terjual'] * (int)$row['harga_label']), 0, ",", "."); ?></td>
                         <td class="align-middle text-end"><?= number_format(((int)$row['jumlah_terjual'] * (int)$row['harga_label']) - ((int)$row['jumlah_terjual'] * (int)$row['harga_toko']), 0, ",", "."); ?></td>
                         <td class="align-middle text-center"><?= (int)$row['jumlah'] - (int)$row['jumlah_terjual']; ?> <?= $row['satuan']; ?></td>
                     </tr>
