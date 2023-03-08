@@ -206,9 +206,9 @@ $barang_pameran = $mysqli->query($q);
                         <?php endwhile; ?>
                         <tr>
                             <th colspan="2">Total</th>
-                            <td colspan="3" class="align-middle text-end"><b><?= number_format($modal, 0, ",", "."); ?></b></td>
-                            <th colspan="3" class="align-middle text-end"><b><?= number_format($uang, 0, ",", "."); ?></b></th>
-                            <td class="align-middle text-end"><b><?= number_format($untung, 0, ",", "."); ?></b></td>
+                            <td colspan="3" class="align-middle text-right"><b><?= number_format($modal, 0, ",", "."); ?></b></td>
+                            <th colspan="3" class="align-middle text-right"><b><?= number_format($uang, 0, ",", "."); ?></b></th>
+                            <td class="align-middle text-right"><b><?= number_format($untung, 0, ",", "."); ?></b></td>
                             <th></th>
                         </tr>
                     </tbody>
