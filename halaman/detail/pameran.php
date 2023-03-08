@@ -182,6 +182,7 @@ $barang_pameran = $mysqli->query($q);
                     </thead>
                     <?php
                     $no = 1;
+                    $uang = 0;
                     $modal = 0;
                     $untung = 0;
                     ?>
@@ -201,13 +202,14 @@ $barang_pameran = $mysqli->query($q);
                             </tr>
                             <?php $modal += (int)$row['jumlah'] * (int)$row['harga_toko']; ?>
                             <?php $untung += ((int)$row['jumlah_terjual'] * (int)$row['harga_label']) - ((int)$row['jumlah_terjual'] * $row['harga_toko']); ?>
+                            <?php $uang += ((int)$row['jumlah_terjual'] * (int)$row['harga_label']); ?>
                         <?php endwhile; ?>
                         <tr>
                             <th colspan="2">Total</th>
-                            <th colspan="2" class="align-middle text-right">Total Modal</th>
-                            <td colspan="1" class="align-middle text-right"><?= number_format($modal, 0, ",", "."); ?></td>
-                            <th colspan="2" class="align-middle text-right">Total Keuntungan</th>
-                            <td colspan="2" class="align-middle text-right"><?= number_format($untung, 0, ",", "."); ?></td>
+                            <td colspan="3" class="align-middle text-end"><b><?= number_format($modal, 0, ",", "."); ?></b></td>
+                            <th colspan="3" class="align-middle text-end"><b><?= number_format($uang, 0, ",", "."); ?></b></th>
+                            <td class="align-middle text-end"><b><?= number_format($untung, 0, ",", "."); ?></b></td>
+                            <th></th>
                         </tr>
                     </tbody>
                 </table>

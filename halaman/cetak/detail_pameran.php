@@ -98,6 +98,7 @@
             $no = 1;
             $modal = 0;
             $untung = 0;
+            $uang = 0;
             ?>
             <tbody>
                 <?php while ($row = $barang_pameran->fetch_assoc()) : ?>
@@ -115,13 +116,14 @@
                     </tr>
                     <?php $modal += (int)$row['jumlah'] * (int)$row['harga_toko']; ?>
                     <?php $untung += (((int)$row['jumlah_terjual'] * (int)$row['harga_label']) - ((int)$row['jumlah_terjual'] * (int)$row['harga_toko'])); ?>
+                    <?php $uang += ((int)$row['jumlah_terjual'] * (int)$row['harga_label']); ?>
                 <?php endwhile; ?>
                 <tr>
                     <th colspan="2">Total</th>
-                    <th colspan="2" class="align-middle text-end">Total Modal</th>
-                    <td class="align-middle text-end"><?= number_format($modal, 0, ",", "."); ?></td>
-                    <th colspan="3" class="align-middle text-end">Total Keuntungan</th>
-                    <td class="align-middle text-end"><?= number_format($untung, 0, ",", "."); ?></td>
+                    <td colspan="3" class="align-middle text-end"><b><?= number_format($modal, 0, ",", "."); ?></b></td>
+                    <th colspan="3" class="align-middle text-end"><b><?= number_format($uang, 0, ",", "."); ?></b></th>
+                    <td class="align-middle text-end"><b><?= number_format($untung, 0, ",", "."); ?></b></td>
+                    <th></th>
                 </tr>
             </tbody>
         </table>
