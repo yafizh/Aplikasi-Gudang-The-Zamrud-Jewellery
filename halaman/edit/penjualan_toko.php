@@ -99,6 +99,8 @@ $q = "
         jb.nama nama_jenis_barang,
         jb.kode kode_jenis_barang, 
         b.nama,
+        b.kode,
+        b.satuan,
         (SUM(ddb.jumlah) 
         - 
         IFNULL(
