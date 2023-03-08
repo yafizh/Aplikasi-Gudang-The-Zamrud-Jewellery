@@ -148,7 +148,7 @@
                             if (!empty($_POST['id_jenis_barang'] ?? ''))
                                 $q .= " AND b.id_jenis_barang=" . $_POST['id_jenis_barang'];
                             if (!empty($_POST['dari_tanggal'] ?? '') && !empty($_POST['sampai_tanggal'] ?? ''))
-                                $q .= " AND (distribusi_barang.tanggal >='" . $_POST['dari_tanggal'] . "' AND distribusi_barang.tanggal <= '" . $_POST['dari_tanggal'] . "')";
+                                $q .= " AND (distribusi_barang.tanggal >='" . $_POST['dari_tanggal'] . "' AND distribusi_barang.tanggal <= '" . $_POST['sampai_tanggal'] . "')";
 
                             $q .= " ORDER BY distribusi_barang.tanggal DESC, distribusi_barang.id DESC";
                             $result = $mysqli->query($q);

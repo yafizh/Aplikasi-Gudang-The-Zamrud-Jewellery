@@ -74,7 +74,7 @@
                 if (!empty($_POST['id_petugas'] ?? ''))
                     $q .= " AND pameran.id_petugas=" . $_POST['id_petugas'];
                 if (!empty($_POST['dari_tanggal'] ?? '') && !empty($_POST['sampai_tanggal'] ?? ''))
-                    $q .= " AND (pameran.tanggal_mulai >='" . $_POST['dari_tanggal'] . "' AND pameran.tanggal_selesai <= '" . $_POST['dari_tanggal'] . "')";
+                    $q .= " AND (pameran.tanggal_mulai >='" . $_POST['dari_tanggal'] . "' AND pameran.tanggal_selesai <= '" . $_POST['sampai_tanggal'] . "')";
 
                 $q .= " ORDER BY pameran.tanggal_mulai DESC, pameran.id DESC";
                 $result = $mysqli->query($q) or die($mysqli->error);
