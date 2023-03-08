@@ -16,11 +16,18 @@
         <?php if (isset($_POST['id_jenis_barang'])) : ?>
             <?php $jenis_barang = $mysqli->query("SELECT * FROM jenis_barang WHERE id=" . $_POST['id_jenis_barang'])->fetch_assoc(); ?>
         <?php endif; ?>
+        <?php if (isset($_POST['id_pameran'])) : ?>
+            <?php $pameran = $mysqli->query("SELECT * FROM pameran WHERE id=" . $_POST['id_pameran'])->fetch_assoc(); ?>
+        <?php endif; ?>
         <div class="row">
             <div class="col-12 col-sm-6">
                 <table class="table">
                     <tr>
                         <th colspan="2">Filter</th>
+                    </tr>
+                    <tr>
+                        <td class="align-middle td-fit">Nama Pameran</td>
+                        <td class="pl-5">: <?= $pameran['nama'] ?? 'Semua Pameran'; ?></td>
                     </tr>
                     <tr>
                         <td class="align-middle td-fit">Jenis Barang</td>
@@ -86,6 +93,8 @@
                         1=1 
                 ";
 
+                if (!empty($_POST['id_pameran'] ?? ''))
+                    $q .= " AND p.id=" . $_POST['id_pameran'];
                 if (!empty($_POST['id_jenis_barang'] ?? ''))
                     $q .= " AND b.id_jenis_barang=" . $_POST['id_jenis_barang'];
                 if (!empty($_POST['dari_tanggal'] ?? '') && !empty($_POST['sampai_tanggal'] ?? ''))

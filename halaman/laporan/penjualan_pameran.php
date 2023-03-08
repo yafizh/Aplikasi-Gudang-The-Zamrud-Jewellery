@@ -13,6 +13,9 @@
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">Filter</h6>
                         <div>
+                            <?php if (!empty($_POST['id_pemaren'])) : ?>
+                                <input type="text" name="id_pemaren" hidden value="<?= $_POST['id_pemaren']; ?>">
+                            <?php endif; ?>
                             <?php if (!empty($_POST['id_jenis_barang'])) : ?>
                                 <input type="text" name="id_jenis_barang" hidden value="<?= $_POST['id_jenis_barang']; ?>">
                             <?php endif; ?>
@@ -26,6 +29,16 @@
                 </form>
                 <form action="" method="POST">
                     <div class="card-body">
+                        <div class="mb-3">
+                            <?php $pameran = $mysqli->query("SELECT * FROM pameran ORDER BY nama"); ?>
+                            <label for="id_pameran" class="form-label">Nama Pameran</label>
+                            <select name="id_pameran" id="id_pameran" class="form-control">
+                                <option value="" selected disabled>Semua Pameran</option>
+                                <?php while ($row = $pameran->fetch_assoc()) : ?>
+                                    <option <?= $row['id'] == ($_POST['id_pameran'] ?? '') ? 'selected' : ''; ?> value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                        </div>
                         <div class="mb-3">
                             <?php $jenis_barang = $mysqli->query("SELECT * FROM jenis_barang ORDER BY nama"); ?>
                             <label for="id_jenis_barang" class="form-label">Jenis Barang</label>
@@ -102,7 +115,9 @@
                                 WHERE 
                                     1=1 
                             ";
-                            
+
+                            if (!empty($_POST['id_pameran'] ?? ''))
+                                $q .= " AND p.id=" . $_POST['id_pameran'];
                             if (!empty($_POST['id_jenis_barang'] ?? ''))
                                 $q .= " AND b.id_jenis_barang=" . $_POST['id_jenis_barang'];
                             if (!empty($_POST['dari_tanggal'] ?? '') && !empty($_POST['sampai_tanggal'] ?? ''))
