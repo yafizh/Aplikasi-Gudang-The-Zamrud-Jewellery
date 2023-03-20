@@ -1,49 +1,15 @@
-<?php
-$data = $mysqli->query("SELECT * FROM penjualan_toko WHERE id=" . $_GET['id'])->fetch_assoc();
-if (isset($_POST['submit'])) {
-    $id_toko = $mysqli->real_escape_string($_POST['id_toko']);
-    $tanggal = $mysqli->real_escape_string($_POST['tanggal']);
-    $id_barang = $_POST['id_barang'];
-    $jumlah = $_POST['jumlah'];
-
-    try {
-        $mysqli->begin_transaction();
-
-        $q = "
-            UPDATE penjualan_toko SET 
-                id_toko='$id_toko',
-                tanggal='$tanggal' 
-            WHERE 
-                id=" . $_GET['id'] . "
-        ";
-        $mysqli->query($q);
-
-        $mysqli->query("DELETE FROM detail_penjualan_toko WHERE id_penjualan_toko=" . $_GET['id']);
-        foreach ($id_barang as $i => $id) {
-            $q = "
-                INSERT INTO detail_penjualan_toko (
-                    id_penjualan_toko,
-                    id_barang,
-                    jumlah 
-                ) VALUES (
-                    '" . $_GET['id'] . "',
-                    '" . $id . "',
-                    '" . $jumlah[$i] . "'
-                ) 
-            ";
-            $mysqli->query($q);
-        }
-
-
-        $mysqli->commit();
-        $_SESSION['success'] = 'Edit data berhasil!';
-        echo "<script>location.href = '?h=penjualan_toko';</script>";
-    } catch (\Throwable $e) {
-        $mysqli->rollback();
-        throw $e;
+<style>
+    .plus:hover,
+    .minus:hover {
+        cursor: pointer;
     }
-}
-?>
+
+    .plus,
+    .minus {
+        cursor: pointer;
+        font-size: 1.4rem;
+    }
+</style>
 <div class="container-fluid">
 
     <div class="d-flex justify-content-between align-items-center">
@@ -55,106 +21,196 @@ if (isset($_POST['submit'])) {
 
     <div class="row justify-content-center">
         <div class="col-12">
-            <form action="" method="POST">
-                <div class="row">
-                    <div class="col-12 col-md-4">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Toko</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <?php $toko = $mysqli->query("SELECT * FROM toko WHERE id=" . $data['id_toko'])->fetch_assoc(); ?>
-                                    <label for="id_toko" class="form-label">Nama Toko</label>
-                                    <input type="text" class="form-control" name="id_toko" id="id_toko" readonly value="<?= $toko['nama']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tanggal" class="form-label">Tanggal Penjualan Toko</label>
-                                    <input type="date" class="form-control" id="tanggal" name="tanggal" required autocomplete="off" value="<?= $data['tanggal']; ?>">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="" id="form-barang">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="kode_barang" class="form-label">Kode Barang</label>
+                                                    <input type="text" class="form-control" id="kode_barang" required>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="nama_barang" class="form-label">Nama Barang</label>
+                                                    <input type="text" class="form-control" id="nama_barang" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="mb-3">
+                                                    <label for="diskon" class="form-label">Diskon</label>
+                                                    <input type="text" class="form-control text-right" id="diskon" value="0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-5">
+                                                <div class="mb-3">
+                                                    <label for="kwantitas" class="form-label">Kwantitas</label>
+                                                    <input type="number" class="form-control text-center" id="kwantitas" value="1" min="0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <label for="exampleFormControlInput1" class="form-label" style="visibility: hidden;">Button</label>
+                                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Toko Barang</h6>
+                        <div class="col-12 mb-3">
+                            <div class="table-responsive">
+                                <table class="table table-bordered bg-white" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="td-fit text-center align-middle">No</th>
+                                            <th class="text-center align-middle">Kode Barang</th>
+                                            <th class="text-center align-middle">Nama Barang</th>
+                                            <th class="text-center align-middle">Harga</th>
+                                            <th class="text-center align-middle">Kwantitas</th>
+                                            <th class="text-center align-middle">Diskon</th>
+                                            <th class="text-center align-middle">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-middle text-center" colspan="7">Data Kosong</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="card-body">
-                                <div id="container-distribusi-barang"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Form Penjualan Toko</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="" id="form-checkout">
+                                <div class="mb-3">
+                                    <label for="tanggal" class="form-label">Tanggal Penjualan</label>
+                                    <input type="date" class="form-control" id="tanggal" name="tanggal" required readonly autocomplete="off" value="<?= Date("Y-m-d"); ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <?php $jenis_pembayaran = $mysqli->query("SELECT * FROM jenis_pembayaran ORDER BY urutan"); ?>
+                                    <label for="id_jenis_pembayaran" class="form-label">Jenis Pembayaran</label>
+                                    <select name="id_jenis_pembayaran" id="id_jenis_pembayaran" required class="form-control">
+                                        <option value="" selected disabled>Pilih Jenis Pembayaran</option>
+                                        <?php while ($row = $jenis_pembayaran->fetch_assoc()) : ?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['nama']; ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="total" class="form-label">Total</label>
+                                    <input type="text" class="form-control text-right" readonly name="total" id="total" required min="0" value="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pembayaran" class="form-label">Pembayaran</label>
+                                    <input type="text" class="form-control text-right" name="pembayaran" id="pembayaran" required min="0" value="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="kembalian" class="form-label">Kembalian</label>
+                                    <input type="text" class="form-control text-right" readonly name="kembalian" id="kembalian" required min="0" value="0">
+                                </div>
                                 <hr>
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="submit" name="submit" class="btn btn-primary">Lakukan Penjualan</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
-            </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <?php
-$q = "
-    SELECT 
-        jb.nama nama_jenis_barang,
-        jb.kode kode_jenis_barang, 
-        b.nama,
-        b.kode,
-        b.satuan,
-        (SUM(ddb.jumlah) 
-        - 
-        IFNULL(
-            (
-                SELECT
-                    SUM(dpt.jumlah) 
-                FROM 
-                    detail_penjualan_toko dpt 
-                INNER JOIN 
-                    penjualan_toko pt 
-                ON 
-                    pt.id=dpt.id_penjualan_toko 
-                WHERE 
-                    pt.id_toko=" . $data['id_toko'] . " 
-                    AND 
-                    dpt.id_barang=b.id
-            ), 
-        0)
-        ) jumlah
-    FROM 
-        distribusi_barang db 
-    INNER JOIN 
-        detail_distribusi_barang ddb 
-    ON 
-        ddb.id_distribusi_barang=db.id 
-    INNER JOIN 
-        barang b 
-    ON 
-        b.id=ddb.id_barang 
-    INNER JOIN 
-        jenis_barang jb 
-    ON 
-        jb.id=b.id_jenis_barang
-    WHERE 
-        db.id_toko=" . $data['id_toko'] . " 
-        AND 
-        ddb.id_barang=b.id 
-    GROUP BY b.id 
-    ORDER BY jb.nama 
-";
-$barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
+if ($_SESSION['user']['status'] == 'PEGAWAI') {
+    $id_toko = $mysqli->query("SELECT * FROM toko WHERE id_pegawai=" . $_SESSION['user']['id_pegawai'])->fetch_assoc()['id'];
+    $q = "
+        SELECT 
+            jb.nama nama_jenis_barang,
+            jb.kode kode_jenis_barang, 
+            b.id,
+            b.nama,
+            b.kode,
+            b.harga_label,
+            b.harga_toko,
+            b.satuan,
+            (SUM(ddb.jumlah) 
+            - 
+            IFNULL(
+                (
+                    SELECT
+                        SUM(dpt.jumlah) 
+                    FROM 
+                        detail_penjualan_toko dpt 
+                    INNER JOIN 
+                        penjualan_toko pt 
+                    ON 
+                        pt.id=dpt.id_penjualan_toko 
+                    WHERE 
+                        pt.id_toko=$id_toko 
+                        AND 
+                        dpt.id_barang=b.id
+                ), 
+            0)
+            ) jumlah
+        FROM 
+            distribusi_barang db 
+        INNER JOIN 
+            detail_distribusi_barang ddb 
+        ON 
+            ddb.id_distribusi_barang=db.id 
+        INNER JOIN 
+            barang b 
+        ON 
+            b.id=ddb.id_barang 
+        INNER JOIN 
+            jenis_barang jb 
+        ON 
+            jb.id=b.id_jenis_barang
+        WHERE 
+            db.id_toko=$id_toko 
+            AND 
+            ddb.id_barang=b.id 
+        GROUP BY b.id 
+        ORDER BY jb.nama 
+    ";
+    $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
+} else $barang = [];
 ?>
 <?php
 $q = "
     SELECT 
-        b.stok,
-        dp.jumlah,
-        b.id, 
-        b.satuan, 
-        jb.kode kode_jenis_barang,
+        DATE(penjualan_toko.tanggal_waktu) tanggal,
+        penjualan_toko.pembayaran,
+        penjualan_toko.id_jenis_pembayaran,
+        jb.nama nama_jenis_barang,
+        jb.kode kode_jenis_barang, 
+        b.id,
+        b.nama,
         b.kode,
-        b.nama 
+        b.harga_label,
+        b.harga_toko,
+        dp.jumlah kwantitas,
+        dp.diskon,
+        b.satuan 
     FROM 
         detail_penjualan_toko dp 
+    INNER JOIN 
+        penjualan_toko  
+    ON 
+        penjualan_toko.id=dp.id_penjualan_toko  
     INNER JOIN 
         barang b 
     ON 
@@ -166,126 +222,184 @@ $q = "
     WHERE 
         dp.id_penjualan_toko=" . $_GET['id'] . "
 ";
-$barang_didistribusi = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
+$barang_terjual = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC); ?>
 <script>
-    const containerDistribusiBarang = document.getElementById('container-distribusi-barang');
+    const id_edit =  JSON.parse(<?= $_GET['id'] ?>);
     const barang = JSON.parse('<?= json_encode($barang); ?>');
-    const barangTerpilih = [];
-    const ignoreIndex = [];
-    const barangDidistribusi = JSON.parse('<?= json_encode($barang_didistribusi); ?>');
+    const barang_terjual = JSON.parse('<?= json_encode($barang_terjual); ?>');
+    const checkout = {
+        id_toko: <?= json_encode($id_toko); ?>,
+        id_barang: [],
+        kode_barang: [],
+        nama_barang: [],
+        harga_label: [],
+        harga_toko: [],
+        kwantitas: [],
+        diskon: [],
+        total: [],
+        pembayaran: 0,
+        kembalian: 0,
+        id_jenis_pembayaran: 0,
+    };
+    let index_barang = -1;
 
-    const addFieldBarang = (button) => {
-        containerDistribusiBarang.insertAdjacentHTML('beforeend', `
-            <div class="row field-barang mb-3">
-                <div class="col-4">
-                    <label  class="form-label">Barang</label>
-                    <select name="id_barang[]" class="form-control barang">
-                        <option value="" selected disabled>Pilih Barang</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <label>Jumlah</label>
-                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" value="0" />
-                </div>
-                <div class="col-2 d-flex align-items-end gap-2">
-                    <label class="satuan">Satuan</label>
-                </div>
-                <div class="col-3 d-flex align-items-end button-container">
-                    <button onclick="removeFieldBarang(this)" class="mr-3 btn btn-danger">Hapus</button>
-                    <button onclick="addFieldBarang(this)" class="mr-3 btn btn-success add-field-button">Tambah</button>
-                </div>
-            </div>
-        `);
-        button.remove();
-        setOptions();
+    const total = document.getElementById("total");
+    const pembayaran = document.getElementById("pembayaran");
+    const kembalian = document.getElementById("kembalian");
+
+    const updateCheckout = () => {
+        const totalReduce = checkout.total.reduce((a, b) => a + b);
+        total.value = formatNumberWithDot.format(totalReduce);
+        kembalian.value = formatNumberWithDot.format((checkout.pembayaran - totalReduce > 0) ? (checkout.pembayaran - totalReduce) : 0);
     }
 
-    const removeFieldBarang = (button) => {
-        button.parentElement.parentElement.remove();
-        if (!document.querySelector('.add-field-button')) {
-            const semuaFieldBarang = document.querySelectorAll('.field-barang');
-            semuaFieldBarang[semuaFieldBarang.length - 1].querySelector('.button-container').insertAdjacentHTML('beforeend', `<button onclick="addFieldBarang(this)" class="btn btn-success add-field-button">Tambah</button>`);
+    const updateKeranjang = () => {
+        document.querySelector('tbody').innerHTML = '';
+        checkout.kode_barang.forEach((value, index) => {
+            document.querySelector('tbody').insertAdjacentHTML('beforeend', `
+                <tr>
+                    <td class="td-fit align-middle text-center">${index+1}</td>
+                    <td class="align-middle text-center">${checkout.kode_barang[index]}</td>
+                    <td class="align-middle">${checkout.nama_barang[index]}</td>
+                    <td class="align-middle text-right">${formatNumberWithDot.format(checkout.harga_label[index])}</td>
+                    <td class="align-middle text-center">
+                        <a class="minus text-decoration-none">-</a>
+                        <span class="mx-2">${checkout.kwantitas[index]}</span>
+                        <a class="plus text-decoration-none">+</a>
+                    </td>
+                    <td class="align-middle text-right">${formatNumberWithDot.format(checkout.diskon[index])}</td>
+                    <td class="align-middle text-right">${formatNumberWithDot.format(checkout.total[index])}</td>
+                </tr>
+            `);
+        });
+        minus();
+        plus();
+    }
+
+    document.getElementById("kode_barang").addEventListener('input', function() {
+        for (let index = 0; index < barang.length; index++) {
+            if ((barang[index]['kode_jenis_barang'] + generateKodeBarang(barang[index]['kode'])) == this.value) {
+                document.getElementById("nama_barang").value = barang[index].nama;
+                index_barang = index;
+                return;
+            }
+
+            document.getElementById("nama_barang").value = '';
+            index_barang = -1;
+
         }
-        setOptions();
-    }
+    });
 
-    const setOptions = () => {
-        document.querySelectorAll('.barang').forEach((element, index) => {
-            if (!ignoreIndex.includes(index)) {
-                element.innerHTML = '<option value="" selected disabled>Pilih Barang</option>';
-                let optgroup = document.createElement('optgroup');
-                let group = null;
-                for (const key in barang) {
-                    if (!barangTerpilih.includes(barang[key]['id'])) {
-                        const option = document.createElement('option');
-                        option.value = barang[key]['id'];
-                        option.text = `${barang[key]['kode_jenis_barang']}${generateKodeBarang(barang[key]['kode'])}: ${barang[key]['nama']}`;
-                        option.setAttribute('data-satuan', barang[key]['satuan']);
-                        optgroup.append(option);
+    document.getElementById('diskon').addEventListener("keypress", function(evt) {
+        if (evt.which < 48 || evt.which > 57) {
+            evt.preventDefault();
+            return;
+        }
 
-                        // If total of barang is 1
-                        if (Object.keys(barang).length == 1) {
-                            optgroup.setAttribute('label', barang[key]['nama_jenis_barang']);
-                            element.append(optgroup);
-                            optgroup = document.createElement('optgroup');
-                            break;
-                        }
+        this.addEventListener('input', function() {
+            this.value = formatNumberWithDot.format(this.value.split('.').join(''));
+        });
+    });
 
-                        // If total of barang more than 1
-                        if (key == (Object.keys(barang).length - 1)) {
-                            optgroup.setAttribute('label', barang[key]['nama_jenis_barang']);
-                            element.append(optgroup);
-                            optgroup = document.createElement('optgroup');
-                            break;
-                        }
-                        if (barang[key]['id_jenis_barang'] != barang[parseInt(key) + 1]['id_jenis_barang']) {
-                            optgroup.setAttribute('label', barang[key]['nama_jenis_barang']);
-                            element.append(optgroup);
-                            optgroup = document.createElement('optgroup');
-                        }
 
+    document.getElementById('pembayaran').addEventListener("keypress", function(evt) {
+        if (evt.which < 48 || evt.which > 57) {
+            evt.preventDefault();
+            return;
+        }
+
+        this.addEventListener('input', function() {
+            const nilai = parseInt(this.value.split('.').join(''));
+            checkout.pembayaran = nilai;
+            this.value = formatNumberWithDot.format(nilai);
+            updateCheckout();
+        });
+    });
+
+    const minus = () => {
+        document.querySelectorAll('.minus').forEach((value, index) => {
+            value.addEventListener('click', () => {
+                checkout.kwantitas[index] -= 1;
+                checkout.total[index] -= parseInt(checkout.harga_label[index]);
+                if (checkout.kwantitas[index] == 0) {
+                    if (index > -1) {
+                        checkout.total[index] -= (parseInt(checkout.harga_label[index] * checkout.kwantitas[index] - checkout.diskon[index]));
+                        checkout.kode_barang.splice(index, 1);
+                        checkout.nama_barang.splice(index, 1);
+                        checkout.harga_label.splice(index, 1);
+                        checkout.harga_toko.splice(index, 1);
+                        checkout.kwantitas.splice(index, 1);
+                        checkout.diskon.splice(index, 1);
                     }
                 }
-                $(document).ready(function() {
-                    $('.barang').select2();
-                });
-                $(element).on('select2:select', function(element2) {
-                    barangTerpilih.push(element2.currentTarget[element2.currentTarget.selectedIndex].value);
-                    document.querySelectorAll('.satuan')[index].innerText = element2.currentTarget[element2.currentTarget.selectedIndex].getAttribute('data-satuan');
-                    document.querySelectorAll('input[name="jumlah[]"]')[index].setAttribute('max', element2.currentTarget[element2.currentTarget.selectedIndex].getAttribute('data-max'));
-                    ignoreIndex.push(index);
-                    setOptions();
-                });
-            }
+                updateKeranjang();
+                updateCheckout();
+            });
+        });
+    }
+    const plus = () => {
+        document.querySelectorAll('.plus').forEach((value, index) => {
+            value.addEventListener('click', () => {
+                checkout.kwantitas[index] += 1;
+                checkout.total[index] += parseInt(checkout.harga_label[index]);
+                updateKeranjang();
+                updateCheckout();
+            });
         });
     }
 
-    for (let index = 0; index < Object.keys(barangDidistribusi).length; index++) {
-        barangTerpilih.push(barangDidistribusi[index]['id']);
-        ignoreIndex.push(index);
-        containerDistribusiBarang.insertAdjacentHTML('beforeend', `
-            <div class="row field-barang mb-3">
-                <div class="col-4">
-                    <label class="form-label">Barang</label>
-                    <select name="id_barang[]" class="form-control barang">
-                        <option value="" disabled>Pilih Barang</option>
-                        <option value="${barangDidistribusi[index]['id']}" selected>${barangDidistribusi[index]['kode_jenis_barang']}${generateKodeBarang(barangDidistribusi[index]['kode'])}: ${barangDidistribusi[index]['nama']}</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <label>Jumlah</label>
-                    <input type="number" class="form-control text-center" name="jumlah[]" autocomplete="off" min="1" max="${parseInt(barangDidistribusi[index]['jumlah'])+parseInt(barangDidistribusi[index]['stok'])}" value="${barangDidistribusi[index]['jumlah']}" />
-                </div>
-                <div class="col-2 d-flex align-items-end gap-2">
-                    <label class="satuan">${barangDidistribusi[index]['satuan']}</label>
-                </div>
-                <div class="col-3 d-flex align-items-end button-container">
-                    <button onclick="removeFieldBarang(this)" class="mr-3 btn btn-danger">Hapus</button>
-                    ${(index == Object.keys(barangDidistribusi).length-1) ? `<button onclick="addFieldBarang(this)" class="mr-3 btn btn-success add-field-button">Tambah</button>` : ``}                    
-                </div>
-            </div>
-        `);
-    }
+    document.getElementById("form-barang").addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (checkout.kode_barang.includes(barang[index_barang].kode_jenis_barang + generateKodeBarang(barang[index_barang].kode))) {
+            const tempIndex = checkout.kode_barang.indexOf((barang[index_barang].kode_jenis_barang + generateKodeBarang(barang[index_barang].kode)));
+            checkout.kwantitas[tempIndex] += parseInt(document.getElementById('kwantitas').value);
+            checkout.diskon[tempIndex] = parseInt(document.getElementById('diskon').value.split('.').join(''));
+            checkout.total[tempIndex] = parseInt(checkout.harga_label[tempIndex] * checkout.kwantitas[tempIndex] - checkout.diskon[tempIndex]);
+            checkout.total[tempIndex] = (parseInt(checkout.harga_label[checkout.harga_label.length - 1] * checkout.kwantitas[checkout.kwantitas.length - 1] - checkout.diskon[checkout.diskon.length - 1]));
+        } else {
+            checkout.id_barang.push(barang[index_barang].id);
+            checkout.kode_barang.push(barang[index_barang].kode_jenis_barang + generateKodeBarang(barang[index_barang].kode));
+            checkout.nama_barang.push(barang[index_barang].nama);
+            checkout.harga_label.push(parseInt(barang[index_barang].harga_label));
+            checkout.harga_toko.push(parseInt(barang[index_barang].harga_toko));
+            checkout.kwantitas.push(parseInt(document.getElementById('kwantitas').value));
+            checkout.diskon.push(parseInt(document.getElementById('diskon').value.split('.').join('')));
+            checkout.total.push(parseInt(checkout.harga_label[checkout.harga_label.length - 1] * checkout.kwantitas[checkout.kwantitas.length - 1] - checkout.diskon[checkout.diskon.length - 1]));
+        }
+        updateKeranjang();
+        updateCheckout();
+    });
+    document.getElementById("form-checkout").addEventListener('submit', async function(e) {
+        e.preventDefault();
+        checkout.id_jenis_pembayaran = document.getElementById('id_jenis_pembayaran').value;
+        const response = await fetch(`ajax/jual.php?id=${id_edit}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(checkout)
+        }).then(response => response.json());
+        if (response == 'success') {
+            alert('success');
+        }
+    });
 
-    setOptions();
+
+
+    // Init Data
+    barang_terjual.forEach(value => {
+        checkout.id_barang.push(value.id);
+        checkout.kode_barang.push(value.kode_jenis_barang + generateKodeBarang(value.kode));
+        checkout.nama_barang.push(value.nama);
+        checkout.harga_label.push(parseInt(value.harga_label));
+        checkout.harga_toko.push(parseInt(value.harga_toko));
+        checkout.kwantitas.push(parseInt(value.kwantitas));
+        checkout.diskon.push(parseInt(value.diskon));
+        checkout.total.push(parseInt(checkout.harga_label[checkout.harga_label.length - 1] * checkout.kwantitas[checkout.kwantitas.length - 1] - checkout.diskon[checkout.diskon.length - 1]));
+    });
+    checkout.pembayaran = parseInt(barang_terjual[0].pembayaran);
+    pembayaran.value = formatNumberWithDot.format(checkout.pembayaran);
+    document.getElementById('id_jenis_pembayaran').value = barang_terjual[0].id_jenis_pembayaran;
+    updateKeranjang();
+    updateCheckout();
 </script>
