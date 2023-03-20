@@ -46,6 +46,15 @@ INSERT INTO `db_gudang`.`pegawai` (
 (4, 7, '66666666', 'Pegawai 4', 'Jabatan 3', '6468168136816', 'Perempuan', '2000-01-01', 'Martapura', CURRENT_DATE()),
 (5, 8, '77777777', 'Pegawai 5', 'Jabatan 5', '6468168136816', 'Perempuan', '2000-01-01', 'Martapura', CURRENT_DATE());
 
+INSERT INTO `db_gudang`.`jenis_pembayaran` (
+    id,
+    nama,
+    urutan 
+) VALUES 
+(1, 'Mandiri', 1),
+(2, 'BNI', 2),
+(3, 'QRIS', 3),
+(4, 'BCA', 4);
 
 INSERT INTO `db_gudang`.`jenis_barang` (
     id,
