@@ -34,6 +34,7 @@
                             $q = "
                                 SELECT 
                                     penjualan_toko.*,
+                                    DATE(penjualan_toko.tanggal_waktu) tanggal,
                                     toko.nama nama_toko 
                                 FROM 
                                     penjualan_toko 
@@ -46,7 +47,7 @@
                             if ($_SESSION['user']['status'] == "PEGAWAI")
                                 $q .= " WHERE toko.id_pegawai=" . $_SESSION['user']['id_pegawai'];
 
-                            $q .= " ORDER BY penjualan_toko.tanggal DESC, penjualan_toko.id DESC";
+                            $q .= " ORDER BY penjualan_toko.tanggal_waktu DESC, penjualan_toko.id DESC";
                             $result = $mysqli->query($q);
                             $no = 1;
                             ?>

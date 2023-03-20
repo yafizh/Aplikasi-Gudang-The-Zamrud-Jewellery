@@ -71,6 +71,16 @@ $_SESSION['old'] = [];
             else if ($number < 1000)
                 return $number;
         }
+        const formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            maximumFractionDigits: 0,
+        });
+
+        const formatNumberWithDot = new Intl.NumberFormat('id-ID', {
+            currency: 'IDR',
+            maximumFractionDigits: 0,
+        });
     </script>
 </head>
 
@@ -87,6 +97,9 @@ $_SESSION['old'] = [];
                                 // Tampil
                             case "admin":
                                 include_once "halaman/tampil/admin.php";
+                                break;
+                            case "jenis_pembayaran":
+                                include_once "halaman/tampil/jenis_pembayaran.php";
                                 break;
                             case "petugas":
                                 include_once "halaman/tampil/petugas.php";
@@ -150,6 +163,9 @@ $_SESSION['old'] = [];
                                 include_once "halaman/detail/penjualan_toko.php";
                                 break;
                                 // Tambah
+                            case "tambah_jenis_pembayaran":
+                                include_once "halaman/tambah/jenis_pembayaran.php";
+                                break;
                             case "tambah_admin":
                                 include_once "halaman/tambah/admin.php";
                                 break;
@@ -193,6 +209,9 @@ $_SESSION['old'] = [];
                             case "edit_admin":
                                 include_once "halaman/edit/admin.php";
                                 break;
+                            case "edit_jenis_pembayaran":
+                                include_once "halaman/edit/jenis_pembayaran.php";
+                                break;
                             case "edit_petugas":
                                 include_once "halaman/edit/petugas.php";
                                 break;
@@ -230,6 +249,9 @@ $_SESSION['old'] = [];
                                 include_once "halaman/edit/penjualan_toko.php";
                                 break;
                                 // Hapus
+                            case "hapus_jenis_pembayaran":
+                                include_once "halaman/hapus/jenis_pembayaran.php";
+                                break;
                             case "hapus_admin":
                                 include_once "halaman/hapus/admin.php";
                                 break;
@@ -290,6 +312,9 @@ $_SESSION['old'] = [];
                                 break;
                             case "laporan_penjualan_toko":
                                 include_once "halaman/laporan/penjualan_toko.php";
+                                break;
+                            case "laporan_keuangan":
+                                include_once "halaman/laporan/keuangan.php";
                                 break;
                                 // Ganti Password
                             case "ganti_password":
