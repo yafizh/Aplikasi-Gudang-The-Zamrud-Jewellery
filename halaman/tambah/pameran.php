@@ -303,6 +303,7 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
                         option.value = barang[key]['id'];
                         option.text = `${barang[key]['kode_jenis_barang']}${generateKodeBarang(barang[key]['kode'])}: ${barang[key]['nama']}`;
                         option.setAttribute('data-satuan', barang[key]['satuan']);
+                        option.setAttribute('data-max', barang[key]['stok']);
                         optgroup.append(option);
 
 
@@ -336,6 +337,7 @@ $barang = $mysqli->query($q)->fetch_all(MYSQLI_ASSOC);
                     barangTerpilih.push(element2.currentTarget[element2.currentTarget.selectedIndex].value);
                     document.querySelectorAll('.satuan')[index].innerText = element2.currentTarget[element2.currentTarget.selectedIndex].getAttribute('data-satuan');
                     document.querySelectorAll('input[name="jumlah[]"]')[index].setAttribute('max', element2.currentTarget[element2.currentTarget.selectedIndex].getAttribute('data-max'));
+                    document.querySelectorAll('input[name="jumlah[]"]')[index].setAttribute('min', 0);
                     ignoreIndex.push(index);
                     setOptions();
                 });

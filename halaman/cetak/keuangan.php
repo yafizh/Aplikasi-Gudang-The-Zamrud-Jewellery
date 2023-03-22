@@ -123,12 +123,12 @@
                         ?>
                     <?php endwhile; ?>
                     <tr>
-                        <td colspan="3">Total</td>
-                        <td class="text-center"><?= $total_jumlah; ?></td>
-                        <td class="text-end"> <?= number_format($total_harga_toko, 0, ",", "."); ?></td>
-                        <td class="text-end"> <?= number_format($total_harga_label, 0, ",", "."); ?></td>
-                        <td class="text-end"> <?= number_format($total_diskon, 0, ",", "."); ?></td>
-                        <td class="text-end"> <?= number_format($total_harga_laba_bersih, 0, ",", "."); ?></td>
+                        <td colspan="3"><strong>Total</strong></td>
+                        <td class="text-center"><strong><?= $total_jumlah; ?></strong></td>
+                        <td class="text-end"><strong><?= number_format($total_harga_toko, 0, ",", "."); ?></strong></td>
+                        <td class="text-end"><strong><?= number_format($total_harga_label, 0, ",", "."); ?></strong></td>
+                        <td class="text-end"><strong><?= number_format($total_diskon, 0, ",", "."); ?></strong></td>
+                        <td class="text-end"><strong><?= number_format($total_harga_laba_bersih, 0, ",", "."); ?></strong></td>
                     </tr>
                 <?php else : ?>
                     <tr>

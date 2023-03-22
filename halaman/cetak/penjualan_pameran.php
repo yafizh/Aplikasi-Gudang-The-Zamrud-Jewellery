@@ -13,9 +13,6 @@
     <?php include_once('../../templates/header.php'); ?>
     <h4 class="text-center my-3">Laporan Penjualan Pameran</h4>
     <section class="px-3">
-        <?php if (isset($_POST['id_jenis_barang'])) : ?>
-            <?php $jenis_barang = $mysqli->query("SELECT * FROM jenis_barang WHERE id=" . $_POST['id_jenis_barang'])->fetch_assoc(); ?>
-        <?php endif; ?>
         <?php if (isset($_POST['id_pameran'])) : ?>
             <?php $pameran = $mysqli->query("SELECT * FROM pameran WHERE id=" . $_POST['id_pameran'])->fetch_assoc(); ?>
         <?php endif; ?>
@@ -30,15 +27,9 @@
                         <td class="pl-5">: <?= $pameran['nama'] ?? 'Semua Pameran'; ?></td>
                     </tr>
                     <tr>
-                        <td class="align-middle td-fit">Jenis Barang</td>
-                        <td class="pl-5">: <?= $jenis_barang['nama'] ?? 'Semua Jenis Barang'; ?></td>
-                    </tr>
-                    <tr>
                         <td class="align-middle td-fit">Tanggal</td>
                         <?php if (isset($_POST['dari_tanggal']) && isset($_POST['sampai_tanggal'])) : ?>
                             <td class="pl-5">: <?= indonesiaDate($_POST['dari_tanggal']); ?> - <?= indonesiaDate($_POST['sampai_tanggal']); ?></td>
-                        <?php else : ?>
-                            <td class="pl-5">: Semua Waktu</td>
                         <?php endif; ?>
                     </tr>
                 </table>
@@ -52,11 +43,11 @@
                     <th class="td-fit text-center align-middle">No</th>
                     <th class="text-center align-middle">Tanggal Penjualan</th>
                     <th class="text-center align-middle">Nama Pameran</th>
-                    <th class="text-center align-middle">Nama Pembeli</th>
-                    <th class="text-center align-middle">Jenis Barang</th>
-                    <th class="text-center align-middle">Kode Barang</th>
                     <th class="text-center align-middle">Nama Barang</th>
-                    <th class="text-center align-middle">Jumlah</th>
+                    <th class="text-center align-middle">Banyak</th>
+                    <th class="text-center align-middle">Harga Beli X Banyak</th>
+                    <th class="text-center align-middle">Harga Jual X Banyak</th>
+                    <th class="text-center align-middle">Laba Bersih</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,7 +61,9 @@
                         jb.kode kode_jenis_barang,
                         b.nama nama_barang,
                         b.kode kode_barang,
-                        dpp.jumlah
+                        dpp.jumlah,
+                        dpp.harga_label,
+                        dpp.harga_toko
                     FROM 
                         detail_penjualan_pameran dpp 
                     INNER JOIN 
@@ -90,19 +83,23 @@
                     ON 
                         jb.id=b.id_jenis_barang 
                     WHERE 
-                        1=1 
+                    (
+                        pp.tanggal >='" . $_POST['dari_tanggal'] . "' 
+                        AND 
+                        pp.tanggal <= '" . $_POST['sampai_tanggal'] . "'
+                    ) 
                 ";
 
                 if (!empty($_POST['id_pameran'] ?? ''))
                     $q .= " AND p.id=" . $_POST['id_pameran'];
-                if (!empty($_POST['id_jenis_barang'] ?? ''))
-                    $q .= " AND b.id_jenis_barang=" . $_POST['id_jenis_barang'];
-                if (!empty($_POST['dari_tanggal'] ?? '') && !empty($_POST['sampai_tanggal'] ?? ''))
-                    $q .= " AND (pp.tanggal >='" . $_POST['dari_tanggal'] . "' AND pp.tanggal <= '" . $_POST['sampai_tanggal'] . "')";
 
                 $q .= " ORDER BY pp.tanggal DESC, pp.id DESC";
                 $result = $mysqli->query($q) or die($mysqli->error);
                 $no = 1;
+                $total_jumlah = 0;
+                $total_harga_toko = 0;
+                $total_harga_label = 0;
+                $total_harga_laba_bersih = 0;
                 ?>
                 <?php if ($result->num_rows) : ?>
                     <?php while ($row = $result->fetch_assoc()) : ?>
@@ -110,13 +107,38 @@
                             <td class="td-fit align-middle text-center"><?= $no++; ?></td>
                             <td class="align-middle text-center"><?= indonesiaDate($row['tanggal']); ?></td>
                             <td class="align-middle"><?= $row['nama_pameran']; ?></td>
-                            <td class="align-middle"><?= $row['nama_pembeli']; ?></td>
-                            <td class="align-middle text-center"><?= $row['jenis_barang']; ?></td>
-                            <td class="align-middle text-center"><?= $row['kode_jenis_barang'] . generateKodeBarang($row['kode_barang']); ?></td>
                             <td class="align-middle"><?= $row['nama_barang']; ?></td>
                             <td class="align-middle text-center"><?= $row['jumlah']; ?></td>
+                            <td class="align-middle text-end">
+                                <?= number_format($row['harga_toko'] * $row['jumlah'], 0, ",", "."); ?>
+                            </td>
+                            <td class="align-middle text-end">
+                                <?= number_format($row['harga_label'] * $row['jumlah'], 0, ",", "."); ?>
+                            </td>
+                            <td class="align-middle text-end">
+                                <?= number_format(
+                                    ($row['harga_label'] * $row['jumlah']) - ($row['harga_toko'] * $row['jumlah']),
+                                    0,
+                                    ",",
+                                    "."
+                                );
+                                ?>
+                            </td>
                         </tr>
+                        <?php
+                        $total_jumlah += $row['jumlah'];
+                        $total_harga_toko += $row['harga_toko'] * $row['jumlah'];
+                        $total_harga_label += $row['harga_label'] * $row['jumlah'];
+                        $total_harga_laba_bersih += ($row['harga_label'] * $row['jumlah']) - ($row['harga_toko'] * $row['jumlah']) ;
+                        ?>
                     <?php endwhile; ?>
+                    <tr>
+                        <td colspan="4"><strong>Total</strong></td>
+                        <td class="text-center"><strong><?= $total_jumlah; ?></strong></td>
+                        <td class="text-end"> <strong><?= number_format($total_harga_toko, 0, ",", "."); ?></strong></td>
+                        <td class="text-end"> <strong><?= number_format($total_harga_label, 0, ",", "."); ?></strong></td>
+                        <td class="text-end"> <strong><?= number_format($total_harga_laba_bersih, 0, ",", "."); ?></strong></td>
+                    </tr>
                 <?php else : ?>
                     <tr>
                         <td class="text-center" colspan="8">Tidak Ada Data</td>

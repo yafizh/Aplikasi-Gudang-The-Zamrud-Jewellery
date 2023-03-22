@@ -69,7 +69,7 @@
                                         <th class="text-center">Harga Beli X Banyak</th>
                                         <th class="text-center">Harga Jual X Banyak</th>
                                         <th class="text-center">Diskon</th>
-                                        <th class="text-center">Nafa</th>
+                                        <th class="text-center">Laba Bersih</th>
                                     </tr>
                                 </thead>
                                 <?php
@@ -113,16 +113,16 @@
                                             <td class="align-middle text-center"><?= indonesiaDate($row['tanggal']); ?></td>
                                             <td class="align-middle"><?= $row['nama_barang']; ?></td>
                                             <td class="align-middle text-center"><?= $row['jumlah']; ?></td>
-                                            <td class="align-middle text-end">
+                                            <td class="align-middle text-right">
                                                 <?= number_format($row['harga_toko'] * $row['jumlah'], 0, ",", "."); ?>
                                             </td>
-                                            <td class="align-middle text-end">
+                                            <td class="align-middle text-right">
                                                 <?= number_format($row['harga_label'] * $row['jumlah'], 0, ",", "."); ?>
                                             </td>
-                                            <td class="align-middle text-end">
+                                            <td class="align-middle text-right">
                                                 <?= number_format($row['diskon'], 0, ",", "."); ?>
                                             </td>
-                                            <td class="align-middle text-end">
+                                            <td class="align-middle text-right">
                                                 <?= number_format(
                                                     ($row['harga_label'] * $row['jumlah']) - ($row['harga_toko'] * $row['jumlah']) - $row['diskon'],
                                                     0,

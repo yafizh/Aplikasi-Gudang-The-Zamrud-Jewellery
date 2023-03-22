@@ -38,7 +38,9 @@ $q = "
         dp.id_barang,
         jb.kode kode_jenis_barang, 
         b.kode, 
-        b.satuan, 
+        b.satuan,
+        b.harga_toko, 
+        b.harga_label, 
         b.nama 
     FROM 
         detail_pameran dp 
@@ -59,8 +61,10 @@ if (isset($_POST['submit'])) {
     $domisili = $mysqli->real_escape_string($_POST['domisili']);
     $nomor_telepon = $mysqli->real_escape_string($_POST['nomor_telepon']);
     $tanggal = $mysqli->real_escape_string($_POST['tanggal']);
-    $jenis_pembayaran = $mysqli->real_escape_string($_POST['jenis_pembayaran']);
+    $id_jenis_pembayaran = $mysqli->real_escape_string($_POST['id_jenis_pembayaran']);
     $jumlah = $_POST['jumlah'];
+    $harga_toko = $_POST['harga_toko'];
+    $harga_label = $_POST['harga_label'];
 
     try {
         $mysqli->begin_transaction();
@@ -68,18 +72,18 @@ if (isset($_POST['submit'])) {
         $q = "
             INSERT INTO penjualan_pameran (
                 id_pameran,
+                id_jenis_pembayaran,
                 nama,
                 domisili,
                 nomor_telepon,
-                tanggal,
-                jenis_pembayaran
+                tanggal
             ) VALUES (
                 '" . $_GET['id_pameran'] . "',
+                '$id_jenis_pembayaran',
                 '$nama',
                 '$domisili',
                 '$nomor_telepon',
-                '$tanggal',
-                '$jenis_pembayaran'
+                '$tanggal'
             )
         ";
         $mysqli->query($q);
@@ -91,11 +95,15 @@ if (isset($_POST['submit'])) {
                     INSERT INTO detail_penjualan_pameran (
                         id_penjualan_pameran,
                         id_barang,
-                        jumlah 
+                        jumlah,
+                        harga_toko,
+                        harga_label
                     ) VALUES (
                         '$id_penjualan_pameran',
                         '" . $value['id_barang'] . "',
-                        '" . $jumlah[$i] . "'
+                        '" . $jumlah[$i] . "',
+                        '" . $harga_toko[$i] . "',
+                        '" . $harga_label[$i] . "'
                     ) 
                 ";
                 $mysqli->query($q);
@@ -173,12 +181,13 @@ if (isset($_POST['submit'])) {
                                     <input type="date" class="form-control" id="tanggal" name="tanggal" required autocomplete="off" value="<?= Date("Y-m-d"); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tanggal" class="form-label">Jenis Pembayaran</label>
-                                    <select name="jenis_pembayaran" id="jenis_pembayaran" class="form-control" required>
+                                    <?php $jenis_pembayaran = $mysqli->query("SELECT * FROM jenis_pembayaran ORDER BY urutan"); ?>
+                                    <label for="id_jenis_pembayaran" class="form-label">Jenis Pembayaran</label>
+                                    <select name="id_jenis_pembayaran" id="id_jenis_pembayaran" class="form-control" required>
                                         <option value="" disabled selected>Pilih Jenis Pembayaran</option>
-                                        <option value="Cash">Cash</option>
-                                        <option value="Debit">Debit</option>
-                                        <option value="QRIS">QRIS</option>
+                                        <?php while ($row = $jenis_pembayaran->fetch_assoc()) : ?>
+                                            <option value="<?= $row['id']; ?>"><?= $row['nama']; ?></option>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                             </div>
@@ -206,6 +215,8 @@ if (isset($_POST['submit'])) {
                                             </div>
                                             <div class="mb-3 col-3">
                                                 <label>Jumlah Pembelian</label>
+                                                <input type="number" class="form-control text-center" name="harga_toko[]" required autocomplete="off" value="<?= $row['harga_toko']; ?>" hidden />
+                                                <input type="number" class="form-control text-center" name="harga_label[]" required autocomplete="off" value="<?= $row['harga_label']; ?>" hidden />
                                                 <input type="number" class="form-control text-center" min="0" name="jumlah[]" required autocomplete="off" value="0" max="<?= $row['jumlah']; ?>" />
                                             </div>
                                             <div class="mb-3 col-auto d-flex align-items-end">
